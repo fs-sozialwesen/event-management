@@ -1,8 +1,8 @@
 .row
-  .col-md-3 = f.input :archived
-  .col-md-3 = f.input :canceled
+  / .col-md-3 = f.input :archived
+  / .col-md-3 = f.input :canceled
   .col-md-2 = f.input :year, collection: Catalog.pluck(:year).sort, include_blank: false
-  .col-md-4 = f.input :pre_booking_weeks, include_blank: false
+  / .col-md-4 = f.input :pre_booking_weeks, include_blank: false
 .row
   .col-md-6 = f.association :editor, label_method: :name, collection: User.editors, input_html: { class: 'select2' }
   .col-md-6 = f.input :number
@@ -18,8 +18,8 @@
   .col-md-6 = f.association :location, input_html: { class: 'select2' }, collection: Location.order(:name)
 
 .row
-  .col-md-3 = f.input :price
+  / .col-md-3 = f.input :price
   .col-md-3 = f.input :printed_pages, hint: "Zeichen gesamt: #{content_characters_for f.object}"
-= f.input :price_text, input_html: { class: 'editor' }
-= f.input :external_booking_address
+/ = f.input :price_text, input_html: { class: 'editor' }
+/ = f.input :external_booking_address
 = f.input :key_words

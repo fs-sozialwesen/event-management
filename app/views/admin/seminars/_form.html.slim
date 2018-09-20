@@ -10,6 +10,7 @@
   div
     ul.nav.nav-tabs
       li.active: a data-toggle="tab" href="#general"  Allgemein
+      li:        a data-toggle="tab" href="#booking"  Online-Buchung
       li:        a data-toggle="tab" href="#events"   Termine
       li:        a data-toggle="tab" href="#benefit"  Nutzen
       li:        a data-toggle="tab" href="#content"  Inhalt
@@ -17,6 +18,7 @@
       li:        a data-toggle="tab" href="#stats"    PRAS-Daten
     .tab-content
       .tab-pane#general.active = render 'admin/seminars/form/general', f: f
+      .tab-pane#booking        = render 'admin/seminars/form/booking', f: f
       .tab-pane#events         = render 'admin/seminars/form/events',  f: f
       .tab-pane#benefit        = render 'admin/seminars/form/text',    f: f, field: :benefit
       .tab-pane#content        = render 'admin/seminars/form/text',    f: f, field: :content

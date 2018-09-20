@@ -51,6 +51,8 @@
         .row.line
           .col-md-4: strong Gebühr
           .col-md-8 = @seminar.price_text.html_safe
+      - if @seminar.pre_bookable?
+        p 10%-Frühbucher-Rabatt bei Anmeldung bis #{@seminar.pre_booking_weeks} Wochen vor Seminar-Beginn
       - if @seminar.due_date.present?
         .row.line
           .col-md-4: strong Anmeldeschluss

@@ -1,4 +1,5 @@
 class Booking < ApplicationRecord
+
   enum status: { created: 0, canceled: 1 }
 
   attr_accessor :external
@@ -15,7 +16,7 @@ class Booking < ApplicationRecord
   validate :validate_attendees
   validates :data_protection, acceptance: true
   validates :terms_of_service, acceptance: true
-  validates :contact_email, :contact_phone, presence: true, if: :external
+  validates :contact_phone, presence: true, if: :external
   validates :invoice_title, :invoice_street, :invoice_zip, :invoice_city, presence: true, if: :external
   validates :tandem_address, :tandem_company, :tandem_name,
     presence: true,
@@ -38,4 +39,5 @@ class Booking < ApplicationRecord
   def validate_attendees
     errors.add(:attendees, :too_few) if attendees.empty? || (reduction.to_s == 'group' && attendees.size < 5)
   end
+
 end
