@@ -24,6 +24,12 @@ de:
     schools:
       - Aschersleben
       - Drübeck
+    reductions:
+      pari: PARITÄTER
+      group: Gruppenrabatt
+      early: Frühbucher
+      tandem: Tandem
+      school: Schüler*innen
   buchung:
     company_true: Firmenanmeldung
     company_false: Privat
@@ -93,6 +99,7 @@ de:
       user:     Benutzer*in
       cms_admin: CMS-Administrator*in
       finance:   Finanzen
+      trainee: Praktikant*in
   delete: Löschen
   edit: Bearbeiten
   copy: Kopieren

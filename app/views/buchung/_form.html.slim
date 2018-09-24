@@ -1,0 +1,106 @@
+= simple_form_for(@booking, url: buchung_create_url, defaults: { label: false }) do |f|
+  = f.input :seminar_id, as: :hidden
+
+  .row style="padding-top: 30px"
+    .col-md-8
+      fieldset
+        legend = Attendee.model_name.human(count: 2)
+
+        = f.simple_fields_for :attendees do |attendee_form|
+          - attendee = attendee_form.object
+          .attendee
+            .row
+              - if attendee_form.index > 0
+                a.btn.btn-danger.btn-xs.remove-attendee = fa_icon 'trash'
+              .col-md-4 = attendee_form.input :first_name
+              .col-md-4 = attendee_form.input :last_name
+              .col-md-4 = attendee_form.input :profession
+
+        .row
+          .col-md-1 = link_to fa_icon('plus', text: 'Teilnehmer hinzufügen'), '#',
+            class: 'add-attendee btn btn-default', tabindex: -1, title: 'Neuer Teilnehmer'
+      fieldset
+        legend Arbeitgeber
+        .row
+          .col-md-6 = f.input :company_title
+        .row
+          .col-md-5 = f.input :company_street
+          .col-md-2 = f.input :company_zip,  as: :tel
+          .col-md-5 = f.input :company_city
+
+      fieldset
+        legend Kontakt
+        .row
+          .col-md-6 = f.input :contact_email,  as: :email, placeholder: '* E-Mail-Adresse'
+          .col-md-6 = f.input :contact_phone,  as: :tel,   placeholder: '* Telefon'
+          .col-md-6 = f.input :contact_fax,    as: :tel
+          .col-md-6 = f.input :contact_mobile, as: :tel
+
+      fieldset
+        legend = Booking.human_attribute_name(:invoice_address)
+        .row
+          .col-md-6 = f.input :invoice_title, as: :text, input_html: { rows: 4 }
+        .row
+          .col-md-6 = f.input :invoice_street
+        .row
+          .col-md-2 = f.input :invoice_zip,  as: :tel
+          .col-md-4 = f.input :invoice_city
+
+      fieldset
+        legend Paritätische
+        .row
+          .col-md-6 = f.input :member, label: t('buchung.new.member')
+          .col-md-6 = f.input :member_institution, label: t('buchung.new.member_institution')
+        .row
+          .col-md-4 = f.input :graduate, label: t('buchung.new.graduate')
+          .col-md-4 = f.input :school, collection: t('bookings.schools'), include_blank: false
+          .col-md-4 = f.input :year
+
+      fieldset
+        legend Bemerkungen
+        = f.input :comments, input_html: { rows: 4 }
+
+      fieldset
+        legend AGB
+        = f.input :data_protection,  as: :boolean, required: true, label: raw(t('buchung.new.data_protection'))
+        = f.input :terms_of_service, as: :boolean, required: true, label: raw(t('buchung.new.terms_of_service'))
+
+  .row.action-buttons
+    .col-md-8 = f.submit 'Jetzt anmelden', class: 'btn btn-primary btn-block btn-lg'
+
+coffee:
+  $ ->
+    toggleAttendee = (attendee, hidden) ->
+      attendee.toggleClass('hidden', hidden)
+      attendee.find('.booking_attendees__destroy input').val(hidden)
+
+    $('.attendee').addClass('hidden')
+    toggleAttendee $('.attendee.hidden').first(), false
+    toggleAttendee $('.attendee .has-error').parents('.attendee'), false
+    $('.add-attendee').on 'click', (event) ->
+      event.preventDefault()
+      toggleAttendee $('.attendee.hidden').first(), false
+    $('.remove-attendee').on 'click', (event) ->
+      event.preventDefault()
+      if $('.attendee:visible').length > 1
+        attendee = $(this).parents('.attendee')
+        toggleAttendee attendee, true
+        attendee.find('input').val('')
+
+    $('#booking_graduate').change ->
+      disabled = !$('#booking_graduate:checked').val()
+      $('#booking_school, #booking_year').attr('disabled', disabled)
+
+    $('#booking_graduate').change()
+
+
+sass:
+  a.add-attendee
+    margin-bottom: 25px
+  a.remove-attendee
+    position: absolute
+    right: -20px
+    display: none
+  .attendee:hover
+    a.remove-attendee
+      display: inline

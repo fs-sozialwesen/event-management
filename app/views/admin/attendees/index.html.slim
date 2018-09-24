@@ -30,6 +30,7 @@ br
             th = Booking.human_attribute_name(:attendees)
             th = Booking.human_attribute_name(:contact_email)
             th Firma / Arbeitgeber
+            th = Booking.human_attribute_name(:reduction)
             th
         tbody
           - @attendees.each do |attendee|
@@ -45,6 +46,7 @@ br
                   = link_to attendee.company&.name, admin_company_url(attendee.company)
                 - else
                   = [booking.company_title, booking.invoice_title].select(&:present?).first
+              td = t('bookings.reductions')[attendee.reduction.to_sym] if attendee.reduction
               td
                 - if attendee.canceled?
                   |  storniert

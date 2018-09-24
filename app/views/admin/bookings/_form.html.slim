@@ -51,14 +51,36 @@
       .col-md-5 = f.input :invoice_city, placeholder: 'Ort'
 
   fieldset
-    legend Paritätische
-    .row
-      .col-md-6 = f.input :member, label: t('.member')
-      .col-md-6 = f.input :member_institution, label: t('.member_institution')
-    .row
-      .col-md-4 = f.input :graduate, label: t('.graduate')
-      .col-md-4 = f.input :school, collection:t('bookings.schools'), include_blank: false
-      .col-md-4 = f.input :year
+    legend Rabatt
+    .form-group.radio_buttons
+      .control_group
+        input type="hidden" name="booking[reduction]" value=""
+        span.radio
+          label
+            => f.radio_button :reduction, :early
+            | Frühbucher*innen-Rabatt
+        span.radio
+          label
+            => f.radio_button :reduction, :tandem
+            | Tandem-Rabatt
+        span.radio
+          label
+            => f.radio_button :reduction, :pari
+            | PARITÄTER-Rabatt
+          .reduction-content
+            = f.input :member, label: t('buchung.new.member')
+            = f.input :member_institution, label: t('buchung.new.member_institution')
+        span.radio
+          label
+            => f.radio_button :reduction, :group
+            | Gruppen-Rabatt (ab 5 Personen)
+        span.radio
+          label
+            => f.radio_button :reduction, :school
+            | Rabatt für Absolvent*innen der PARITÄTISCHEN Fachschulen
+          .row.reduction-content
+            .col-md-6 = f.input :school, collection: t('bookings.schools'), include_blank: false
+            .col-md-6 = f.input :year
 
   fieldset
     legend Bemerkungen
@@ -108,3 +130,5 @@ sass:
   a.remove-attendee
     position: absolute
     right: -20px
+  .reduction-content
+    margin-left: 20px

@@ -8,4 +8,8 @@ class StaticPagesController < ApplicationController
 
   def data_info
   end
+
+  def reductions
+  end
+
 end

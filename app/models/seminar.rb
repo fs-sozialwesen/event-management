@@ -36,6 +36,7 @@ class Seminar < ApplicationRecord
   validates :year, presence: true, inclusion: { in: proc { Catalog.pluck :year } }
   # validate :validate_events
   validate :editor_is_editor
+  validates :pre_booking_weeks, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
 
   before_save :set_date
 
@@ -107,6 +108,10 @@ class Seminar < ApplicationRecord
 
   def bookable?
     (date || Date.current) >= Date.current
+  end
+
+  def pre_bookable?
+    pre_booking_weeks.to_i.positive?
   end
 
   def editing_finished?

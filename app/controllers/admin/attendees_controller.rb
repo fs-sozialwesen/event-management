@@ -1,18 +1,18 @@
 module Admin
-
   class AttendeesController < BaseController
-    before_action :set_attendee, only: %i[show update destroy cancel]
+
+    before_action :set_attendee, only: %i(show update destroy cancel)
 
     def index
       authorize Attendee
       @month = (params[:month] || Date.current.month).to_i
       date_range = current_catalog.date_range @month
       @attendees =
-        Attendee
-          .booked
-          .where(created_at: date_range)
-          .includes(:seminar, :company, :booking)
-          .order(created_at: :desc).page(params[:page]).all
+        Attendee.
+          booked.
+          where(created_at: date_range).
+          includes(:seminar, :company, :booking).
+          order(created_at: :desc).page(params[:page]).all
       session[:attendee_back_url] = admin_attendees_url(month: @month)
     end
 
@@ -62,14 +62,15 @@ module Admin
 
     # Only allow a trusted parameter "white list" through.
     def attendee_params
-      attrs = %i[
-        first_name last_name member member_institution graduate school year terms_of_service
+      attrs = %i(
+        first_name last_name member member_institution graduate school year terms_of_service reduction
         contact_person contact_email contact_phone contact_mobile contact_fax comments
         company_title company_street company_zip company_city company_id
         invoice_title invoice_street invoice_zip invoice_city
-      ]
+        tandem_name tandem_company tandem_address
+      )
       params.require(:attendee).permit(attrs)
     end
-  end
 
+  end
 end

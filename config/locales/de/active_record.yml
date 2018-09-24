@@ -78,12 +78,20 @@ de:
         invoice_address: Rechnungsadresse
         cancellation_reason: Stornierungsgrund
         canceled_by: storniert durch
+        reduction: Rabatt
+        tandem_name: Name, Vorname
+        tandem_company: Einrichtung
+        tandem_address: Name und Anschrift der Trägers der Einrichtung
       booking:
         company: Anmeldung
         company_name: Firma
         places: Plätze
         invoice_address: Rechnungsadresse
         contact_email: E-Mail-Adresse
+        reduction: Rabatt
+        tandem_name: Name, Vorname
+        tandem_company: Einrichtung
+        tandem_address: Name und Anschrift der Trägers der Einrichtung
       catalog:
         categories: Themen
         seminars: Seminare
@@ -156,6 +164,9 @@ de:
         editor: Bildungsreferent*in
         external_booking_address: Externe Buchung über
         printed_pages: Seiten im Bildungskalender
+        pre_booking_weeks: Frühbucher-Rabatt (Wochen vorher)
+        tandem_reducible: Tandem-Rabatt
+        pari_reducible: PARITÄTER-Rabatt
       teacher:
         seminars: Seminare
         skill_sets: Fachbereiche

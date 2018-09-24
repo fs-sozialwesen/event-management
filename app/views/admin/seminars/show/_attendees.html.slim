@@ -26,6 +26,8 @@ h4
             => link_to fa_icon('pencil'), invoice
           - else
             = link_to fa_icon('pencil', text: 'Rechnung'), new_invoice_path(booking_id: booking.id), class: 'btn btn-primary btn-xs'
+
+        td = t('bookings.reductions')[attendee.reduction.to_sym] if attendee.reduction
         td = link_to 'Stornieren', admin_attendee_cancel_url(attendee), class: 'btn btn-danger btn-xs'
 
 - if @seminar.all_attendees.canceled.any?
@@ -46,6 +48,7 @@ h4
           td
             - if attendee.canceled_by_id.present?
               = attendee.canceled_by&.name || attendee.canceled_by_id
+          td = t('bookings.reductions')[attendee.reduction.to_sym] if attendee.reduction
           /td
             - invoice = attendee.invoice
             - if invoice

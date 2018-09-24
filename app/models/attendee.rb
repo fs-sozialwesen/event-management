@@ -16,6 +16,8 @@ class Attendee < ApplicationRecord
 
   validates :first_name, :last_name, presence: true
 
+  before_save { |attendee| attendee.graduate = attendee.reduction.to_s == 'school' }
+
   has_paper_trail
 
   multisearchable against: %i(first_name last_name address contact)

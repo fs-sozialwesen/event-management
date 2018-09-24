@@ -52,6 +52,9 @@
       = number_to_currency(@seminar.price)
       br
       = @seminar.price_text&.html_safe
+    p
+      label Frühbucher-Rabatt
+      =< @seminar.pre_bookable? ? "#{@seminar.pre_booking_weeks} Wochen im Vorraus" : 'nicht vorhanden'
     - if @seminar.key_words.present?
       p
         label Suchbegriffe

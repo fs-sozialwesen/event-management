@@ -12,7 +12,10 @@ module Admin
       end
     end
 
-    def show; end
+    def show
+      @year = (params[:year] || current_year).to_i
+      @years = Catalog.pluck(:year).sort
+    end
 
     def new
       authorize Company

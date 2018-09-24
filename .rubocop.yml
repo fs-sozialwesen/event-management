@@ -1,8 +1,81 @@
 AllCops:
+  DisplayStyleGuide: true
   TargetRubyVersion: 2.4
+  Include:
+    - '**/Gemfile'
+    - '**/Rakefile'
+  Exclude:
+   - 'bin/*'
+   - 'db/seeds.rb'
+   - 'db/schema.rb'
+   - 'vendor/bundle/**/*'
+
 Rails:
   Enabled: true
+Rails/FilePath:
+  Enabled: false
+Rails/SkipsModelValidations:
+  Enabled: false
+
 Metrics/LineLength:
   Max: 120
 Metrics/AbcSize:
   Max: 25
+Metrics/ClassLength:
+  Max: 250
+Metrics/ModuleLength:
+  Max: 250
+Metrics/MethodLength:
+  Enabled: true
+  Max: 25
+Metrics/BlockLength:
+  Enabled: false
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Layout/DotPosition:
+  EnforcedStyle: trailing
+Layout/MultilineOperationIndentation:
+  EnforcedStyle: indented
+Layout/AlignParameters:
+  EnforcedStyle: with_fixed_indentation
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines_except_namespace
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/DocumentationMethod:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/CommentAnnotation:
+ Enabled: false
+Style/FrozenStringLiteralComment:
+ Enabled: false
+Style/EmptyMethod:
+ EnforcedStyle: expanded
+
+Style/LambdaCall:
+  EnforcedStyle: braces
+Style/Lambda:
+  EnforcedStyle: literal
+Style/BlockDelimiters:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  # Specify the default preferred delimiter for all types with the 'default' key
+  # Override individual delimiters (even with default specified) by specifying an individual key
+  PreferredDelimiters:
+    default: ()
+    '%i': '()'
+    '%I': '()'
+    '%r': '{}'
+    '%w': '()'
+    '%W': '()'
+Style/RegexpLiteral:
+  EnforcedStyle: mixed
+  AllowInnerSlashes: false
+
+Bundler/OrderedGems:
+  Enabled: false

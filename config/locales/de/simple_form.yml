@@ -22,7 +22,7 @@ de:
         contact_phone: '* Telefon'
         contact_fax: Fax
         year: Jahr
-        invoice_title: '* Firmenname / Name'
+        invoice_title: '* Name der Einrichtung'
         invoice_street: '* Straße/Nr'
         invoice_zip: '* PLZ'
         invoice_city: '* Ort'
@@ -32,7 +32,7 @@ de:
       attendees:
         first_name: Vorname
         last_name: Nachname
-        profession: Tätigkeit
+        profession: Berufliche Tätigkeit
       address:
         city: Ort
         street: Straße/Nr
@@ -48,7 +48,7 @@ de:
         contact_phone: '* Telefon'
         contact_fax: Fax
         year: Jahr
-        invoice_title: '* Firmenname / Name'
+        invoice_title: '* Name der Einrichtung'
         invoice_street: '* Straße/Nr'
         invoice_zip: '* PLZ'
         invoice_city: '* Ort'

@@ -1,9 +1,11 @@
 class BuchungController < ApplicationController
 
+  MAX_ATTENDEES = 16
+
   def new
     @seminar = Seminar.published.find(params[:seminar_id]).decorate
     @booking = @seminar.bookings.build
-    10.times { @booking.attendees.build }
+    MAX_ATTENDEES.times { @booking.attendees.build }
   end
 
   def create
@@ -19,7 +21,7 @@ class BuchungController < ApplicationController
       redirect_to buchung_show_url(@booking)
     else
       @seminar = Seminar.find(@booking.seminar_id).decorate
-      10.times { @booking.attendees.build }
+      MAX_ATTENDEES.times { @booking.attendees.build }
       render :new
     end
   end
@@ -37,22 +39,22 @@ class BuchungController < ApplicationController
   end
 
   def copy_fields_to_attendees
-    attributes = %w[
-      seminar_id contact company_address invoice_address member member_institution school year
-      graduate comments
-    ]
+    attributes = %w(
+      seminar_id contact company_address invoice_address member member_institution school year graduate comments
+      reduction tandem_name tandem_company tandem_address is_company
+    )
     attributes = @booking.attributes.slice(*attributes)
     @booking.attendees.each { |attendee| attendee.assign_attributes attributes }
   end
 
   def booking_params
     attrs = [
-      :seminar_id, :member, :member_institution, :graduate, :school, :year,
+      :seminar_id, :member, :member_institution, :graduate, :school, :year, :reduction,
       :contact_email, :contact_phone, :contact_mobile, :contact_fax, :comments,
       :company_title, :company_street, :company_zip, :company_city,
-      :invoice_title, :invoice_street, :invoice_zip, :invoice_city,
-      :data_protection, :terms_of_service,
-      attendees_attributes: %i[first_name last_name profession]
+      :invoice_title, :invoice_street, :invoice_zip, :invoice_city, :is_company,
+      :data_protection, :terms_of_service, :tandem_name, :tandem_company, :tandem_address,
+      attendees_attributes: %i(first_name last_name profession)
     ]
     p = params.require(:booking).permit(attrs)
     p['attendees_attributes'].reject! do |_, attr|
@@ -60,4 +62,5 @@ class BuchungController < ApplicationController
     end
     p
   end
+
 end
