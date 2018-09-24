@@ -26,8 +26,15 @@ module Admin
 
     def date
       authorize Seminar
-      @month    = params[:month].to_i
-      @seminars = current_catalog.seminars.by_month(@month)
+      # @month    = params[:month].to_i
+      # @seminars = current_catalog.seminars.by_month(@month)
+
+
+      @month         = (params[:month] || Date.current.month).to_i
+      first_of_month = Date.new current_catalog.year, @month
+      @days_of_month = first_of_month..first_of_month.end_of_month
+      @events        = Event.order(:date).joins(:seminar).includes(:seminar).where(date: @days_of_month)
+      @seminars      = Seminar.where(id: @events.select(:seminar_id)).page(params[:page])
       respond_to do |format|
         format.html { @seminars = @seminars.page(params[:page]) }
         format.xlsx
@@ -39,9 +46,12 @@ module Admin
       @month         = (params[:month] || Date.current.month).to_i
       first_of_month = Date.new current_catalog.year, @month
       @days_of_month = first_of_month..first_of_month.end_of_month
-      @events        = Event.order(:date).joins(:seminar).includes(:seminar)
-        .where(date: @days_of_month)
+      @events        = Event.order(:date).joins(:seminar).includes(:seminar).where(date: @days_of_month)
       @seminars      = Seminar.where(id: @events.select(:seminar_id)).page(params[:page])
+      respond_to do |format|
+        format.html
+        format.xlsx { render :date }
+      end
     end
 
     def canceled

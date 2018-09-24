@@ -1,4 +1,4 @@
-= render 'admin/seminars/index/header', export_options: { month: @month }
+= render 'admin/seminars/index/header', export_path: calendar_admin_seminars_url(month: @month, format: :xlsx)
 
 .row
   .col-md-2
