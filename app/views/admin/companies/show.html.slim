@@ -11,25 +11,33 @@
       .panel-heading Kategorien
       ul.list-group
         - @company.categories.uniq.sort_by(&:number).each do |cat|
-          li.list-group-item = link_to cat.display_name, admin_category_url(cat)
+          li.list-group-item = link_to "#{cat.display_name} (#{cat.year})", admin_category_url(cat)
 
   .col-md-9
-    - attendees = @company.attendees.booked.joins(:seminar).where('seminars.year' => current_year)
-    - count = attendees.count
-    h4 #{count} #{Attendee.model_name.human count: count}
+    ul.nav.nav-tabs
+      - @years.each do |year|
+        - attendees = @company.attendees.booked.joins(:seminar).where('seminars.year' => year)
+        li class=(:active if year == @year)
+          a data-toggle="tab" href="#year-#{year}" #{year} (#{attendees.count})
+    .tab-content
+      - @years.each do |year|
+        .tab-pane class=(:active if year == @year) id="year-#{year}"
+          - attendees = @company.attendees.booked.joins(:seminar).where('seminars.year' => year)
+          - count = attendees.count
+          h4 #{count} #{Attendee.model_name.human count: count}
 
-    .table-responsive
-      table.standard-table.table-clickable.table-no-border.seminars
-        thead
-          tr
-            th = Booking.human_attribute_name(:seminar)
-            th = Seminar.human_attribute_name(:events)
-            th = Booking.human_attribute_name(:attendees)
-        tbody
-          - attendees.order(created_at: :desc).each do |attendee|
-            - seminar = attendee.seminar.decorate
-            tr data = { url: admin_attendee_url(attendee) } class=('warning' if attendee.canceled?)
-              td title=seminar.title
-                = link_to seminar.number, admin_seminar_url(seminar)
-              td = seminar.dates.join(', ')
-              td = attendee.name
+          .table-responsive
+            table.standard-table.table-clickable.table-no-border.seminars
+              thead
+                tr
+                  th = Booking.human_attribute_name(:seminar)
+                  th = Seminar.human_attribute_name(:events)
+                  th = Booking.human_attribute_name(:attendees)
+              tbody
+                - attendees.order(created_at: :desc).each do |attendee|
+                  - seminar = attendee.seminar.decorate
+                  tr data = { url: admin_attendee_url(attendee) } class=('warning' if attendee.canceled?)
+                    td title=seminar.title
+                      = link_to seminar.number, admin_seminar_url(seminar)
+                    td = seminar.dates.join(', ')
+                    td = attendee.name
