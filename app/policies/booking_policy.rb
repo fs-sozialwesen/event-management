@@ -1,4 +1,4 @@
 class BookingPolicy < ApplicationPolicy
-  who_can(:show?)   { editor? }
-  who_can(:create?) { editor? }
+  who_can(:show?)   { editor? || finance? }
+  who_can(:create?) { editor? || finance? }
 end

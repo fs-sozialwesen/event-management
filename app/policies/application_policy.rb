@@ -31,6 +31,10 @@ class ApplicationPolicy
     admin? || user.finance?
   end
 
+  def trainee?
+    admin? || user.trainee?
+  end
+
   def scope
     Pundit.policy_scope!(user, record.class)
   end
