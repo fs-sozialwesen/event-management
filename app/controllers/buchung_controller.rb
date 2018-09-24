@@ -1,9 +1,11 @@
 class BuchungController < ApplicationController
 
+  MAX_ATTENDEES = 16
+
   def new
     @seminar = Seminar.published.find(params[:seminar_id]).decorate
     @booking = @seminar.bookings.build
-    10.times { @booking.attendees.build }
+    MAX_ATTENDEES.times { @booking.attendees.build }
   end
 
   def create
@@ -19,7 +21,7 @@ class BuchungController < ApplicationController
       redirect_to buchung_show_url(@booking)
     else
       @seminar = Seminar.find(@booking.seminar_id).decorate
-      10.times { @booking.attendees.build }
+      MAX_ATTENDEES.times { @booking.attendees.build }
       render :new
     end
   end
