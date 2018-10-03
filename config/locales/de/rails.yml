@@ -240,3 +240,5 @@ de:
     uploads:
       new:
         title: "Neuer Upload"
+  seminars:
+    pre_bookable_text: "10%-Frühbucher-Rabatt bei Anmeldung bis %{weeks} Wochen vor Seminar-Beginn"

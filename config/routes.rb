@@ -17,6 +17,11 @@ Rails.application.routes.draw do
     patch 'users'    => 'devise/registrations#update', as: 'user_registration'
   end
 
+  namespace :api, constraints: { format: 'json' } do
+    resources :categories, only: [:index]
+    resources :seminars, only: %i(index show)
+  end
+
   namespace :admin do
 
     root to: 'dashboard#show'
