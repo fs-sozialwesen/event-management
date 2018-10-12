@@ -59,7 +59,7 @@ module Admin
 
     # Only allow a trusted parameter "white list" through.
     def catalog_params
-      params.require(:catalog).permit(:title, :year, :published)
+      params.require(:catalog).permit(:title, :year, :published, :print_version)
     end
   end
 end
