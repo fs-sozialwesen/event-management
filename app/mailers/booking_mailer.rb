@@ -3,7 +3,7 @@ class BookingMailer < ApplicationMailer
   def booking_confirmation_email(booking)
     @booking = booking
     @seminar = booking.seminar.decorate
-    subject  = 'Paritätische Bildungswerk Sachsen-Anhalt - Seminaranmeldung'
+    subject  = 'PBW GmbH - Seminaranmeldung'
     mail to: booking.contact_email, subject: subject
   end
 
