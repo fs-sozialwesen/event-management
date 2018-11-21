@@ -4,7 +4,7 @@ class BuchungController < ApplicationController
 
   def new
     @seminar = Seminar.published.find(params[:seminar_id]).decorate
-    @booking = @seminar.bookings.build company: true
+    @booking = @seminar.bookings.build is_company: true
     MAX_ATTENDEES.times { @booking.attendees.build }
   end
 
