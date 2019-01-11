@@ -34,7 +34,7 @@ module Admin
       first_of_month = Date.new current_catalog.year, @month
       @days_of_month = first_of_month..first_of_month.end_of_month
       @events        = Event.order(:date).joins(:seminar).includes(:seminar).where(date: @days_of_month)
-      @seminars      = Seminar.where(id: @events.select(:seminar_id)).page(params[:page])
+      @seminars      = Seminar.where(id: @events.select(:seminar_id))
       respond_to do |format|
         format.html { @seminars = @seminars.page(params[:page]) }
         format.xlsx
