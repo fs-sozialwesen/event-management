@@ -11,13 +11,19 @@ wb.add_worksheet(name: 'Seminarliste') do |sheet|
   sheet.add_row
   sheet.add_row
 
-  sheet.add_row %w(Nr. Thema Tag Teilnehmer)
-  sheet.add_style 'A5:D5', b: true
-  sheet.add_border 'A5:D5'
+  sheet.add_row %w(Nr. Thema Tag Teilnehmer Ort)
+  sheet.add_style 'A5:E5', b: true
+  sheet.add_border 'A5:E5'
 
   @seminars.each_with_index do |seminar, index|
     line = index + 6
-    sheet.add_row [ seminar.number, seminar.title, seminar.decorate.dates.join(', '), seminar.attendees.count ]
+    sheet.add_row [
+      seminar.number,
+      seminar.title,
+      seminar.decorate.dates.join(', '),
+      seminar.attendees.count,
+      seminar.location&.name
+    ]
     sheet.add_border "A#{line}:D#{line}"
   end
 
