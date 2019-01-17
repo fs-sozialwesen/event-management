@@ -140,6 +140,6 @@ class Seminar < ApplicationRecord
 
   def set_date
     return unless events.any?
-    self.date = events.order(:date).first&.date
+    self.date = events.sort(&:date).first&.date
   end
 end
