@@ -8,8 +8,8 @@ module Api
 
       @seminars = @seminars.published.order(@filter[:order]).includes(:teachers, :events, :categories).
         page(@filter[:page]).per(@filter[:per_page])
-      @seminars = @seminars.where('date >= ?', @filter[:date_start]) if @filter[:date_start]
-      @seminars = @seminars.where('date <= ?', @filter[:date_end])   if @filter[:date_end]
+      @seminars = @seminars.where('seminars.date >= ?', @filter[:date_start]) if @filter[:date_start]
+      @seminars = @seminars.where('seminars.date <= ?', @filter[:date_end])   if @filter[:date_end]
       @seminars = @seminars.external_search @filter[:search_term]    if @filter[:search_term]
 
       expires_in cache_time, public: true
