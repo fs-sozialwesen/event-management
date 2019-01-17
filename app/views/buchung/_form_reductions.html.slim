@@ -39,53 +39,56 @@
           .col-md-6 = f.input :contact_phone,  as: :tel,   placeholder: '* Telefon/Mobil'
           .col-md-6 = f.input :contact_email,  as: :email, placeholder: 'E-Mail'
 
-      fieldset
-        legend Ich möchte folgenden Rabatt in Anspruch nehmen:
-        small Es kann nur ein Rabatt pro Teilnehmer*in in Anspruch genommen werden.
-        br
-        small Weitere Informationen zu unseren Rabatten finden Sie im Bildungskalender 2019 auf Seite 12
-          oder #{link_to 'hier', main_app.reductions_path}.
-        .form-group.radio_buttons
-          .control_group
-            input type="hidden" name="booking[reduction]" value=""
-            - if @seminar.pre_bookable?
-              span.radio
-                label
-                  => f.radio_button :reduction, :early, disabled: (Date.current > @seminar.date - @seminar.pre_booking_weeks.weeks)
-                  | 10% Frühbucher*innen-Rabatt (#{@seminar.pre_booking_weeks} Wochen im Voraus)
-            - if @seminar.tandem_reducible?
-              span.radio
-                label
-                  => f.radio_button :reduction, :tandem
-                  | 10% Tandem-Rabatt (nur für Kurse)
-              .reduction-content
-                p: small Ich nehme den Rabatt gemeinsam mit folgender Person in Anspruch: (Diese Person muss sich eigenständig anmelden.)
-                .row
-                  .col-md-6 = f.input :tandem_name, placeholder: 'Name, Vorname'
-                  .col-md-6 = f.input :tandem_company, placeholder: 'Einrichtung'
-                = f.input :tandem_address, placeholder: 'Bitte geben Sie Name und Anschrift des Trägers der Einrichtungen an',
-                    hint: 'Angabe zur Einlösung des Rabatts notwendig'
-            - if @seminar.pari_reducible?
-              span.radio
-                label
-                  => f.radio_button :reduction, :pari
-                  | 5% PARITÄTER-Rabatt (nur für Kurse)
-              .row.reduction-content
-                .col-md-6 = f.input :member, label: t('buchung.new.member')
-                .col-md-6 = f.input :member_institution, label: t('buchung.new.member_institution')
-            span.radio
-              label
-                => f.radio_button :reduction, :group, disabled: true
-                | 10% Gruppen-Rabatt (ab 5 Personen einer Einrichtung)
-            .reduction-content Ich melde für die o.g. Veranstaltung gleichzeitig o.g. Personen aus meiner Einrichtung an.
-            span.radio
-              label
-                => f.radio_button :reduction, :school
-                | 20% Rabatt für Absolvent*innen der PARITÄTISCHEN Fachschulen für Sozialwesen
-            .row.reduction-content
-              .col-md-6 = f.input :school, collection: t('bookings.schools'), include_blank: false
-              .col-md-6 = f.input :year, placeholder: 'Abschlussjahr'
-              p: small Sollte der Abschluss länger als 10 Jahre zurückliegen, bitte eine Kopie des Abschlusszeugnisses einreichen.
+      - if @seminar.reducible?
+        fieldset
+          legend Ich möchte folgenden Rabatt in Anspruch nehmen:
+          small Es kann nur ein Rabatt pro Teilnehmer*in in Anspruch genommen werden.
+          br
+          small Weitere Informationen zu unseren Rabatten finden Sie im Bildungskalender 2019 auf Seite 12
+            oder #{link_to 'hier', main_app.reductions_path}.
+          .form-group.radio_buttons
+            .control_group
+              input type="hidden" name="booking[reduction]" value=""
+              - if @seminar.early_reducible?
+                span.radio
+                  label
+                    => f.radio_button :reduction, :early, disabled: (Date.current > @seminar.date - @seminar.pre_booking_weeks.weeks)
+                    | 10% Frühbucher*innen-Rabatt (#{@seminar.pre_booking_weeks} Wochen im Voraus)
+              - if @seminar.tandem_reducible?
+                span.radio
+                  label
+                    => f.radio_button :reduction, :tandem
+                    | 10% Tandem-Rabatt (nur für Kurse)
+                .reduction-content
+                  p: small Ich nehme den Rabatt gemeinsam mit folgender Person in Anspruch: (Diese Person muss sich eigenständig anmelden.)
+                  .row
+                    .col-md-6 = f.input :tandem_name, placeholder: 'Name, Vorname'
+                    .col-md-6 = f.input :tandem_company, placeholder: 'Einrichtung'
+                  = f.input :tandem_address, placeholder: 'Bitte geben Sie Name und Anschrift des Trägers der Einrichtungen an',
+                      hint: 'Angabe zur Einlösung des Rabatts notwendig'
+              - if @seminar.pari_reducible?
+                span.radio
+                  label
+                    => f.radio_button :reduction, :pari
+                    | 5% PARITÄTER-Rabatt (nur für Kurse)
+                .row.reduction-content
+                  .col-md-6 = f.input :member, label: t('buchung.new.member')
+                  .col-md-6 = f.input :member_institution, label: t('buchung.new.member_institution')
+              - if @seminar.group_reducible?
+                span.radio
+                  label
+                    => f.radio_button :reduction, :group, disabled: true
+                    | 10% Gruppen-Rabatt (ab 5 Personen einer Einrichtung)
+                .reduction-content Ich melde für die o.g. Veranstaltung gleichzeitig o.g. Personen aus meiner Einrichtung an.
+              - if @seminar.school_reducible?
+                span.radio
+                  label
+                    => f.radio_button :reduction, :school
+                    | 20% Rabatt für Absolvent*innen der PARITÄTISCHEN Fachschulen für Sozialwesen
+                .row.reduction-content
+                  .col-md-6 = f.input :school, collection: t('bookings.schools'), include_blank: false
+                  .col-md-6 = f.input :year, placeholder: 'Abschlussjahr'
+                  p: small Sollte der Abschluss länger als 10 Jahre zurückliegen, bitte eine Kopie des Abschlusszeugnisses einreichen.
 
       fieldset
         legend Bemerkungen

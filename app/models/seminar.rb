@@ -110,7 +110,11 @@ class Seminar < ApplicationRecord
     (date || Date.current) >= Date.current
   end
 
-  def pre_bookable?
+  def reducible?
+    early_reducible? || tandem_reducible? || pari_reducible? || group_reducible? || school_reducible?
+  end
+
+  def early_reducible?
     pre_booking_weeks.to_i.positive?
   end
 

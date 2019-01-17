@@ -43,6 +43,11 @@
     /= render 'admin/seminars/show/teachers'
     - location = @seminar.location
     = link_to icon_for(location, text: location.name, size: 2), admin_location_url(location) if location
+
+    - if @seminar.key_words.present?
+      p
+        label Suchbegriffe
+        =< @seminar.key_words
     p
       label Jahr
       =< @seminar.year
@@ -52,13 +57,7 @@
       = number_to_currency(@seminar.price)
       br
       = @seminar.price_text&.html_safe
-    p
-      label Frühbucher-Rabatt
-      =< @seminar.pre_bookable? ? "#{@seminar.pre_booking_weeks} Wochen im Vorraus" : 'nicht vorhanden'
-    - if @seminar.key_words.present?
-      p
-        label Suchbegriffe
-        =< @seminar.key_words
 
+    = render 'admin/seminars/show/reductions'
     = render 'admin/seminars/show/events'
     = render 'admin/seminars/show/categories_panel'
