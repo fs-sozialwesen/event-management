@@ -1,4 +1,4 @@
-json.cache! @seminar, expires_in: 10.minutes do
+json.cache! @seminar, expires_in: cache_time do
 
   json.extract! @seminar, :id, :title, :subtitle, :number
   json.admin_url admin_seminar_url(@seminar)
