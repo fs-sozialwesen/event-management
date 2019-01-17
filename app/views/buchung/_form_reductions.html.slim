@@ -53,12 +53,12 @@
                 span.radio
                   label
                     => f.radio_button :reduction, :early, disabled: (Date.current > @seminar.date - @seminar.pre_booking_weeks.weeks)
-                    | 10% Frühbucher*innen-Rabatt (#{@seminar.pre_booking_weeks} Wochen im Voraus)
+                    | #{t('buchung.reductions.early')} (#{@seminar.pre_booking_weeks} Wochen im Voraus)
               - if @seminar.tandem_reducible?
                 span.radio
                   label
                     => f.radio_button :reduction, :tandem
-                    | 10% Tandem-Rabatt (nur für Kurse)
+                    | 10% #{t('buchung.reductions.tandem')} (nur für Kurse)
                 .reduction-content
                   p: small Ich nehme den Rabatt gemeinsam mit folgender Person in Anspruch: (Diese Person muss sich eigenständig anmelden.)
                   .row
@@ -70,7 +70,7 @@
                 span.radio
                   label
                     => f.radio_button :reduction, :pari
-                    | 5% PARITÄTER-Rabatt (nur für Kurse)
+                    | #{t 'buchung.reductions.pari'} (nur für Kurse)
                 .row.reduction-content
                   .col-md-6 = f.input :member, label: t('buchung.new.member')
                   .col-md-6 = f.input :member_institution, label: t('buchung.new.member_institution')
@@ -78,13 +78,13 @@
                 span.radio
                   label
                     => f.radio_button :reduction, :group, disabled: true
-                    | 10% Gruppen-Rabatt (ab 5 Personen einer Einrichtung)
+                    | #{t 'buchung.reductions.group'} (ab 5 Personen einer Einrichtung)
                 .reduction-content Ich melde für die o.g. Veranstaltung gleichzeitig o.g. Personen aus meiner Einrichtung an.
               - if @seminar.school_reducible?
                 span.radio
                   label
                     => f.radio_button :reduction, :school
-                    | 20% Rabatt für Absolvent*innen der PARITÄTISCHEN Fachschulen für Sozialwesen
+                    = t 'buchung.reductions.school'
                 .row.reduction-content
                   .col-md-6 = f.input :school, collection: t('bookings.schools'), include_blank: false
                   .col-md-6 = f.input :year, placeholder: 'Abschlussjahr'
