@@ -30,10 +30,11 @@
         = f.simple_fields_for :item, item do |item_fields|
           .row
             .col-md-6 = item_fields.input :attendee, label: false, input_html: { name: 'invoice[items][][attendee]' }
-            .col-md-3 = item_fields.input :price, label: false, input_html: {value: number_with_precision(item_fields.object.price), name: 'invoice[items][][price]' }
+            .col-md-3
+              = item_fields.input :price, label: false, input_html: {value: number_with_precision(item_fields.object.price), name: 'invoice[items][][price]' }
       .row
         .col-md-3.col-md-offset-6
-          p.sum = number_to_currency @invoice.items.map(&:price).sum
+          p.sum
 
       .form-inputs = f.input :post_message, input_html: { rows: 5 }
 
@@ -62,6 +63,9 @@ sass:
   .sum
     text-align: right
     font-weight: bold
+  .form-group.has-error
+    input
+      border-width: medium
 
 coffee:
   $ ->
@@ -71,10 +75,18 @@ coffee:
         val = parseFloat($(input).val().replace('.', '').replace(',', '.'))
         sum += val unless isNaN(val)
       $('.sum').html(sum.toLocaleString('de', style: 'currency', currency: 'EUR'))
+    checkZeros = ->
+      $('.invoice_item_price input').each (index, input) =>
+        val = parseFloat($(input).val().replace('.', '').replace(',', ''))
+        formGroup = $(input).closest(".form-group")
+        formGroup.toggleClass('has-error', val == 0.0)
 
     $('.invoice_item_price input').change (event) =>
       calculateSum()
+      checkZeros()
       input = $(event.target)
-      val = parseFloat(input.val().replace('.', '').replace(',', '.'))
+      val = parseFloat(input.val().replace('.', '').replace(',', ''))
       input.val(val.toLocaleString('de', minimumFractionDigits: 2 ))
 
+    calculateSum()
+    checkZeros()

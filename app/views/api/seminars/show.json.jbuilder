@@ -17,8 +17,8 @@ json.location @seminar.location&.name
 json.price_text @seminar.price_text&.to_json
 
 json.bookable @seminar.bookable?
-json.pre_bookable @seminar.pre_bookable?
-json.pre_bookable_text @seminar.pre_bookable? ? t('seminars.pre_bookable_text', weeks: @seminar.pre_booking_weeks) : nil
+json.pre_bookable @seminar.early_reducible?
+json.pre_bookable_text @seminar.early_reducible? ? t('seminars.pre_bookable_text', weeks: @seminar.pre_booking_weeks) : nil
 
 json.due_date @seminar.due_date.present? ? @seminar.due_date.to_json : nil
 

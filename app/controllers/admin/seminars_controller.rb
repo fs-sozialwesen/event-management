@@ -1,7 +1,8 @@
 module Admin
   class SeminarsController < BaseController
-    before_action :set_seminar, only: %i[show edit update destroy attendees pras versions toggle_category
-                                         publish unpublish finish_editing finish_layout]
+
+    before_action :set_seminar, only:
+      %i(show edit update destroy attendees pras versions toggle_category publish unpublish finish_editing finish_layout)
 
     def index
       authorize Seminar

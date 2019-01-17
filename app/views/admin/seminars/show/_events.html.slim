@@ -2,7 +2,7 @@ h4 = Seminar.human_attribute_name(:events)
 - if @seminar.has_date_text?
   = @seminar.date_text.html_safe
 
-table.standard-table
+table.table.table-condensed
   - @seminar.events_list.each do |date, time|
     tr
       td = ldate date

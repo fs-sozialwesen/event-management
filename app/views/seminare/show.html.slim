@@ -51,7 +51,7 @@
         .row.line
           .col-md-4: strong Gebühr
           .col-md-8 = @seminar.price_text.html_safe
-      - if @seminar.pre_bookable?
+      - if @seminar.early_reducible?
         p = t('seminars.pre_bookable_text', weeks: @seminar.pre_booking_weeks)
       - if @seminar.due_date.present?
         .row.line

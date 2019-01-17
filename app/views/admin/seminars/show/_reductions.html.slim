@@ -1,0 +1,12 @@
+h4 Rabatte
+
+table.table.table-condensed
+  tr
+    td = Seminar.human_attribute_name(:pre_booking_weeks)
+    td
+      = bool_icon(@seminar.early_reducible?)
+      =< "#{@seminar.pre_booking_weeks} Wochen im Vorraus" if @seminar.early_reducible?
+  - %i(tandem_reducible pari_reducible group_reducible school_reducible).each do |reducible|
+    tr
+      td = Seminar.human_attribute_name(reducible)
+      td = bool_icon @seminar[reducible]

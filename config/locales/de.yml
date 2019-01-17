@@ -38,6 +38,12 @@ de:
     schools:
       - Aschersleben
       - Drübeck
+    reductions:
+      pari: 5% PARITÄTER-Rabatt
+      group: 10% Gruppen-Rabatt
+      early: 10% Frühbucher*innen-Rabatt
+      tandem: 10% Tandem-Rabatt
+      school: 20% Rabatt für Absolvent*innen der PARITÄTISCHEN Fachschulen für Sozialwesen
   catalogs:
     icon: book
   categories:

@@ -164,9 +164,11 @@ de:
         editor: Bildungsreferent*in
         external_booking_address: Externe Buchung über
         printed_pages: Seiten im Bildungskalender
-        pre_booking_weeks: Frühbucher-Rabatt (Wochen vorher)
-        tandem_reducible: Tandem-Rabatt
-        pari_reducible: PARITÄTER-Rabatt
+        pre_booking_weeks: Frühbucher
+        tandem_reducible: Tandem
+        pari_reducible: PARITÄTER
+        group_reducible: Guppen
+        school_reducible: Absolventen
       teacher:
         seminars: Seminare
         skill_sets: Fachbereiche
