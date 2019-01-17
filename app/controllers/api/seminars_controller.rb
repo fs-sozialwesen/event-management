@@ -37,7 +37,7 @@ module Api
       filter[:year] = (params[:year] || Date.current.year).to_i
       filter[:page] = params[:page]
       filter[:per_page] = params[:per_page]
-      filter[:order] = params[:sort_by].in?(%w(date title)) ? params[:sort_by] : :date
+      filter[:order] = params[:sort_by].in?(%w(date title)) ? params[:sort_by].to_sym : :date
       filter[:order] = { filter[:order] => params[:sorting] } if params[:sorting].in?(%w(asc desc))
       filter[:date_start] = get_date :date_start
       filter[:date_end]   = get_date :date_end
