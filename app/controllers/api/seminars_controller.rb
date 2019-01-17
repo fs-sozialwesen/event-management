@@ -6,8 +6,7 @@ module Api
       @category = Category.find_by id: params[:category_id]
       @seminars = @category ? @category.seminars : Seminar.where(year: @filter[:year])
 
-      @seminars = @seminars.published.order(@filter[:order]).includes(:teachers, :events, :categories).
-        page(@filter[:page]).per(@filter[:per_page])
+      @seminars = @seminars.published.order(@filter[:order]).page(@filter[:page]).per(@filter[:per_page])
       @seminars = @seminars.where('seminars.date >= ?', @filter[:date_start]) if @filter[:date_start]
       @seminars = @seminars.where('seminars.date <= ?', @filter[:date_end])   if @filter[:date_end]
       @seminars = @seminars.external_search @filter[:search_term]    if @filter[:search_term]
