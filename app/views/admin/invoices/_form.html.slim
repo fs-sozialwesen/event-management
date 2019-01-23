@@ -85,7 +85,7 @@ coffee:
       calculateSum()
       checkZeros()
       input = $(event.target)
-      val = parseFloat(input.val().replace('.', '').replace(',', ''))
+      val = parseFloat(input.val().replace('.', '').replace(',', '.'))
       input.val(val.toLocaleString('de', minimumFractionDigits: 2 ))
 
     calculateSum()
