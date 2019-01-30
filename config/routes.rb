@@ -18,8 +18,8 @@ Rails.application.routes.draw do
   end
 
   namespace :api, constraints: { format: 'json' } do
-    resources :categories, only: [:index] { get :tree, on: :collection }
-    resources :seminars, only: %i(index show)
+    resources(:categories, only: %i(index show)) { get :tree, on: :collection }
+    resources :seminars,   only: %i(index show)
   end
 
   namespace :admin do
