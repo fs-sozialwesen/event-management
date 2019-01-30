@@ -3,12 +3,18 @@ module Api
 
     def index
       @year = (params[:year] || Date.current.year).to_i
-      parent_id = params[:parent_id]
-      @filter = parent_id.present? ? { parent_id: parent_id } : { year: @year }
-      @categories = Category.where(@filter)
+      @categories = Category.where(year: @year).roots
 
       expires_in cache_time, public: true
       stale? @categories
+    end
+
+    def show
+      @categories = Category.find_by(id: params[:id])&.children
+
+      expires_in cache_time, public: true
+      stale? @categories
+      render 'index'
     end
 
     def tree
