@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  # quick fix until new homepage is live
+  get '/kuj-magdeburg', to: redirect('/suche?q=magdeburg+kinder')
+  get '/kuj-stendal',   to: redirect('/suche?q=stendal+kinder')
+
   get  'buchung/:seminar_id',   to: 'buchung#new',    as: :buchung_new
   post 'buchung',               to: 'buchung#create', as: :buchung_create
   get  'nachricht/:booking_id', to: 'buchung#show',   as: :buchung_show
