@@ -10,7 +10,7 @@ class SeminarPolicy < ApplicationPolicy
   who_can(:editing_status?)  { editor? || layouter? }
   who_can(:show?)            { editor? || layouter? || finance? || trainee? }
   who_can(:create?)          { editor? }
-  who_can(:update?)          { editor? || (layouter? && !seminar.published? && !seminar.catalog.published?) || trainee? }
+  who_can(:update?)          { editor? || (layouter? && !seminar.published?) || trainee? }
   who_can(:attendees?)       { editor? || finance? }
   who_can(:pras?)            { admin? }
   who_can(:versions?)        { editor? || layouter? }
