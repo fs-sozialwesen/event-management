@@ -45,6 +45,9 @@ gem 'prawn'
 # See https://github.com/prawnpdf/prawn-table/pull/50
 gem 'prawn-table', git: 'https://github.com/J-F-Liu/prawn-table'
 
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
+
 # gem 'rubyzip', '~> 1.1.0'
 # gem 'axlsx', '2.1.0.pre'
 # no new gem out yet using the new rubyzip version

@@ -1,0 +1,43 @@
+.logo = image_tag wicked_pdf_asset_base64('pbw-logo.svg'), width: '1000'
+
+.content
+  h1 Seminarausschreibung
+  h2 = @seminar.title
+
+  - if @seminar.benefit
+    h3 = Seminar.human_attribute_name :benefit
+    = @seminar.benefit.html_safe
+  - if @seminar.content
+    h3 = Seminar.human_attribute_name :content
+    = @seminar.content.html_safe
+  - if @seminar.notes.present?
+    h3 = Seminar.human_attribute_name :notes
+    = @seminar.notes.html_safe
+
+  table.table
+    tr
+      th Termin:
+      td
+        - if @seminar.has_date_text?
+          = @seminar.date_text.html_safe
+        - else
+          = @seminar.events_list.map { |date, time| "#{ldate date} #{time}" }.join('<br>').html_safe
+    tr
+      th Referent*in:
+      td = @seminar.teachers.map { |teacher| "<b>#{teacher.name}</b>, #{teacher.profession}" }.join('<br>').html_safe
+    tr
+      th Ort:
+      td = @seminar.location&.name
+    tr
+      th Kosten:
+      td = @seminar.price_text.html_safe
+    tr
+      th Sem-Nr.:
+      td = @seminar.number
+
+footer
+  p.homepage www.<span>pbw-lsa</span>.de
+  p.address
+    | Gemeinnütziges Paritätisches Bildungswerk – PBW GmbH
+    br
+    | Wiener Str. 2 . 39112 Magdeburg . Telefon 0391 / 62 93 313 . Fax 0391 / 62 93 59 63 13 . Mail bildungswerk-lsa.de

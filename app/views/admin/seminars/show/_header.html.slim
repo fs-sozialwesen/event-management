@@ -34,4 +34,5 @@ ol.breadcrumb
     => link_to fa_icon('external-link', text: 'Externe Ansicht'), seminar_visitor_url(@seminar), class: 'btn btn-default btn-block'
 
     = copy_link new_admin_seminar_url(copy_from: @seminar.id), class: 'btn-block'
+    = pdf_link admin_seminar_url(@seminar, format: :pdf), css_class: 'btn btn-default btn-block'
 
