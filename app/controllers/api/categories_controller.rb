@@ -10,11 +10,10 @@ module Api
     end
 
     def show
-      @categories = Category.find_by(id: params[:id])&.children
+      @category = Category.find_by(id: params[:id])
 
       expires_in cache_time, public: true
-      stale? @categories
-      render 'index'
+      stale? @category
     end
 
     def tree
