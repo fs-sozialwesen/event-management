@@ -1,4 +1,4 @@
-.logo = image_tag wicked_pdf_asset_base64('pbw-logo.svg'), width: '1000'
+.logo = image_tag wicked_pdf_asset_base64('pbw-logo.svg'), width: '280'
 
 .content
   h1 Seminarausschreibung
@@ -14,7 +14,7 @@
     h3 = Seminar.human_attribute_name :notes
     = @seminar.notes.html_safe
 
-  table.table
+  table
     tr
       th Termin:
       td

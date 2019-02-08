@@ -80,7 +80,7 @@ module Admin
       session[:attendee_back_url] = admin_seminar_path(@seminar, anchor: 'attendees')
       respond_to do |format|
         format.html
-        format.pdf { render pdf: "#{Seminar.model_name.human}_#{@seminar.number}" }
+        format.pdf { render pdf: "#{Seminar.model_name.human}_#{@seminar.number}", show_as_html: params.key?('debug') }
       end
     end
 
