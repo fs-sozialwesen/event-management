@@ -1,37 +1,64 @@
 @import bootstrap-sprockets
 @import bootstrap
-@import bootstrap/variables
-@import bootstrap/mixins
-
-@include make-grid(sm)
-@include make-grid(md)
-@include make-grid(lg)
 
 .main
-  padding: 30px 30px 0 30px
+  padding: 50px 50px 50px 170px
+  border: 20px solid $brand-primary
+  height: 4070px
+.logo
+  float: right
+  width: 1000px
+  height: 300px
+  overflow: hidden
+  img
+    position: relative
+    top: -550px
 
+.content
+  margin-top: 400px
 .page-break
   display: block
   clear: both
   page-break-after: always
 
-body
-  font-size: 50px
+*
+  font-size: 55px
 
 h1
   font-size: 2em
-  margin-bottom: 1em
+  font-weight: bold
+  top: 2em
   color: $brand-primary
   text-transform: uppercase
 h2
-  font-size: 1.8em
+  font-size: 1.4em
+  font-weight: bold
+  margin-bottom: 2em
 h3
-  font-size: 1.6em
-p, ul
   font-size: 1.2em
+  font-weight: bold
+  margin-top: 80px
 
-header
-  .logo
-    p
-      color: $brand-primary
-      font-size: 0.8em
+table
+  margin-top: 100px
+  th, td
+    border: 0 !important
+  th
+    width: 400px
+footer
+  //border: 1px solid red
+  position: fixed
+  bottom: 20px
+  margin-left: 250px
+  p.homepage
+    text-align: center
+    font-size: 1.4em
+    font-weight: bold
+    color: $brand-primary
+    margin-bottom: 0.5em
+    span
+      color: red
+      font-size: inherit
+  p.address
+    text-align: center
+    font-size: 0.65em

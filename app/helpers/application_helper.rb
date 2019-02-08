@@ -94,8 +94,8 @@ module ApplicationHelper
     link_to fa_icon('clone', text: t(:copy)), url, options
   end
 
-  def pdf_link(url, text: 'PDF')
-    link_to fa_icon('file-pdf-o', text: text), url, class: 'btn btn-default', target: '_blank'
+  def pdf_link(url, text: 'PDF', css_class: 'btn btn-default')
+    link_to fa_icon('file-pdf-o', text: text), url, class: css_class, target: '_blank'
   end
 
   def delete_link(record, scope: nil)
