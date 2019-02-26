@@ -4,7 +4,7 @@ module Api
     def index
       @filter = filter
       @category = Category.find_by id: params[:category_id]
-      @seminars = @category ? @category.seminars : Seminar.where(year: @filter[:year])
+      @seminars = @category ? @category.all_seminars : Seminar.where(year: @filter[:year])
 
       @seminars = @seminars.published.order(@filter[:order]).page(@filter[:page]).per(@filter[:per_page])
       @seminars = @seminars.where('seminars.date >= ?', @filter[:date_start]) if @filter[:date_start]
@@ -33,15 +33,21 @@ module Api
 
     def filter
       filter = {}
-      filter[:year] = (params[:year] || Date.current.year).to_i
-      filter[:page] = params[:page]
-      filter[:per_page] = params[:per_page]
-      filter[:order] = params[:sort_by].in?(%w(date title)) ? params[:sort_by].to_sym : :date
-      filter[:order] = { filter[:order] => params[:sorting] } if params[:sorting].in?(%w(asc desc))
-      filter[:date_start] = get_date :date_start
-      filter[:date_end]   = get_date :date_end
+      filter[:year]        = (params[:year] || Date.current.year).to_i
+      filter[:page]        = params[:page]
+      filter[:per_page]    = params[:per_page]
+      filter[:order]       = sort_by
+      filter[:date_start]  = get_date :date_start
+      filter[:date_end]    = get_date :date_end
       filter[:search_term] = params[:search_term]
       filter
+    end
+
+    def sort_by
+      order = 'date'
+      order = "regexp_replace(title, '\\W+', '', 'g')" if params[:sort_by] == 'title'
+      order = "#{order} desc" if params[:sorting] == 'desc'
+      order
     end
 
     def get_date(start_or_end)
