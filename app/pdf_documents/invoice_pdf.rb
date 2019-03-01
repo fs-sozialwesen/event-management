@@ -11,7 +11,7 @@ class InvoicePdf < ApplicationDocument
     @debug         = false
     @margin_top    = 28.mm
     @margin_bottom = 0
-    @margin_side   = 28.mm
+    @margin_side   = 23.mm
     @printed_footer = 30.mm
     super(page_size: 'A4', margin: [@margin_top, @margin_side, @margin_bottom + @printed_footer])
     @invoice = invoice
