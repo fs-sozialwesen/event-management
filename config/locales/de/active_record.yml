@@ -169,6 +169,9 @@ de:
         pari_reducible: PARITÄTER
         group_reducible: Guppen
         school_reducible: Absolventen
+        recommended: empfohlen
+        recommendation_label: Empfehlungstext
+
       teacher:
         seminars: Seminare
         skill_sets: Fachbereiche

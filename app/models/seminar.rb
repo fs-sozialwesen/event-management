@@ -50,6 +50,7 @@ class Seminar < ApplicationRecord
   scope :by_month, lambda { |month|
     month.zero? ? where(date: nil) : where('extract(month from date) = ?', month)
   }
+  scope :recommended,          -> { where recommended: true }
   scope :editing_finished,     -> { where.not editing_finished_at: nil }
   scope :editing_not_finished, -> { where     editing_finished_at: nil }
   scope :layout_finished,      -> { where.not layout_finished_at:  nil }
