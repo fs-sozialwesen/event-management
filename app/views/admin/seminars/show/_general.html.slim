@@ -37,6 +37,10 @@
           $('[data-behavior=submit-on-change]').change -> $(this).closest('form').submit()
 
     br
+    label Empfohlen
+    =< bool_icon @seminar.recommended
+    =< @seminar.recommendation_label
+    br
     = render 'admin/seminars/show/sub_modules'
 
     /= render 'admin/seminars/show/teachers'

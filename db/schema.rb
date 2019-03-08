@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190117162640) do
+ActiveRecord::Schema.define(version: 20190308141232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -532,6 +532,8 @@ ActiveRecord::Schema.define(version: 20190117162640) do
     t.boolean "pari_reducible", default: false
     t.boolean "group_reducible", default: true
     t.boolean "school_reducible", default: true
+    t.boolean "recommended", default: false
+    t.string "recommendation_label"
     t.index ["location_id"], name: "index_seminars_on_location_id"
     t.index ["parent_id"], name: "index_seminars_on_parent_id"
   end

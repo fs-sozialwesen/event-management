@@ -1,6 +1,9 @@
 .row
   .col-md-3 = f.input :archived
   .col-md-3 = f.input :canceled
+  .col-md-3
+    = f.input :recommended
+    = f.input :recommendation_label, placeholder: 'Neu! oder Zusatzseminar'
 .row
   .col-md-9
     fieldset

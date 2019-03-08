@@ -10,6 +10,7 @@ module Api
       @seminars = @seminars.where('seminars.date >= ?', @filter[:date_start]) if @filter[:date_start]
       @seminars = @seminars.where('seminars.date <= ?', @filter[:date_end])   if @filter[:date_end]
       @seminars = @seminars.bookable                                          if @filter[:only_bookable]
+      @seminars = @seminars.recommended                                       if @filter[:recommended]
       @seminars = @seminars.where(location_id: @filter[:location_ids])        if @filter[:location_ids].any?
       @seminars = @seminars.external_search @filter[:search_term]             if @filter[:search_term]
 
@@ -42,6 +43,7 @@ module Api
       filter[:date_start]    = get_date :date_start
       filter[:date_end]      = get_date :date_end
       filter[:only_bookable] = !params.key?(:with_outdated)
+      filter[:recommended]   = params.key?(:recommended)
       filter[:location_ids]  = params[:location_ids].to_s.split(',')
       filter[:search_term]   = params[:search_term]
       filter
