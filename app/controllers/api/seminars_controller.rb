@@ -9,7 +9,9 @@ module Api
       @seminars = @seminars.published.order(@filter[:order]).page(@filter[:page]).per(@filter[:per_page])
       @seminars = @seminars.where('seminars.date >= ?', @filter[:date_start]) if @filter[:date_start]
       @seminars = @seminars.where('seminars.date <= ?', @filter[:date_end])   if @filter[:date_end]
-      @seminars = @seminars.external_search @filter[:search_term]    if @filter[:search_term]
+      @seminars = @seminars.bookable                                          if @filter[:only_bookable]
+      @seminars = @seminars.where(location_id: @filter[:location_ids])        if @filter[:location_ids].any?
+      @seminars = @seminars.external_search @filter[:search_term]             if @filter[:search_term]
 
       expires_in cache_time, public: true
       stale? @seminars
@@ -33,20 +35,22 @@ module Api
 
     def filter
       filter = {}
-      filter[:year]        = (params[:year] || Date.current.year).to_i
-      filter[:page]        = params[:page]
-      filter[:per_page]    = params[:per_page]
-      filter[:order]       = sort_by
-      filter[:date_start]  = get_date :date_start
-      filter[:date_end]    = get_date :date_end
-      filter[:search_term] = params[:search_term]
+      filter[:year]          = (params[:year] || Date.current.year).to_i
+      filter[:page]          = params[:page]
+      filter[:per_page]      = params[:per_page]
+      filter[:order]         = sort_by
+      filter[:date_start]    = get_date :date_start
+      filter[:date_end]      = get_date :date_end
+      filter[:only_bookable] = !params.key?(:with_outdated)
+      filter[:location_ids]  = params[:location_ids].to_s.split(',')
+      filter[:search_term]   = params[:search_term]
       filter
     end
 
     def sort_by
       order = 'date'
       order = "regexp_replace(title, '\\W+', '', 'g')" if params[:sort_by] == 'title'
-      order = "#{order} desc" if params[:sorting] == 'desc'
+      order = "#{order} desc"                          if params[:sorting] == 'desc'
       order
     end
 
