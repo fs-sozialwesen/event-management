@@ -51,6 +51,7 @@ Rails.application.routes.draw do
         get 'category(/:id)',          action: :category,       as: :category
         get :search
         get :filter
+        get :recommended
       end
     end
     resources :legal_statistics, only: %i[index show update]

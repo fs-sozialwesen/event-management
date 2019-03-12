@@ -6,7 +6,7 @@
         - if @seminars
           - count = @seminars.total_count
           - title = "#{count} #{Seminar.model_name.human count: count}"
-          - if @seminar.respond_to?(:total_count) && @seminars.total_count != count
+          - if @seminars.respond_to?(:total_count) && @seminars.total_count != count
             - title += " (#{@seminars.total_count})"
         - else
           - title = 'Seminare'
@@ -27,7 +27,8 @@ ul.nav.nav-tabs.seminar-views
   li class=('active' if params[:action] == 'filter')   = link_to 'Filter',        filter_admin_seminars_path
   li class=('active' if params[:action] == 'editing_status')
     = link_to 'Bearbeitungsstatus', editing_status_admin_seminars_path
-
+  li class=('active' if params[:action] == 'recommended')
+    = link_to 'Empfohlen', recommended_admin_seminars_path
 sass:
   ul.seminar-views
     margin-bottom: 20px
