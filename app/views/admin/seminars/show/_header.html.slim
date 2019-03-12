@@ -17,7 +17,7 @@ ol.breadcrumb
         br
         => "Modul: #{@seminar.number} - #{@seminar.title}"
       - else
-        => icon_for @seminar, text: "#{@seminar.number} - #{@seminar.title}"
+        => icon_for @seminar, text: "#{@seminar.number} - #{@seminar.title}#{" ⭐" if @seminar.recommended?}"
       br
       small = @seminar.subtitle
       br

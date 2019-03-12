@@ -1,0 +1,7 @@
+= render 'admin/seminars/index/header'
+
+.row
+  .col-md-3
+  .col-md-9
+    = render 'table', seminars: @seminars, header: false
+    .pull-right = paginate @seminars

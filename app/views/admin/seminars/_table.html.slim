@@ -21,6 +21,8 @@
                   = seminar.dates.join('<br>').html_safe
               td
                 = seminar.title
+                - if seminar.recommended?
+                  = " ⭐"
                 br
                 small.text-muted = seminar.subtitle
               td = render 'admin/seminars/status', seminar: seminar

@@ -76,6 +76,11 @@ module Admin
       @seminars = current_catalog.seminars.page(params[:page]).send @scope
     end
 
+    def recommended
+      authorize Seminar
+      @seminars = current_catalog.seminars.recommended.page(params[:page])
+    end
+
     def show
       session[:attendee_back_url] = admin_seminar_path(@seminar, anchor: 'attendees')
       respond_to do |format|
