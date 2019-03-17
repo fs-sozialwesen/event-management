@@ -19,8 +19,6 @@ gem 'rmagick'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-
-
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'bootstrap-sass'
 gem 'devise'
@@ -55,8 +53,7 @@ gem 'axlsx', github: 'randym/axlsx'
 gem 'axlsx_rails'
 gem 'axlsx_styler'
 gem 'paperclip', '~> 5.0'
-gem 'alchemy_cms', '~> 4.0.0'
-
+gem 'acts-as-taggable-on'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

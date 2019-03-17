@@ -1,8 +1,0 @@
-- cache(element) do
-  = element_view_for(element, class: 'team-member') do |el|
-    .image = el.render :picture
-    .text
-      label.employee-name = el.render :name
-      .employee-position  = el.render :position
-      .employee-phone     = el.render :phone
-      .employee-email     = el.render :email

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
 
-  ROLES = %i(admin user editor layouter cms_admin finance trainee).freeze
+  ROLES = %i(admin user editor layouter finance trainee).freeze
   has_many :edited_seminars, class_name: 'Seminar', foreign_key: :editor_id
 
   ROLES.each do |role|
@@ -33,11 +33,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, #:registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  def alchemy_roles
-    # member, author, editor, admin
-    cms_admin? || admin? ? %w(admin) : []
-  end
 
   def has_role?(role)
     role.to_s.in? roles
