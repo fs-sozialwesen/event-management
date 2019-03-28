@@ -1,0 +1,166 @@
+= simple_form_for(@booking, url: booking_create_url, defaults: { label: false }) do |f|
+  = f.input :seminar_id, as: :hidden
+
+  .row style="padding-top: 30px"
+    .col-md-9
+      fieldset
+        legend = Attendee.model_name.human(count: 2)
+
+        = f.simple_fields_for :attendees do |attendee_form|
+          - attendee = attendee_form.object
+          .attendee
+            .row
+              - if attendee_form.index > 0
+                a.btn.btn-danger.btn-xs.remove-attendee = fa_icon 'trash'
+              .col-md-4 = attendee_form.input :first_name
+              .col-md-4 = attendee_form.input :last_name
+              .col-md-4 = attendee_form.input :profession
+
+        .row
+          .col-md-1 = link_to fa_icon('plus', text: 'Teilnehmer hinzufügen'), '#',
+            class: 'add-attendee btn btn-default', tabindex: -1, title: 'Neuer Teilnehmer'
+      fieldset
+        legend Schicken Sie die Rechnung bitte an folgende Adresse:
+        p
+          label.radio-inline
+            input type="radio" name="booking[is_company]" value='false' checked=(!@booking.is_company) Privatadresse
+          label.radio-inline
+            input type="radio" name="booking[is_company]" value='true' checked=(@booking.is_company) Arbeitgeber
+        .row.company_title
+          .col-md-12 = f.input :invoice_title
+        .row
+          .col-md-5 = f.input :invoice_street
+          .col-md-2 = f.input :invoice_zip,  as: :tel
+          .col-md-5 = f.input :invoice_city
+
+      fieldset
+        legend Bitte geben Sie für eventuelle kurzfristige Absagen einen Kontakt an, unter dem Sie erreichbar sind:
+        .row
+          .col-md-6 = f.input :contact_phone,  as: :tel,   placeholder: '* Telefon/Mobil'
+          .col-md-6 = f.input :contact_email,  as: :email, placeholder: 'E-Mail'
+
+      - if @seminar.reducible?
+        fieldset
+          legend Ich möchte folgenden Rabatt in Anspruch nehmen:
+          small Es kann nur ein Rabatt pro Teilnehmer*in in Anspruch genommen werden.
+          br
+          small Weitere Informationen zu unseren Rabatten finden Sie im Bildungskalender 2019 auf Seite 12
+            oder #{link_to 'hier', main_app.reductions_path}.
+          .form-group.radio_buttons
+            .control_group
+              input type="hidden" name="booking[reduction]" value=""
+              - if @seminar.early_reducible?
+                span.radio
+                  label
+                    => f.radio_button :reduction, :early, disabled: (Date.current > @seminar.date - @seminar.pre_booking_weeks.weeks)
+                    | #{t('buchung.reductions.early')} (#{@seminar.pre_booking_weeks} Wochen im Voraus)
+              - if @seminar.tandem_reducible?
+                span.radio
+                  label
+                    => f.radio_button :reduction, :tandem
+                    | 10% #{t('buchung.reductions.tandem')} (nur für Kurse)
+                .reduction-content
+                  p: small Ich nehme den Rabatt gemeinsam mit folgender Person in Anspruch: (Diese Person muss sich eigenständig anmelden.)
+                  .row
+                    .col-md-6 = f.input :tandem_name, placeholder: 'Name, Vorname'
+                    .col-md-6 = f.input :tandem_company, placeholder: 'Einrichtung'
+                  = f.input :tandem_address, placeholder: 'Bitte geben Sie Name und Anschrift des Trägers der Einrichtungen an',
+                      hint: 'Angabe zur Einlösung des Rabatts notwendig'
+              - if @seminar.pari_reducible?
+                span.radio
+                  label
+                    => f.radio_button :reduction, :pari
+                    | #{t 'buchung.reductions.pari'} (nur für Kurse)
+                .row.reduction-content
+                  .col-md-6 = f.input :member, label: t('buchung.new.member')
+                  .col-md-6 = f.input :member_institution, label: t('buchung.new.member_institution')
+              - if @seminar.group_reducible?
+                span.radio
+                  label
+                    => f.radio_button :reduction, :group, disabled: true
+                    | #{t 'buchung.reductions.group'} (ab 5 Personen einer Einrichtung)
+                .reduction-content Ich melde für die o.g. Veranstaltung gleichzeitig o.g. Personen aus meiner Einrichtung an.
+              - if @seminar.school_reducible?
+                span.radio
+                  label
+                    => f.radio_button :reduction, :school
+                    = t 'buchung.reductions.school'
+                .row.reduction-content
+                  .col-md-6 = f.input :school, collection: t('bookings.schools'), include_blank: false
+                  .col-md-6 = f.input :year, placeholder: 'Abschlussjahr'
+                  p: small Sollte der Abschluss länger als 10 Jahre zurückliegen, bitte eine Kopie des Abschlusszeugnisses einreichen.
+
+      fieldset
+        legend Bemerkungen
+        = f.input :comments, input_html: { rows: 4 }
+
+      fieldset
+        legend AGB
+        = f.input :data_protection,  as: :boolean, required: true, label: raw(t('buchung.new.data_protection'))
+        = f.input :terms_of_service, as: :boolean, required: true, label: raw(t('buchung.new.terms_of_service'))
+
+  .row.action-buttons
+    .col-md-9 = f.submit 'Jetzt anmelden', class: 'btn btn-primary btn-block btn-lg'
+
+coffee:
+  $ ->
+    $('form#new_booking').submit ->
+      $('span.radio:not(.selected) + .reduction-content').find('input, select').prop('disabled', true)
+      true
+
+    $('input[name="booking[is_company]"]').change ->
+      $('.company_title').toggle $('input[name="booking[is_company]"]:checked').val() == 'true'
+    $('input[name="booking[is_company]"]').change()
+
+    toggleAttendee = (attendee, hidden) ->
+      attendee.toggleClass('hidden', hidden)
+      attendee.find('.booking_attendees__destroy input').val(hidden)
+    checkGroupReduction = ->
+      attendeesCount = $('.attendee').length - $('.attendee.hidden').length
+      groupReductionPossible = attendeesCount > 4
+      $('#booking_reduction_group').attr 'disabled', !groupReductionPossible
+      if !groupReductionPossible && $('input[name="booking[reduction]"]:checked').val() == 'group'
+        $('input[name="booking[reduction]"]').prop('checked', false)
+
+    $('.attendee').addClass('hidden')
+    toggleAttendee $('.attendee.hidden').first(), false
+    toggleAttendee $('.attendee .has-error').parents('.attendee'), false
+    $('.add-attendee').on 'click', (event) ->
+      event.preventDefault()
+      toggleAttendee $('.attendee.hidden').first(), false
+      checkGroupReduction()
+    $('.remove-attendee').on 'click', (event) ->
+      event.preventDefault()
+      if $('.attendee:visible').length > 1
+        attendee = $(this).parents('.attendee')
+        toggleAttendee attendee, true
+        attendee.find('input').val('')
+      checkGroupReduction()
+
+    reduction = $('[name="booking[reduction]"]')
+    reduction.change (event) ->
+      $('span.radio').removeClass('selected')
+      $('[name="booking[reduction]"]:checked').parentsUntil('span.radio').parent().addClass('selected')
+    reduction.change()
+
+sass:
+  fieldset
+    margin-bottom: 20px
+  a.add-attendee
+    margin-bottom: 25px
+  a.remove-attendee
+    position: absolute
+    right: -20px
+    display: none
+    z-index: 10
+  .attendee:hover
+    a.remove-attendee
+      display: inline
+  .reduction-content
+    display: none
+    margin-left: 20px
+  span.radio.selected
+    & > label
+      font-weight: bold
+    & + .reduction-content
+      display: block

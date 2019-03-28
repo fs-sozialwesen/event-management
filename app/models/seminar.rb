@@ -109,7 +109,7 @@ class Seminar < ApplicationRecord
   end
 
   def bookable?
-    (date || Date.current) >= Date.current
+    published && (date || Date.current) >= Date.current
   end
 
   def reducible?
