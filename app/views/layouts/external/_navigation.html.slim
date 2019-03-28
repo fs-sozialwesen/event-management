@@ -9,11 +9,7 @@ nav.navbar.navbar-default.navbar-fixed-top
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand href=alchemy.root_url
+      a.navbar-brand href=root_url
 
     #navbar-collapse.collapse.navbar-collapse
-      / - if Alchemy::Page.find_by( name: 'Startseite').children.published.any?
-      - if current_user || session[:new_nav]
-        = render 'layouts/external/new_nav'
-      - else
-        = render 'layouts/external/old_nav'
+      = render 'layouts/external/old_nav'

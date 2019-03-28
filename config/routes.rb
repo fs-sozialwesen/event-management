@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   post 'seminar-buchung',               to: 'bookings#create', as: :booking_create
   get  'buchungsnachricht/:booking_id', to: 'bookings#show',   as: :booking_show
 
-  # root to: 'pages#home'
+  root to: 'pages#home'
 
   get 'seminare/start/:year',            to: 'seminare#home',   as: :seminare_home
   get 'seminare(/:year(/:category_id))', to: 'seminare#index',  as: :seminare_visitor
@@ -58,21 +58,21 @@ Rails.application.routes.draw do
         get :recommended
       end
     end
-    resources :legal_statistics, only: %i[index show update]
+    resources :legal_statistics, only: %i(index show update)
     resources :categories, except: :edit do
       put :move, on: :member
     end
-    resources :bookings,   only: %i[show new create]
-    resources :attendees,  only: %i[index show update] do
+    resources :bookings,   only: %i(show new create)
+    resources :attendees,  only: %i(index show update) do
       get :cancel
       post :cancel, action: :destroy
       get :company, on: :collection
     end
     resources :invoices,  except: :edit
     resources :companies, except: :edit
-    resources(:catalogs,  except: %i[edit destroy]) { get :make_current, on: :member }
+    resources(:catalogs,  except: %i(edit destroy)) { get :make_current, on: :member }
 
-    resources :feedbacks, only: %i[new create]
+    resources :feedbacks, only: %i(new create)
   end
 
   get 'agbs'          => 'static_pages#terms_of_service', as: :terms_of_service
@@ -80,6 +80,5 @@ Rails.application.routes.draw do
   get 'daten'         => 'static_pages#data_info',        as: :data_info
   get 'rabatt_system' => 'static_pages#reductions',       as: :reductions
 
-  mount Alchemy::Engine => '/'
   # get ':path1(/:path2(/:path3))' => 'pages#show', as: :pages
 end

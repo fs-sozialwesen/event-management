@@ -38,8 +38,8 @@ footer
           / = render_navigation all_sub_menues: true
         .col-md-3
           ul
-            li = link_to 'AGB', main_app.terms_of_service_path
-            li = link_to 'Datenschutz', main_app.data_protection_path
+            li = link_to 'AGB', terms_of_service_path
+            li = link_to 'Datenschutz', data_protection_path
         .col-sm-6
           / b Fort- und Weiterbildung
           |  Wiener Straße 2 |
@@ -49,9 +49,9 @@ footer
           a href="mailto:bildungswerk@paritaet-lsa.de"  bildungswerk@paritaet-lsa.de
         .col-sm-3
           - if current_user
-            = link_to 'Admin', main_app.admin_root_path, data: { no_turbolink: true }
+            = link_to 'Admin', admin_root_path, data: { no_turbolink: true }
           - else
-            = link_to 'Anmelden', main_app.new_user_session_path
+            = link_to 'Anmelden', new_user_session_path
   .sub-footer
     .container
       .row
