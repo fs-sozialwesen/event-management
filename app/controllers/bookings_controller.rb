@@ -2,8 +2,13 @@ class BookingsController < ApplicationController
 
   MAX_ATTENDEES = 16
 
+  layout 'booking'
+
   def new
+    @back_path = session[:back_path] = request.referer
     @seminar = Seminar.published.find(params[:seminar_id]).decorate
+    return render 'overdue' unless @seminar.bookable?
+    return render 'external' if @seminar.external_booking_address.present?
     @booking = @seminar.bookings.build is_company: true
     MAX_ATTENDEES.times { @booking.attendees.build }
   end
@@ -29,6 +34,7 @@ class BookingsController < ApplicationController
   def show
     @booking = Booking.find params[:booking_id]
     @seminar = @booking.seminar.decorate
+    @back_path = session[:back_path]
   end
 
   private

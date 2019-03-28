@@ -1,0 +1,8 @@
+
+h4 Dieses Seminar können Sie unter folgender Adresse buchen:
+- if @seminar.external_booking_address.include?('@')
+  = link_to 'Per E-Mail', "mailto:#{@seminar.external_booking_address}"
+- else
+  = link_to @seminar.external_booking_address, @seminar.external_booking_address, target: :blank
+
+= render 'seminar'

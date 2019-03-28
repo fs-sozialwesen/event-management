@@ -2,7 +2,7 @@
   = f.input :seminar_id, as: :hidden
 
   .row style="padding-top: 30px"
-    .col-md-8
+    .col-md-9
       fieldset
         legend = Attendee.model_name.human(count: 2)
 
@@ -100,7 +100,7 @@
         = f.input :terms_of_service, as: :boolean, required: true, label: raw(t('buchung.new.terms_of_service'))
 
   .row.action-buttons
-    .col-md-8 = f.submit 'Jetzt anmelden', class: 'btn btn-primary btn-block btn-lg'
+    .col-md-9 = f.submit 'Jetzt anmelden', class: 'btn btn-primary btn-block btn-lg'
 
 coffee:
   $ ->
