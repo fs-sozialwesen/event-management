@@ -2,7 +2,7 @@ json.cache! @seminar, expires_in: cache_time do
 
   json.extract!         @seminar, :id, :title, :subtitle, :number, :recommended, :recommendation_label
   json.admin_url        admin_seminar_url(@seminar)
-  json.booking_url      @seminar.booking_address
+  json.booking_url      booking_new_url(seminar_id: @seminar.id)
   json.external_booking @seminar.external_booking_address.present?
 
   json.content @seminar.content&.to_json
