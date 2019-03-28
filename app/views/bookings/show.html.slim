@@ -1,0 +1,9 @@
+- content_for :back_link, link_to('&laquo; zur Seminarübersicht'.html_safe, seminare_visitor_path, class: 'btn btn-default')
+
+.container
+  h2 Anmeldungsbestätigung
+
+  = render 'seminar'
+
+  p = t('bookings.created')
+

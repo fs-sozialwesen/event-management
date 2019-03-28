@@ -1,0 +1,18 @@
+.row
+  .col-md-2: label Seminarnr.
+  .col-md-6: strong = link_to @seminar.number, seminar_visitor_url(@seminar)
+.row
+  .col-md-2: label Titel
+  .col-md-6 = @seminar.title
+.row
+  .col-md-2
+  .col-md-6 = @seminar.subtitle
+.row
+  .col-md-2: label Termine
+  .col-md-6 = @seminar.formatted_events.html_safe
+.row
+  .col-md-2: label Ort
+  .col-md-6 = @seminar.location&.name
+.row
+  .col-md-2: label Gebühr
+  .col-md-6 = @seminar.price_text&.html_safe
