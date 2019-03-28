@@ -58,7 +58,7 @@
           .col-md-4: strong Anmeldeschluss
           .col-md-8 = @seminar.due_date.html_safe
       - if @seminar.year > 2018
-        .line = link_to 'Informationen zu unserem Rabattsystem', main_app.reductions_path
+        .line = link_to 'Informationen zu unserem Rabattsystem', reductions_path
       - if @seminar.notes.present?
         .row.line
           .col-md-4: strong Bemerkungen

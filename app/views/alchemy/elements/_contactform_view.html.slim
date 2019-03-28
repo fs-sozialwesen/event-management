@@ -1,6 +1,0 @@
-= simple_form_for(@message ||= Alchemy::Message.new) do |form|
-  = form.input :name, label: false, placeholder: 'Name'
-  = form.input :email, label: false, placeholder: 'E-Mail-Adresse'
-  = form.input :message, as: 'text', label: false, placeholder: 'Nachricht', input_html: { rows: 8 }
-  = form.hidden_field :contact_form_id, value: element.id
-  = form.submit 'Abschicken', class: 'btn btn-primary'

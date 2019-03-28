@@ -6,7 +6,7 @@ nav.navbar.navbar-inverse.navbar-fixed-top
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      = link_to 'Start', alchemy.root_url, class: 'navbar-brand', tabindex: -1
+      = link_to 'Start', root_url, class: 'navbar-brand', tabindex: -1
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         - if policy(Seminar).index?
@@ -23,7 +23,6 @@ nav.navbar.navbar-inverse.navbar-fixed-top
         - if policy(LegalStatistic).index?
           li class=('active' if controller_name == 'legal_statistics')
             = link_to title_for_model(LegalStatistic, with_icon: false), admin_legal_statistics_url, tabindex: -1
-        li = link_to 'CMS', alchemy.admin_path, tabindex: -1
         = navbar_dropdown 'Stammdaten', active: controller_name.in?(%w(catalogs categories locations teachers companies users)) do
           - if policy(Catalog).index?
             li class=('active' if controller_name == 'catalogs')
