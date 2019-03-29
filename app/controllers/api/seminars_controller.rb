@@ -12,7 +12,8 @@ module Api
       @seminars = @seminars.bookable                                          if @filter[:only_bookable]
       @seminars = @seminars.recommended                                       if @filter[:recommended]
       @seminars = @seminars.where(location_id: @filter[:location_ids])        if @filter[:location_ids].any?
-      @seminars = @seminars.external_search @filter[:search_term]             if @filter[:search_term]
+      # @seminars = @seminars.external_search @filter[:search_term]             if @filter[:search_term]
+      @seminars = @seminars.ext_search @filter[:search_term]                  if @filter[:search_term]
 
       expires_in cache_time, public: true
       stale? @seminars

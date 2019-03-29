@@ -26,6 +26,7 @@ class SeminareController < ApplicationController
   def search
     @query = params[:q]
     @published_years = Catalog.published.pluck(:year).select { |year| year >= Date.current.year }
-    @seminars = Seminar.published.where(year: @published_years).external_search @query
+    # @seminars = Seminar.published.where(year: @published_years).external_search @query
+    @seminars = Seminar.published.where(year: @published_years).ext_search @query
   end
 end

@@ -66,9 +66,15 @@ class Seminar < ApplicationRecord
     where('number ilike ?', "#{filter[:number1]}%#{filter[:number2].tr('*', '%')}-%#{filter[:number3]}%")
   }
 
+  search_fields = %i(number title subtitle benefit content notes due_date price_text key_words)
+
+  scope :ext_search, ->(q) {
+    expression = search_fields.map { |field| "#{field} ilike :q" }.join(' OR ')
+    where(expression, q: "%#{q}%")
+  }
+
   has_paper_trail
 
-  search_fields = %i(number title subtitle benefit content notes due_date price_text key_words)
   associated_fields = {
     teachers:   %i(first_name last_name profession),
     categories: %i(name),
