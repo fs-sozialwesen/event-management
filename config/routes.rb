@@ -8,7 +8,12 @@ Rails.application.routes.draw do
   post 'buchung',               to: 'buchung#create', as: :buchung_create
   get  'nachricht/:booking_id', to: 'buchung#show',   as: :buchung_show
 
+  get  'seminar-buchung/:seminar_id',   to: 'bookings#new',    as: :booking_new
+  post 'seminar-buchung',               to: 'bookings#create', as: :booking_create
+  get  'buchungsnachricht/:booking_id', to: 'bookings#show',   as: :booking_show
+
   root to: 'pages#home'
+
   get 'seminare/start/:year',            to: 'seminare#home',   as: :seminare_home
   get 'seminare(/:year(/:category_id))', to: 'seminare#index',  as: :seminare_visitor
   get 'seminar/:id',                     to: 'seminare#show',   as: :seminar_visitor

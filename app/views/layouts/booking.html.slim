@@ -1,0 +1,27 @@
+doctype html
+html.no-js lang="de"
+  head
+    meta charset="utf-8" /
+    meta content="IE=edge" http-equiv="X-UA-Compatible" /
+    meta content="width=device-width, initial-scale=1" name="viewport" /
+    title
+      | PBW LSA
+      - if content_for? :page_title
+        | -
+        =< content_for :page_title
+    meta content=content_for(:page_description) name="description"
+
+    = stylesheet_link_tag 'booking', media: 'all'
+    link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,900" media="all"
+    link rel="stylesheet" type="text/css" href="https://pbw-lsa.org/fileadmin/templates/pwb_de/css/style.css" media="all"
+
+    = javascript_include_tag 'booking'
+    == csrf_meta_tags
+
+  body.pbw.loaded.red
+    main
+      .container
+        .logo-line
+          .pull-right = link_to 'Zurück', (@back_path || 'javascript: window.history.back();')
+          = image_tag 'pbw-logo.png', width: 300
+        == yield
