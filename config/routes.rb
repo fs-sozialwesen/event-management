@@ -79,6 +79,7 @@ Rails.application.routes.draw do
   get 'datenschutz'   => 'static_pages#data_protection',  as: :data_protection
   get 'daten'         => 'static_pages#data_info',        as: :data_info
   get 'rabatt_system' => 'static_pages#reductions',       as: :reductions
+  get 'zeichensetzen' => 'static_pages#zeichensetzen',    as: :zeichensetzen
 
   # get ':path1(/:path2(/:path3))' => 'pages#show', as: :pages
 end
