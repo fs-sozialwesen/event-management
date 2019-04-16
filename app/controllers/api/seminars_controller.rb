@@ -27,6 +27,9 @@ module Api
       render json: {}, status: :not_found unless @seminar
     end
 
+    def docs
+    end
+
     protected
 
     def cache_time
