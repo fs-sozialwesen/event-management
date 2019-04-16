@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api, constraints: { format: 'json' } do
+    root to: 'seminars#docs'
     resources(:categories, only: %i(index show)) { get :tree, on: :collection }
     resources :seminars,   only: %i(index show)
     resources :locations,  only: %i(index)
