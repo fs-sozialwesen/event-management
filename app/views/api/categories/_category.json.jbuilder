@@ -1,7 +1,7 @@
 json.(category, :id, :number, :name, :year, :parent_id, :position)
 json.abs_position              category.path.map(&:position).join('.')
-json.number_seminars_direct    category.seminars.count
-json.number_seminars_inherited category.all_seminars.count
+json.number_seminars_direct    category.seminars.published.count
+json.number_seminars_inherited category.all_seminars.published.count
 json.number_children           category.children.count
 json.number_descendants        category.descendants.count - 1
 json.level                     category.path.size
