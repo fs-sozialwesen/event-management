@@ -10,6 +10,8 @@ json.cache! [@seminars, @filter], expires_in: cache_time do
       json.dates      seminar.decorate.dates
       json.events     seminar.events, :date, :start_time, :end_time
       json.teachers   seminar.teachers.map(&:name)
+      json.price      seminar.price&.to_f
+      json.price_text strip_tags(seminar.price_text)
     end
   end
 end

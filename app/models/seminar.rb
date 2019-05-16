@@ -48,8 +48,13 @@ class Seminar < ApplicationRecord
   scope :canceled,  -> { where canceled:  true }
   scope :bookable,  -> { where 'date >= :date', date: Date.current }
   scope :overdue,   -> { where 'date < :date',  date: Date.current }
-  scope :by_month, lambda { |month|
-    month.zero? ? where(date: nil) : where('extract(month from date) = ?', month)
+  scope :by_year_and_month, lambda { |year, month|
+    if month.zero?
+      where(date: [nil, '']).where(year: year)
+    else
+      start_date = Date.new year, month
+      where(id: Event.order(:date).joins(:seminar).where(date: start_date..start_date.end_of_month).select(:seminar_id))
+    end
   }
   scope :recommended,          -> { where recommended: true }
   scope :editing_finished,     -> { where.not editing_finished_at: nil }
@@ -69,8 +74,8 @@ class Seminar < ApplicationRecord
   search_fields = %i(number title subtitle benefit content notes due_date price_text key_words)
 
   scope :ext_search, ->(q) {
-    expression = search_fields.map { |field| "#{field} ilike :q" }.join(' OR ')
-    where(expression, q: "%#{q}%")
+    expression = (search_fields + ['locations.name']).map { |field| "#{field} ilike :q" }.join(' OR ')
+    joins(:location).where(expression, q: "%#{q}%")
   }
 
   has_paper_trail

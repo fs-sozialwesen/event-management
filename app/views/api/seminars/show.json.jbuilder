@@ -5,9 +5,9 @@ json.cache! @seminar, expires_in: cache_time do
   json.booking_url      booking_new_url(seminar_id: @seminar.id)
   json.external_booking @seminar.external_booking_address.present?
 
-  json.content @seminar.content&.to_json
-  json.benefit @seminar.benefit&.to_json
-  json.notes   @seminar.notes&.to_json
+  json.content @seminar.content
+  json.benefit @seminar.benefit
+  json.notes   @seminar.notes
 
 
   json.date_text       @seminar.has_date_text? ? @seminar.date_text.to_json : nil
@@ -15,8 +15,9 @@ json.cache! @seminar, expires_in: cache_time do
   json.events          @seminar.events, :date, :start_time, :end_time
   json.teachers        @seminar.teachers, :name, :profession
 
-  json.location @seminar.location, :id, :name
-  json.price_text @seminar.price_text&.to_json
+  json.location   @seminar.location, :id, :name
+  json.price      @seminar.price&.to_f
+  json.price_text strip_tags(@seminar.price_text)
 
   json.bookable          @seminar.bookable?
   json.pre_bookable      @seminar.early_reducible?
