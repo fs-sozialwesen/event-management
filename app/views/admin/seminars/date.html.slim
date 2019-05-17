@@ -4,7 +4,7 @@
   .col-md-2
     ul.nav.nav-pills.nav-stacked
       - I18n.t('date.month_names').each.with_index do |month, index|
-        - label = month || 'Ohne Termin'
+        - label = month || '!!! OHNE TERMIN !!!'
         li class=('active' if @month == index) = link_to label, date_admin_seminars_path(month: index)
   .col-md-10
     = render 'admin/seminars/table', seminars: @seminars, header: false

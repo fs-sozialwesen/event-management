@@ -16,14 +16,14 @@ module Api
       @seminars = @seminars.ext_search @filter[:search_term]                  if @filter[:search_term]
 
       expires_in cache_time, public: true
-      stale? @seminars
+      # stale? @seminars
     end
 
     def show
       @seminar = Seminar.published.find_by(id: params[:id])&.decorate
 
       expires_in cache_time, public: true
-      stale? @seminar
+      # stale? @seminar
       render json: {}, status: :not_found unless @seminar
     end
 
