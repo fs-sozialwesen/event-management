@@ -20,9 +20,9 @@
       .tab-pane#general.active = render 'admin/seminars/form/general', f: f
       .tab-pane#booking        = render 'admin/seminars/form/booking', f: f
       .tab-pane#events         = render 'admin/seminars/form/events',  f: f
-      .tab-pane#benefit        = render 'admin/seminars/form/text',    f: f, field: :benefit
-      .tab-pane#content        = render 'admin/seminars/form/text',    f: f, field: :content
-      .tab-pane#notes          = render 'admin/seminars/form/text',    f: f, field: :notes
+      .tab-pane#benefit        = render 'admin/seminars/form/text',    f: f, field: :benefit, char_limit: 500
+      .tab-pane#content        = render 'admin/seminars/form/text',    f: f, field: :content, char_limit: 800
+      .tab-pane#notes          = render 'admin/seminars/form/text',    f: f, field: :notes,   char_limit: 160
       .tab-pane#stats          = render 'admin/seminars/form/stats',   f: f
 
   section.action-buttons
@@ -35,3 +35,17 @@ sass:
   #content, #benefit, #notes
     iframe.wysihtml5-sandbox
       height: 500px !important
+
+coffee:
+  $ ->
+    $("textarea, input").keyup ->
+      $this = $(this)
+      charLimit = $this.data('charLimit')
+      if charLimit
+        textLength = $this.val().length
+        formGroup = $this.closest('.form-group')
+        formGroup.find('.char-counter').remove()
+        klass = if textLength <= parseInt(charLimit) then 'success' else 'warning'
+        formGroup.append("<span class='char-counter label label-#{klass}'>#{textLength} / #{charLimit} Zeichen</span>")
+    $("textarea, input").keyup()
+
