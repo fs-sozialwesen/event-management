@@ -11,7 +11,7 @@
             collection: Seminar.where(parent_id: nil).order(:number),
             input_html: { class: 'select2' },
             label: 'Dieses Seminar ist ein Modul von'
-= f.input :title
+= f.input :title, input_html: { data: { char_limit: 80 } }
 = f.input :subtitle
 .row
   .col-md-6 = f.association :teachers, input_html: { class: 'select2' }, collection: Teacher.order(:last_name)
