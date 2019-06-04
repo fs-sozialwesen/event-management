@@ -74,8 +74,12 @@ class Seminar < ApplicationRecord
   search_fields = %i(number title subtitle benefit content notes due_date price_text key_words)
 
   scope :ext_search, ->(q) {
-    expression = (search_fields + ['locations.name']).map { |field| "#{field} ilike :q" }.join(' OR ')
-    joins(:location).where(expression, q: "%#{q}%")
+    search_words = q.to_s.split(' ').map.with_index { |word, index| [:"q#{index}", "%#{word}%"] }.to_h
+    all_search_fields = search_fields + ['locations.name']
+    expression = search_words.keys.map do |key|
+      all_search_fields.map { |field| "#{field} ilike :#{key}" }.join(' OR ')
+    end.map { |exp| "(#{exp})" }.join(' AND ')
+    joins(:location).where(expression, search_words)
   }
 
   has_paper_trail
