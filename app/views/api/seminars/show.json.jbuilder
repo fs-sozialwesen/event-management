@@ -11,11 +11,11 @@ json.cache! @seminar, expires_in: cache_time do
 
 
   json.date_text       @seminar.has_date_text? ? @seminar.date_text.to_json : nil
-  json.formatted_dates(@seminar.events_list.map { |date, time| { date: date, time: time } })
+  json.formatted_dates(@seminar.events_list.map { |date, time| { date: ldate(date), time: time } })
   json.events          @seminar.events, :date, :start_time, :end_time
   json.teachers        @seminar.teachers, :name, :profession
 
-  json.location   @seminar.location, :id, :name
+  json.location   @seminar.location, :id, :name, :address_street, :address_zip, :address_city
   json.price      @seminar.price&.to_f
   json.price_text strip_tags(@seminar.price_text)
 
