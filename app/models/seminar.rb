@@ -72,14 +72,22 @@ class Seminar < ApplicationRecord
   }
 
   search_fields = %i(number title subtitle benefit content notes due_date price_text key_words)
+  ext_search_fields = {
+    seminars: search_fields,
+    locations: [:name],
+    teachers: %i(first_name last_name title)
+  }
 
+  # @param q String 'hallo tom'
+  # search_words = { q0: '%hallo%', q1: '%tom%' }
+  # (number ilike :q0 OR title ilike :q0 OR ... OR location.name ilike :q0) AND (number ilike :q1 OR title ...) AND ...
+  # (number ilike %hallo% OR title ilike %hallo% OR ... OR location.name ilike %hallo%) AND (number ilike %tom% OR title ...) AND ...
   scope :ext_search, ->(q) {
-    search_words = q.to_s.split(' ').map.with_index { |word, index| [:"q#{index}", "%#{word}%"] }.to_h
-    all_search_fields = search_fields + ['locations.name']
+    search_words  = q.to_s.split(' ').map.with_index { |word, index| [:"q#{index}", "%#{word}%"] }.to_h
     expression = search_words.keys.map do |key|
-      all_search_fields.map { |field| "#{field} ilike :#{key}" }.join(' OR ')
+      ext_search_fields.flat_map { |table, fields| fields.map { |field| "#{table}.#{field} ilike :#{key}" } }.join(' OR ')
     end.map { |exp| "(#{exp})" }.join(' AND ')
-    joins(:location).where(expression, search_words)
+    joins(:location, :teachers).where(expression, search_words)
   }
 
   has_paper_trail
