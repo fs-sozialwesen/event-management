@@ -53,7 +53,7 @@ class Seminar < ApplicationRecord
       where(date: [nil, '']).where(year: year)
     else
       start_date = Date.new year, month
-      where(id: Event.order(:date).joins(:seminar).where(date: start_date..start_date.end_of_month).select(:seminar_id))
+      where(id: Event.where(date: start_date..start_date.end_of_month).select(:seminar_id))
     end
   }
   scope :recommended,          -> { where recommended: true }
