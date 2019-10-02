@@ -1,20 +1,14 @@
 class SeminareController < ApplicationController
 
   def index
-    @year            = params[:year].to_i
-    @published_years = Catalog.published.pluck(:year).select { |year| year >= Date.current.year }
-    return redirect_to(seminare_visitor_path(year: @published_years.first)) unless @year.in?(@published_years)
-    @catalog  = Catalog.find_by(year: @year)
-    @category = @catalog.categories.find_by(id: params[:category_id]) #|| @catalog.categories.roots.first
-    @seminars = (@category ? @category.all_seminars : Seminar.where(year: @year)).published
+    @catalogs = Catalog.published
+    @category = Category.published.find_by(id: params[:category_id]) #|| @catalog.categories.roots.first
+    @seminars = (@category ? @category.all_seminars : Seminar).published
     # @seminars = @seminars.page(params[:page])
   end
 
   def home
-    @year            = params[:year].to_i
-    @published_years = Catalog.published.pluck(:year).select { |year| year >= Date.current.year }
-    return redirect_to(seminare_visitor_path(year: @published_years.first)) unless @year.in?(@published_years)
-    @catalog = Catalog.find_by(year: @year)
+    @catalog = Catalog
   end
 
   def show

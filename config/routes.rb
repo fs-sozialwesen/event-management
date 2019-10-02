@@ -14,10 +14,10 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
-  get 'seminare/start/:year',            to: 'seminare#home',   as: :seminare_home
-  get 'seminare(/:year(/:category_id))', to: 'seminare#index',  as: :seminare_visitor
-  get 'seminar/:id',                     to: 'seminare#show',   as: :seminar_visitor
-  get 'suche',                           to: 'seminare#search', as: :seminar_search
+  get 'seminare/start/:year',    to: 'seminare#home',   as: :seminare_home
+  get 'seminare(/:category_id)', to: 'seminare#index',  as: :seminare_visitor
+  get 'seminar/:id',             to: 'seminare#show',   as: :seminar_visitor
+  get 'suche',                   to: 'seminare#search', as: :seminar_search
 
   devise_for :users, skip: [:registrations]
   as :user do

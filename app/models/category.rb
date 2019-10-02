@@ -2,16 +2,18 @@ class Category < ApplicationRecord
 
   include PgSearch
 
-  validates :name, :year, presence: true
+  validates :name, presence: true
   validates :position, uniqueness: { scope: [:year, :parent_id] }
   validate :acyclic_graph
 
-  belongs_to :catalog, foreign_key: :year, primary_key: :year, inverse_of: :categories
+  # belongs_to :catalog, foreign_key: :year, primary_key: :year, inverse_of: :categories
   has_and_belongs_to_many :seminars
 
   belongs_to :parent, class_name: 'Category', inverse_of: :children
   has_many :children, -> { order :position }, class_name: 'Category', foreign_key: 'parent_id', inverse_of: :parent
   scope :roots, -> { where(parent_id: nil).order(:position) }
+  scope :archived, -> { where archived: true }
+  scope :published, -> { where archived: false }
 
   after_save :invalidate_descendants_cache
 

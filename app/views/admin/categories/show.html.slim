@@ -15,4 +15,4 @@
       = link_to "#{category.number} #{category.name} (#{category.seminars.count})", admin_category_url(category)
       br
 
-= render 'admin/seminars/table', seminars: @category.seminars
+= render 'admin/seminars/table', seminars: @category.seminars.where(year: current_year)

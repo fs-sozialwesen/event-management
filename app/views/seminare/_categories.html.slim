@@ -3,6 +3,6 @@ ul.nav.nav-pills.nav-stacked.categories
     li class=('active' if category == @category)
       = link_to category.display_name,
               seminare_visitor_url(category_id: category.to_param),
-              title: category.display_name
+              title: category.name
       - if category.children.any?
-        = render 'seminare/categories', categories: category.children, current_path: current_path
+        = render 'seminare/categories', categories: category.children.published, current_path: current_path

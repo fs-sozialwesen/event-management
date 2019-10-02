@@ -1,5 +1,5 @@
 h4 = Seminar.human_attribute_name(:categories)
-= render 'admin/seminars/show/categories', categories: current_catalog.categories.roots
+= render 'admin/seminars/show/categories', categories: Category.published.roots
 
 - content_for :style do
   sass:

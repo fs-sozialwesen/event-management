@@ -11,5 +11,5 @@ json.path category.path do |cat|
   json.link api_category_url(cat.id, format: :json)
 end
 if children_depth > 0
-  json.children category.children, partial: 'category', as: :category, locals: { children_depth: children_depth - 1 }
+  json.children category.children.published, partial: 'category', as: :category, locals: { children_depth: children_depth - 1 }
 end
