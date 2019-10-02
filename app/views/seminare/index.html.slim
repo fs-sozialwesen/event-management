@@ -34,12 +34,10 @@
       .col-md-8 = render 'seminars_list', seminars: @seminars
 .container.bereich-block
   = render 'search_form'
-  - if @catalog.print_version.present?
-    .pull-right = pdf_link @catalog.print_version.url, text: 'Bildungskalender als PDF herunterladen'
+  - @catalogs.each do |catalog|
+    - catalog.print_version.present?
+      .pull-right = pdf_link @catalog.print_version.url, text: "Bildungskalender #{catalog.year} als PDF herunterladen"
 
-  ul.nav.nav-tabs.years
-    - @published_years.each do |year|
-      li class=('active' if year == @year.to_i) = link_to year, seminare_visitor_path(year: year)
   .row
-    .col-md-4 = render 'categories', categories: @catalog.categories.roots, current_path: @category&.path.to_a
+    .col-md-4 = render 'categories', categories: Category.published.roots, current_path: @category&.path.to_a
     .col-md-8 = render 'seminars_list', seminars: @seminars

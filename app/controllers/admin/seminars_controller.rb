@@ -14,7 +14,7 @@ module Admin
 
     def category
       authorize Seminar
-      categories              = current_catalog.categories
+      categories              = Category.published
       @category               = categories.find_by(id: params[:id])
       seminars                = current_catalog.seminars
       @uncategorized_seminars = seminars.where.not(id: seminars.joins(:categories).select(:id))

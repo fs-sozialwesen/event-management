@@ -2,8 +2,8 @@ ul.nav.nav-pills.nav-stacked.categories
   - categories.each do |category|
     - active = category.in?(current_path)
     li class=('active' if active)
-      - label = "#{category.display_name} (#{category.all_seminars.count})"
+      - label = "#{category.display_name} (#{category.all_seminars.where(year: current_year).count})"
       /- label = category.display_name
       = link_to label, category_admin_seminars_url(category), title: label
       - if active && category.children.any?
-        = render 'admin/seminars/index/categories', categories: category.children, current_path: current_path
+        = render 'admin/seminars/index/categories', categories: category.children.published, current_path: current_path
