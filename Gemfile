@@ -54,6 +54,7 @@ gem 'axlsx_rails'
 gem 'axlsx_styler'
 gem 'paperclip', '~> 5.0'
 gem 'acts-as-taggable-on'
+gem 'browser'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

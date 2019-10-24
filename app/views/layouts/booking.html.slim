@@ -13,11 +13,13 @@ html.no-js lang="de"
 
     = stylesheet_link_tag 'booking', media: 'all'
     link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,900" media="all"
-    link rel="stylesheet" type="text/css" href="https://www.pbw-lsa.de/fileadmin/templates/pbw_de/css/style.css?1568875356" media="all"
+    / https://stackoverflow.com/questions/46414326/ie-11-input-not-displaying-typed-text
+    - unless browser.ie?(11)
+      link rel="stylesheet" type="text/css" href="https://www.pbw-lsa.de/fileadmin/templates/pbw_de/css/style.css?1568875356" media="all"
 
     / style fixes
     sass:
-      input, textarea
+      input[type="text"], textarea
         border: 1px solid grey !important
 
     = javascript_include_tag 'booking'
