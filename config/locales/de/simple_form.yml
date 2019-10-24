@@ -29,10 +29,44 @@ de:
         attendees:
           first_name: '* Vorname'
           last_name: '* Nachname'
-      attendees:
-        first_name: Vorname
-        last_name: Nachname
-        profession: Berufliche Tätigkeit
+#      attendees:
+#        first_name: Vorname
+#        last_name: Nachname
+#        profession: Berufliche Tätigkeit
+      address:
+        city: Ort
+        street: Straße/Nr
+        zip: PLZ
+#      booking:
+#        company_title: Name der Arbeitsstelle
+#        company_street: 'Straße/Nr'
+#        company_zip: 'PLZ'
+#        company_city: 'Ort'
+#        contact_person: Ansprechpartner
+#        contact_email: '* E-Mail-Adresse'
+#        contact_mobile: Mobiltelefon
+#        contact_phone: '* Telefon'
+#        contact_fax: Fax
+#        year: Jahr
+#        invoice_title: '* Name der Einrichtung'
+#        invoice_street: '* Straße/Nr'
+#        invoice_zip: '* PLZ'
+#        invoice_city: '* Ort'
+#        attendees:
+#          first_name: '* Vorname'
+#          last_name: '* Nachname'
+      contact:
+        email: E-Mail-Adresse
+        mobile: Mobiltelefon
+        phone: Telefon
+        fax: Fax
+      feedback:
+        subject: Betreff
+        message: Nachricht
+    hints:
+      seminar:
+        date_text: 'Wenn dieses Feld gefüllt ist, wird der Inhalt anstatt der Termine angezeigt (z.B. "Termin noch offen").'
+    labels:
       address:
         city: Ort
         street: Straße/Nr
@@ -53,24 +87,8 @@ de:
         invoice_zip: '* PLZ'
         invoice_city: '* Ort'
         attendees:
-          first_name: '* Vorname'
-          last_name: '* Nachname'
-      contact:
-        email: E-Mail-Adresse
-        mobile: Mobiltelefon
-        phone: Telefon
-        fax: Fax
-      feedback:
-        subject: Betreff
-        message: Nachricht
-    hints:
-      seminar:
-        date_text: 'Wenn dieses Feld gefüllt ist, wird der Inhalt anstatt der Termine angezeigt (z.B. "Termin noch offen").'
-    labels:
-      address:
-        city: Ort
-        street: Straße/Nr
-        zip: PLZ
+          first_name: 'Vorname'
+          last_name: 'Nachname'
       invoice_address:
       city: Ort
       street: Straße/Nr

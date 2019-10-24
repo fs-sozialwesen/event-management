@@ -1,4 +1,4 @@
-= simple_form_for(@booking, url: booking_create_url, defaults: { label: false }) do |f|
+= simple_form_for(@booking, url: booking_create_url, defaults: {  }) do |f|
   = f.input :seminar_id, as: :hidden
 
   .row style="padding-top: 30px"
@@ -36,8 +36,8 @@
       fieldset
         legend Bitte geben Sie für eventuelle kurzfristige Absagen einen Kontakt an, unter dem Sie erreichbar sind:
         .row
-          .col-md-6 = f.input :contact_phone,  as: :tel,   placeholder: '* Telefon/Mobil'
-          .col-md-6 = f.input :contact_email,  as: :email, placeholder: 'E-Mail'
+          .col-md-6 = f.input :contact_phone,  as: :tel
+          .col-md-6 = f.input :contact_email,  as: :email
 
       - if @seminar.reducible?
         fieldset
@@ -92,7 +92,7 @@
 
       fieldset
         legend Bemerkungen
-        = f.input :comments, input_html: { rows: 4 }
+        = f.input :comments, input_html: { rows: 4 }, label: false
 
       fieldset
         legend AGB
