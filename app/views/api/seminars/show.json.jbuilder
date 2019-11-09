@@ -15,9 +15,10 @@ json.cache! @seminar, expires_in: cache_time do
   json.events          @seminar.events, :date, :start_time, :end_time
   json.teachers        @seminar.teachers, :name, :profession
 
-  json.location   @seminar.location, :id, :name, :address_street, :address_zip, :address_city
-  json.price      @seminar.price&.to_f
-  json.price_text @seminar.price_text
+  json.location        @seminar.location, :id, :name, :address_street, :address_zip, :address_city
+  json.price           @seminar.price&.to_f
+  json.price_text      strip_tags(@seminar.price_text)
+  json.price_text_html @seminar.price_text
 
   json.bookable          @seminar.bookable?
   json.pre_bookable      @seminar.early_reducible?
