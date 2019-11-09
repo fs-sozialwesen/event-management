@@ -1,7 +1,7 @@
 - page_title_for @categories
 .page-header
   .buttons = new_link new_admin_category_path
-  h2 = title_for @categories, count: current_catalog.categories.count
+  h2 = title_for @categories, count: Category.published.count
 
 /ul.list-group
   - @categories.each do |category|
@@ -22,6 +22,8 @@ sass:
       width: 80%
     i.glyphicon
       padding-left: 8px
+    .archived
+      text-decoration: line-through
     .cat-level-1 > .title
       font-size: 2em
     .cat-level-2 > .title

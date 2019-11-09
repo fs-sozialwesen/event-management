@@ -4,13 +4,13 @@
 
 - categories.each do |category|
 
-  tr class="cat-level-#{level}"
+  tr class="cat-level-#{level} #{'archived' if category.archived?}"
     td.title
       - count += 1
       /= pref = [count_prefix, count].compact.join('.')
       = category.number
       =< category.name
-      =< "(#{category.seminars.count})"
+      =< "(#{category.seminars.where(year: current_year).count})"
     td
       /= category.product_categories.map(&:full_name).sort.join('<br>').html_safe
     td

@@ -14,7 +14,7 @@ module Admin
 
     def category
       authorize Seminar
-      categories              = current_catalog.categories
+      categories              = Category.published
       @category               = categories.find_by(id: params[:id])
       seminars                = current_catalog.seminars
       @uncategorized_seminars = seminars.where.not(id: seminars.joins(:categories).select(:id))
@@ -27,15 +27,10 @@ module Admin
 
     def date
       authorize Seminar
-      # @month    = params[:month].to_i
-      # @seminars = current_catalog.seminars.by_month(@month)
 
+      @month = (params[:month] || Date.current.month).to_i
+      @seminars = Seminar.by_year_and_month current_year, @month
 
-      @month         = (params[:month] || Date.current.month).to_i
-      first_of_month = Date.new current_catalog.year, @month
-      @days_of_month = first_of_month..first_of_month.end_of_month
-      @events        = Event.order(:date).joins(:seminar).includes(:seminar).where(date: @days_of_month)
-      @seminars      = Seminar.where(id: @events.select(:seminar_id))
       respond_to do |format|
         format.html { @seminars = @seminars.page(params[:page]) }
         format.xlsx
@@ -48,7 +43,7 @@ module Admin
       first_of_month = Date.new current_catalog.year, @month
       @days_of_month = first_of_month..first_of_month.end_of_month
       @events        = Event.order(:date).joins(:seminar).includes(:seminar).where(date: @days_of_month)
-      @seminars      = Seminar.where(id: @events.select(:seminar_id)).page(params[:page])
+      @seminars      = Seminar.by_year_and_month(current_year, @month).page(params[:page])
       respond_to do |format|
         format.html
         format.xlsx { render :date }

@@ -8,11 +8,16 @@ Rails.application.routes.draw do
   post 'buchung',               to: 'buchung#create', as: :buchung_create
   get  'nachricht/:booking_id', to: 'buchung#show',   as: :buchung_show
 
+  get  'seminar-buchung/:seminar_id',   to: 'bookings#new',    as: :booking_new
+  post 'seminar-buchung',               to: 'bookings#create', as: :booking_create
+  get  'buchungsnachricht/:booking_id', to: 'bookings#show',   as: :booking_show
+
   root to: 'pages#home'
-  get 'seminare/start/:year',            to: 'seminare#home',   as: :seminare_home
-  get 'seminare(/:year(/:category_id))', to: 'seminare#index',  as: :seminare_visitor
-  get 'seminar/:id',                     to: 'seminare#show',   as: :seminar_visitor
-  get 'suche',                           to: 'seminare#search', as: :seminar_search
+
+  get 'seminare/start/:year',    to: 'seminare#home',   as: :seminare_home
+  get 'seminare(/:category_id)', to: 'seminare#index',  as: :seminare_visitor
+  get 'seminar/:id',             to: 'seminare#show',   as: :seminar_visitor
+  get 'suche',                   to: 'seminare#search', as: :seminar_search
 
   devise_for :users, skip: [:registrations]
   as :user do
@@ -21,6 +26,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api, constraints: { format: 'json' } do
+    root to: 'seminars#docs'
     resources(:categories, only: %i(index show)) { get :tree, on: :collection }
     resources :seminars,   only: %i(index show)
     resources :locations,  only: %i(index)
@@ -74,6 +80,7 @@ Rails.application.routes.draw do
   get 'datenschutz'   => 'static_pages#data_protection',  as: :data_protection
   get 'daten'         => 'static_pages#data_info',        as: :data_info
   get 'rabatt_system' => 'static_pages#reductions',       as: :reductions
+  get 'zeichensetzen' => 'static_pages#zeichensetzen',    as: :zeichensetzen
 
   # get ':path1(/:path2(/:path3))' => 'pages#show', as: :pages
 end

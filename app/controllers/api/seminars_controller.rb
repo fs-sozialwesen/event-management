@@ -4,26 +4,31 @@ module Api
     def index
       @filter = filter
       @category = Category.find_by id: params[:category_id]
-      @seminars = @category ? @category.all_seminars : Seminar.where(year: @filter[:year])
+      @seminars = @category ? @category.all_seminars : Seminar
 
       @seminars = @seminars.published.order(@filter[:order]).page(@filter[:page]).per(@filter[:per_page])
+      @seminars = @seminars.where(year: @filter[:year])                       if @filter[:year]
       @seminars = @seminars.where('seminars.date >= ?', @filter[:date_start]) if @filter[:date_start]
       @seminars = @seminars.where('seminars.date <= ?', @filter[:date_end])   if @filter[:date_end]
       @seminars = @seminars.bookable                                          if @filter[:only_bookable]
       @seminars = @seminars.recommended                                       if @filter[:recommended]
       @seminars = @seminars.where(location_id: @filter[:location_ids])        if @filter[:location_ids].any?
-      @seminars = @seminars.external_search @filter[:search_term]             if @filter[:search_term]
+      # @seminars = @seminars.external_search @filter[:search_term]             if @filter[:search_term]
+      @seminars = @seminars.ext_search @filter[:search_term]                  if @filter[:search_term]
 
       expires_in cache_time, public: true
-      stale? @seminars
+      # stale? @seminars
     end
 
     def show
       @seminar = Seminar.published.find_by(id: params[:id])&.decorate
 
       expires_in cache_time, public: true
-      stale? @seminar
+      # stale? @seminar
       render json: {}, status: :not_found unless @seminar
+    end
+
+    def docs
     end
 
     protected
@@ -36,7 +41,7 @@ module Api
 
     def filter
       filter = {}
-      filter[:year]          = (params[:year] || Date.current.year).to_i
+      filter[:year]          = params[:year]
       filter[:page]          = params[:page]
       filter[:per_page]      = params[:per_page]
       filter[:order]         = sort_by

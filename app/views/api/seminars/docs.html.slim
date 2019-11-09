@@ -1,0 +1,218 @@
+.container
+  h1 API-Dokumentation der PBW GmbH
+
+  p Über die API dieser Web-Applikation können öffentlich verfügbare Daten der PBW GmbH abgerufen werden.
+    Die Daten werden im JSON-Format zurückgegeben.
+
+
+  div
+
+    ul.nav.nav-tabs
+      li.active: a href="#seminars" data-toggle="tab" Seminare
+      li: a href="#categories" data-toggle="tab" Kategorien
+      li: a href="#locations" data-toggle="tab" Veranstaltungsorte
+
+    div.tab-content
+      div.tab-pane.active#seminars
+
+        h2 1. Listenansicht
+        - url = api_seminars_url(format: :json)
+        = link_to url, url
+        table.table
+          caption Optionale Parameter
+          thead
+            tr
+              th Parameter
+              th Bedeutung
+              th Standardwert
+              th Beispiel
+          tbody
+            tr
+              td: code year
+              td Jahr
+              td aktuelles Jahr
+              td: code[] year=2018
+            tr
+              td: code page
+              td Seitenzahl
+              td 1
+              td: code[] page=7
+            tr
+              td: code per_page
+              td Einträge pro Seite
+              td 15
+              td: code[] per_page=20
+            tr
+              td: code sort_by
+              td Sortierung nach Datum oder Titel
+              td <code>date</code>
+              td: code[] sort_by=title
+            tr
+              td: code sorting
+              td Sortierungsrichting aufsteigend oder absteigend
+              td <code>asc</code>
+              td: code[] sorting=desc
+            tr
+              td: code date_start
+              td Filter Seminare ab diesem Datum
+              td keine Einschränkung
+              td: code[] date_start=2019-06-01
+            tr
+              td: code date_end
+              td Filter Seminare bis zu diesem Datum
+              td keine Einschränkung
+              td: code[] date_end=2019-10-31
+            tr
+              td: code with_outdated
+              td alle Seminare, auch schon beendete
+              td nur zukünftige Seminare
+              td: code[] with_outdated
+            tr
+              td: code recommended
+              td Empfohlene Seminare
+              td alle Seminare
+              td: code recommended
+            tr
+              td: code location_ids
+              td Filter nach Veranstaltungsorten (IDs)
+              td alle Seminare
+              td: code[] location_ids=87,93
+            tr
+              td: code search_term
+              td Suchwort
+              td -
+              td: code[] search_term=Recht
+
+
+        h2 2. Detailansicht
+
+
+      div.tab-pane#categories
+
+        h2 1. Listenansicht
+        - url = api_categories_url(format: :json)
+        = link_to url, url
+
+        table.table
+          caption Optionale Parameter
+          thead
+            tr
+              th Parameter
+              th Bedeutung
+              th Standardwert
+              th Beispiel
+          tbody
+            tr
+              td: code year
+              td Jahr
+              td aktuelles Jahr
+              td: code[] year=2018
+        pre
+          |
+            [
+              {
+                id: 98,
+                number: "A -",
+                name: "Berufsfeldübergreifende Qualifizierung",
+                year: 2019,
+                parent_id: null,
+                position: 1,
+                abs_position: "1",
+                number_seminars_direct: 3,
+                number_seminars_inherited: 94,
+                number_children: 9,
+                number_descendants: 9,
+                level: 1,
+                link: ".../api/categories/98.json",
+                path: [
+                  {
+                    id: 98,
+                    number: "A -",
+                    name: "Berufsfeldübergreifende Qualifizierung",
+                    link: ".../api/categories/98.json"
+                  }
+                ]
+              },
+              ...
+            ]
+
+        h2 2. Detailansicht Kategorie
+
+        p Enthält alle Detailinformationen zu dieser Kategorie sowie Links zu allen Unterkategorien
+
+        pre
+          |
+            {
+              id: 36,
+              number: "",
+              name: "Berufsfeldübergreifende Qualifizierung",
+              year: 2018,
+              parent_id: null,
+              position: 1,
+              abs_position: "1",
+              number_seminars_direct: 1,
+              number_seminars_inherited: 127,
+              number_children: 1,
+              number_descendants: 15,
+              level: 1,
+              link: ".../api/categories/36.json",
+              path: [
+                {
+                  id: 36,
+                  number: "",
+                  name: "Berufsfeldübergreifende Qualifizierung",
+                  link: ".../api/categories/36.json"
+                 }
+              ],
+              children: [
+                {
+                  id: 58,
+                  number: "A",
+                  name: "Querschnittsthemen der Sozialarbeit",
+                  year: 2018,
+                  parent_id: 36,
+                  position: 11,
+                  abs_position: "1.11",
+                  number_seminars_direct: 0,
+                  number_seminars_inherited: 126,
+                  number_children: 12,
+                  number_descendants: 14,
+                  level: 2,
+                  link: ".../api/categories/58.json",
+                  path: [
+                    {
+                      id: 36,
+                      number: "",
+                      name: "Berufsfeldübergreifende Qualifizierung",
+                      link: ".../api/categories/36.json"
+                    },
+                    {
+                      id: 58,
+                      number: "A",
+                      name: "Querschnittsthemen der Sozialarbeit",
+                      link: ".../api/categories/58.json"
+                    }
+                  ]
+                }
+              ]
+            }
+
+      div.tab-pane#locations
+
+        h2 Veranstaltungsorte
+        - url = api_locations_url(format: :json)
+        = link_to url, url
+
+        pre
+          |
+            [
+              {
+                id: 2,
+                name: "PBW Magdeburg - Sudenburger Hof",
+                description: null,
+                address_street: null,
+                address_zip: null,
+                address_city: null
+              },
+              ...
+            ]
