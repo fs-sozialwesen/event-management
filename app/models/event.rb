@@ -8,7 +8,7 @@ class Event < ApplicationRecord
   has_paper_trail
 
   def time
-    "#{start_time} - #{end_time}"
+    [start_time, end_time].select(&:present?).join(' - ')
   end
 
 end
