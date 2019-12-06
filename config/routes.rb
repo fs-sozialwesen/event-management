@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'seminare/start/:year',    to: redirect('https://www.pbw-lsa.de/fort_weiterbildung/seminare/')
   get 'seminare(/:category_id)', to: redirect('https://www.pbw-lsa.de/fort_weiterbildung/seminare/')
   get 'seminar/:id',             to: redirect { |params, _| "https://www.pbw-lsa.de/seminar/detail/#{params[:id]}/" }
+  get 'seminar/detail/:id',      to: redirect { |params, _| "https://www.pbw-lsa.de/seminar/detail/#{params[:id]}/" }
   get 'suche',                   to: redirect('https://www.pbw-lsa.de/fort_weiterbildung/seminare/')
 
   devise_for :users, skip: [:registrations]

@@ -1,4 +1,7 @@
 .container
   .row
     .col-sm-3
-      = link_to 'Admin', admin_root_path, data: { no_turbolink: true }, class: 'btn btn-primary'
+      - if current_user
+        = link_to 'Admin', admin_root_path, data: { no_turbolink: true }, class: 'btn btn-primary'
+      - else
+        = link_to 'Admin', new_user_session_path, class: 'btn btn-primary'
