@@ -6,14 +6,12 @@ nav.navbar.navbar-inverse.navbar-fixed-top
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      = link_to 'Start', root_url, class: 'navbar-brand', tabindex: -1
+      = link_to 'Start', admin_root_url, class: 'navbar-brand', tabindex: -1
     .collapse.navbar-collapse
       ul.nav.navbar-nav
         - if policy(Seminar).index?
           li class=('active' if controller_name == 'seminars')
             = link_to title_for_model(Seminar, with_icon: true), admin_seminars_url, tabindex: -1
-        /li class=('active' if controller_name == 'bookings')
-          = link_to title_for_model(Booking, with_icon: true), bookings_url, tabindex: -1
         - if policy(Attendee).index?
           li class=('active' if controller_name == 'attendees')
             = link_to title_for_model(Booking, with_icon: true), admin_attendees_url, tabindex: -1

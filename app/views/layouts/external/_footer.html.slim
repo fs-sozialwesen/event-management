@@ -1,59 +1,18 @@
 footer
-  .map
   .upper-footer
     .container
       .row
-        / .col-sm-3
-          / b Fort- und Weiterbildung
-          / ul
-            li = link_to 'Management und Verwaltung', '#'
-            li = link_to 'Persönliche Kompetenzen', '#'
-            li = link_to 'Kinder- und Jugendhilfe', '#'
-            li = link_to 'Umgang mit Menschen im Alter und/oder mit Behinderung', '#'
-            li = link_to 'Schuldnerberatung', '#'
-            li = link_to 'Weiterbildung für Betreuer', '#'
-            li = link_to 'Praktikerforen', '#'
-        / .col-sm-3
-          / b Quereinstieg
-          / ul
-            li = link_to 'Ausbildung zum/zur Staatlich anerkannten Erzieher/in', '#'
-          / b Ausbildung
-          / ul
-            li = link_to 'Heilpädagogik', '#'
-            li = link_to 'Heilerziehungspflege', '#'
-            li = link_to 'Erzieher/in', '#'
-        / .col-sm-3
-          / b Bildungswerk
-          / ul
-            li = link_to 'Unser Profil', '#'
-            li = link_to 'Team', '#'
-            li = link_to 'Kontakt', '#'
-            li = link_to 'Standorte', '#'
-          / b Rechtliches
-          / ul
-            li = link_to 'Impressum', '#'
-            li = link_to 'AGB', '#'
-            li = link_to 'Datenschutz', '#'
-        / .col-sm-6
-          / = render_navigation all_sub_menues: true
         .col-md-3
           ul
             li = link_to 'AGB', terms_of_service_path
             li = link_to 'Datenschutz', data_protection_path
         .col-sm-6
-          / b Fort- und Weiterbildung
           |  Wiener Straße 2 |
           |  39112 Magdeburg |
           |  Tel.: (0391) 6293313 |
           |  Fax: (0391) 6293596313 |
           a href="mailto:bildungswerk@paritaet-lsa.de"  bildungswerk@paritaet-lsa.de
-        .col-sm-3
-          - if current_user
-            = link_to 'Admin', admin_root_path, data: { no_turbolink: true }
-          - else
-            = link_to 'Anmelden', new_user_session_path
-  .sub-footer
-    .container
-      .row
-        .col-md-12
-          | Copyright © Gemeinütziges Paritätisches Bildungswerk Sachsen-Anhalt - PBW GmbH 2017
+sass:
+  footer
+    position: fixed
+    bottom: 0

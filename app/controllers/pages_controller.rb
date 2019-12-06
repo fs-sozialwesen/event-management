@@ -1,7 +1,7 @@
 class PagesController < ApplicationController
 
   def home
-    @current_seminars = Seminar.published.where('date > NOW()').order(:date).limit(8)
+    redirect_to :admin_root if current_user
   end
 
   def show
