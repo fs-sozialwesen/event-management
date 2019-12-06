@@ -45,18 +45,13 @@ Rails.application.routes.draw do
         patch :toggle_category, :publish, :unpublish, :finish_editing, :finish_layout
       end
       collection do
-        get :date, :calendar, :canceled
+        get :date, :calendar, :canceled, :search, :filter, :recommended
         get 'editing_status(/:scope)', action: :editing_status, as: :editing_status
         get 'category(/:id)',          action: :category,       as: :category
-        get :search
-        get :filter
-        get :recommended
       end
     end
     resources :legal_statistics, only: %i(index show update)
-    resources :categories, except: :edit do
-      put :move, on: :member
-    end
+    resources(:categories, except: :edit) { put :move, on: :member }
     resources :bookings,   only: %i(show new create)
     resources :attendees,  only: %i(index show update) do
       get :cancel
@@ -75,6 +70,4 @@ Rails.application.routes.draw do
   get 'daten'         => 'static_pages#data_info',        as: :data_info
   get 'rabatt_system' => 'static_pages#reductions',       as: :reductions
   get 'zeichensetzen' => 'static_pages#zeichensetzen',    as: :zeichensetzen
-
-  # get ':path1(/:path2(/:path3))' => 'pages#show', as: :pages
 end
