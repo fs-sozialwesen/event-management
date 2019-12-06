@@ -31,7 +31,10 @@ ol.breadcrumb
   .col-md-2
     - icon, text, action, css_class = @seminar.published? ? ['eye-slash', 'Deaktivieren!', :unpublish, 'success'] : ['eye', 'Veröffentlichen!', :publish, 'default']
     => link_to fa_icon(icon, text: text), [:admin, @seminar, action: action], method: :patch, class: "btn btn-#{css_class} btn-block"
-    => link_to fa_icon('external-link', text: 'Externe Ansicht'), seminar_visitor_url(@seminar), class: 'btn btn-default btn-block'
+    => link_to fa_icon('external-link', text: 'Externe Ansicht'),
+            "https://www.pbw-lsa.de/seminar/detail/#{@seminar.id}/",
+            class: 'btn btn-default btn-block',
+            target: '_blank'
 
     = copy_link new_admin_seminar_url(copy_from: @seminar.id), class: 'btn-block'
     = pdf_link admin_seminar_url(@seminar, format: :pdf), css_class: 'btn btn-default btn-block'
