@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
 
-  # quick fix until new homepage is live
-  get '/kuj-magdeburg', to: redirect('/suche?q=magdeburg+kinder')
-  get '/kuj-stendal',   to: redirect('/suche?q=stendal+kinder')
-
-  get  'buchung/:seminar_id',   to: 'buchung#new',    as: :buchung_new
-  post 'buchung',               to: 'buchung#create', as: :buchung_create
-  get  'nachricht/:booking_id', to: 'buchung#show',   as: :buchung_show
+  get "buchung/:seminar_id", to: redirect { |params, _| "seminar-buchung/#{params[:seminar_id]}" }
 
   get  'seminar-buchung/:seminar_id',   to: 'bookings#new',    as: :booking_new
   post 'seminar-buchung',               to: 'bookings#create', as: :booking_create
@@ -14,10 +8,10 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
-  get 'seminare/start/:year',    to: 'seminare#home',   as: :seminare_home
-  get 'seminare(/:category_id)', to: 'seminare#index',  as: :seminare_visitor
-  get 'seminar/:id',             to: 'seminare#show',   as: :seminar_visitor
-  get 'suche',                   to: 'seminare#search', as: :seminar_search
+  get 'seminare/start/:year',    to: redirect('https://www.pbw-lsa.de/fort_weiterbildung/seminare/')
+  get 'seminare(/:category_id)', to: redirect('https://www.pbw-lsa.de/fort_weiterbildung/seminare/')
+  get 'seminar/:id',             to: redirect { |params, _| "https://www.pbw-lsa.de/seminar/detail/#{params[:id]}/" }
+  get 'suche',                   to: redirect('https://www.pbw-lsa.de/fort_weiterbildung/seminare/')
 
   devise_for :users, skip: [:registrations]
   as :user do
