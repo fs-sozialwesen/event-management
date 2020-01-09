@@ -47,7 +47,7 @@ wb.add_worksheet(name: "Themen #{@catalog.year}") do |sheet|
 
   sheet.add_row
 
-  add_categories sheet, @catalog.categories.roots.includes(children: {children: :children}).order(:number, :name)
+  add_categories sheet, Category.published.roots.includes(children: {children: :children}).order(:number, :name)
   col_width = 6
   sheet.column_widths col_width, col_width, col_width, col_width, col_width, 200
 end
@@ -55,7 +55,7 @@ end
 cell_rotated_text_style = wb.styles.add_style(alignment: { textRotation: 90 })
 
 wb.add_worksheet(name: 'Seminare => Themen') do |sheet|
-  categories = @catalog.categories.order(:number, :name).all
+  categories = Category.published.order(:number, :name).all
   sheet.add_row ['', ''] + categories.map(&:display_name),
                 style: [nil, nil] + Array.new(categories.size) { cell_rotated_text_style },
                 height: 150
