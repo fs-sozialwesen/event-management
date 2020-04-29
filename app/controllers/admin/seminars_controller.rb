@@ -8,7 +8,7 @@ module Admin
       authorize Seminar
       respond_to do |format|
         format.html { redirect_to action: :category }
-        format.xlsx { @seminars = current_catalog.seminars }
+        format.xlsx { @seminars = current_catalog.seminars.where(year: current_year) }
       end
     end
 
@@ -16,9 +16,9 @@ module Admin
       authorize Seminar
       categories              = Category.published
       @category               = categories.find_by(id: params[:id])
-      seminars                = current_catalog.seminars
+      seminars                = current_catalog.seminars.where(year: current_year)
       @uncategorized_seminars = seminars.where.not(id: seminars.joins(:categories).select(:id))
-      @seminars               = @category ? @category.all_seminars : @uncategorized_seminars
+      @seminars               = @category ? @category.all_seminars.where(year: current_year) : @uncategorized_seminars
       respond_to do |format|
         format.html { @seminars = @seminars.page(params[:page]) }
         format.xlsx { render 'with_all_categories' unless @category }
@@ -52,14 +52,14 @@ module Admin
 
     def canceled
       authorize Seminar
-      @seminars = current_catalog.seminars.canceled.page(params[:page])
+      @seminars = current_catalog.seminars.where(year: current_year).canceled.page(params[:page])
     end
 
     def filter
       authorize Seminar
       return unless request.xhr? || request.format == :xlsx
       @filter   = params.require(:seminar_filter).permit(:number1, :number2, :number3)
-      @seminars = current_catalog.seminars.by_number @filter
+      @seminars = current_catalog.seminars.where(year: current_year).by_number @filter
       render layout: false
     end
 
@@ -68,12 +68,12 @@ module Admin
       @scopes   = %i(all editing_not_finished layout_open editing_changed completed)
       @scope    = params[:scope].to_s.to_sym
       @scope    = @scopes.first unless @scope.in? @scopes
-      @seminars = current_catalog.seminars.page(params[:page]).send @scope
+      @seminars = current_catalog.seminars.where(year: current_year).page(params[:page]).send @scope
     end
 
     def recommended
       authorize Seminar
-      @seminars = current_catalog.seminars.recommended.page(params[:page])
+      @seminars = current_catalog.seminars.where(year: current_year).recommended.page(params[:page])
     end
 
     def show
