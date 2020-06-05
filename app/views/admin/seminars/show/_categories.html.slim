@@ -2,7 +2,7 @@ ul.nav.nav-pills.nav-stacked.categories
   - categories.each do |category|
     li class=('active' if category.in?(@seminar.categories))
       = link_to category.name, [:toggle_category, :admin, @seminar, category_id: category.id],
-          remote: true, method: :patch, data: { behavior: 'toggle-category' }
+          remote: true, method: :patch, data: { behavior: 'toggle-category' }, class: ('archived' if category.archived?)
       - if category.children.any?
         = render 'admin/seminars/show/categories', categories: category.children
 

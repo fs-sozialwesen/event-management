@@ -10,7 +10,7 @@ json.cache! @seminar, expires_in: cache_time do
   json.notes   @seminar.notes
 
 
-  json.date_text       @seminar.has_date_text? ? @seminar.date_text.to_json : nil
+  json.date_text       @seminar.has_date_text? ? @seminar.date_text : nil
   json.formatted_dates(@seminar.events_list.map { |date, time| { date: ldate(date), time: time } })
   json.events          @seminar.events, :date, :start_time, :end_time
   json.teachers        @seminar.teachers, :name, :profession
