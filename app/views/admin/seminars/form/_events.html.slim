@@ -1,3 +1,6 @@
+.row
+  .col-md-3
+    = f.input :bookable_until, as: :string, input_html: { class: 'date' }
 .form-inputs = f.input :date_text, input_html: { class: 'editor' }, label: false
 table.standard-table.events-table
   thead
