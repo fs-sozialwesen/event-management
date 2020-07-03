@@ -3,7 +3,7 @@ response.headers['Content-Disposition'] = %Q(attachment; filename="Adressliste F
 wb = xlsx_package.workbook
 
 wb.add_worksheet(name: 'Adressliste Firmen') do |sheet|
-  attrs = %i(name name2 street zip city city_part phone mobile fax email)
+  attrs = %i(name name2 street zip city city_part phone mobile fax email created_at updated_at)
   last_col = ('A'.ord + attrs.size - 1).chr
   sheet.add_row(attrs.map { |attr| Company.human_attribute_name attr } )
   sheet.add_style "A1:#{last_col}1", b: true
