@@ -12,13 +12,13 @@ wb.add_worksheet(name: 'Teilnehmerliste') do |sheet|
   sheet.add_row
   sheet.add_row
 
-  sheet.add_row ['lfd. Nr.', 'Teilnehmer', 'Tätigkeit', 'Einrichtung', 'Bemerkungen']
+  sheet.add_row ['lfd. Nr.', 'angemeldet am', 'Teilnehmer', 'Tätigkeit', 'Einrichtung', 'Bemerkungen']
   sheet.add_style 'A6:E6', b: true
   sheet.add_border 'A6:E6'
 
   @attendees.each_with_index do |attendee, index|
     line = index + 7
-    sheet.add_row [ (index + 1), attendee.name, attendee.profession, attendee.company&.name, '' ]
+    sheet.add_row [ (index + 1), l(attendee.created_at, format: :short2), attendee.name, attendee.profession, attendee.company&.name, '' ]
     sheet.add_border "A#{line}:E#{line}"
   end
 
