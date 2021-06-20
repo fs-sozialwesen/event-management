@@ -79,7 +79,7 @@ GEM
     axlsx_styler (0.2.0)
       activesupport (>= 3.1)
       axlsx (>= 2.0, < 4)
-    bcrypt (3.1.11)
+    bcrypt (3.1.16)
     bootstrap-datepicker-rails (1.7.1.1)
       railties (>= 3.0)
     bootstrap-sass (3.4.1)
