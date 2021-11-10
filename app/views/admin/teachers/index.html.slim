@@ -1,6 +1,8 @@
 - page_title_for @teachers
 .page-header
-  .buttons = new_link new_admin_teacher_path
+  .buttons
+    => link_to fa_icon('table', text: 'Exportieren'), admin_teachers_url(format: :xlsx), class: 'btn btn-default'
+    = new_link new_admin_teacher_path
   h2 = title_for @teachers
 
 .table-responsive

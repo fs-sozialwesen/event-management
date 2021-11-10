@@ -1,0 +1,32 @@
+response.headers['Content-Disposition'] = %Q(attachment; filename="Referentenliste-#{l Time.current, format: :short2}.xlsx")
+
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: 'Referentenliste') do |sheet|
+  # sheet.add_row ['exportiert am', l(Date.current)]
+  #
+  # sheet.add_style 'A1:A1', b: true
+  #
+  # sheet.add_row
+  # sheet.add_row
+
+  sheet.add_row %w(Vorname Nachname E-Mail Straße PLZ Ort Bemerkung)
+  sheet.add_style 'A1:F1', b: true
+  # sheet.add_border 'A4:F4'
+
+  @teachers.each do |teacher|
+    # line = index + 6
+    sheet.add_row [
+      teacher.first_name,
+      teacher.last_name,
+      teacher.contact_email,
+      teacher.address_street,
+      "#{teacher.address_zip} ",
+      teacher.address_city,
+      teacher.remarks,
+    ]
+    # sheet.add_border "A#{line}:D#{line}"
+  end
+
+  # sheet.column_widths 12, 18, 18, 30, 20
+end
