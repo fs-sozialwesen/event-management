@@ -158,7 +158,7 @@ GEM
       request_store (~> 1.0)
     equalizer (0.0.11)
     erubi (1.10.0)
-    execjs (2.7.0)
+    execjs (2.8.1)
     factory_girl (4.9.0)
       activesupport (>= 3.0.0)
     factory_girl_rails (4.9.0)
@@ -449,7 +449,7 @@ GEM
     turbolinks-source (5.1.0)
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
-    uglifier (4.1.7)
+    uglifier (4.2.0)
       execjs (>= 0.3.0, < 3)
     unf (0.1.4)
       unf_ext
