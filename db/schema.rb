@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20191002183910) do
+ActiveRecord::Schema.define(version: 20200607060551) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -274,6 +274,7 @@ ActiveRecord::Schema.define(version: 20191002183910) do
     t.boolean "school_reducible", default: true
     t.boolean "recommended", default: false
     t.string "recommendation_label"
+    t.date "bookable_until"
     t.index ["location_id"], name: "index_seminars_on_location_id"
     t.index ["parent_id"], name: "index_seminars_on_parent_id"
   end

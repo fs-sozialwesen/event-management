@@ -6,6 +6,10 @@ module Admin
     def index
       authorize Teacher
       @teachers = Teacher.order(:last_name).all
+      respond_to do |format|
+        format.html
+        format.xlsx
+      end
     end
 
     def new

@@ -1,4 +1,8 @@
 h4 = Seminar.human_attribute_name(:events)
+=> Seminar.human_attribute_name(:bookable_until)
+= ldate @seminar.bookable_until
+br
+
 - if @seminar.has_date_text?
   = @seminar.date_text.html_safe
 
