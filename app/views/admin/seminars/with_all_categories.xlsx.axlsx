@@ -42,7 +42,7 @@ wb.add_worksheet(name: current_catalog.year.to_s) do |sheet|
   sheet.add_row header, style: bold
 
 
-  add_categories sheet, current_catalog.categories.roots.includes(children: { children: :children }).order(:number, :name)
+  add_categories sheet, Category.published.roots.includes(children: { children: :children }).order(:number, :name)
 
   sheet.add_row
   sheet.add_row ['ohne Kategorie'], style: bold

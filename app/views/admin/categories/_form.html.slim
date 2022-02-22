@@ -1,6 +1,5 @@
 = simple_form_for([:admin, @category]) do |f|
   = f.input :parent_id, as: :hidden
-  = f.input :year, as: :hidden
   - if @category.errors.any?
     .alert.alert-danger.alert-dismissable
       button.close type="button" data-dismiss="alert"
@@ -13,6 +12,7 @@
       = f.input :year, disabled: true
     .col-md-9
       = f.input :name
+      = f.input :archived
   section.action-buttons
     .col-md-12
       .pull-right

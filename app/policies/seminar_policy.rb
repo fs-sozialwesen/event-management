@@ -29,7 +29,7 @@ class SeminarPolicy < ApplicationPolicy
     if editor?
       attrs += %i(
         number price price_text key_words parent_id max_attendees archived canceled copy_from_id year pre_booking_weeks
-        tandem_reducible pari_reducible group_reducible school_reducible recommended recommendation_label
+        tandem_reducible pari_reducible group_reducible school_reducible recommended recommendation_label bookable_until
       )
 
       attrs << {
