@@ -1,9 +1,8 @@
 ul.nav.navbar-nav.navbar-right
   li.dropdown.yellow-menu
-    = link_to 'Wir über uns', 'http://bildungswerk-lsa.de/index.php?article_id=22'
+    = link_to 'Homepage', 'https://www.pbw-lsa.de/'
   li.dropdown.yellow-menu
-    = link_to 'Team', 'http://bildungswerk-lsa.de/index.php?article_id=42'
-  li.dropdown.yellow-menu class=('active' if request.path =~ /\A\/(fort-und-weiterbildung|seminare)/)
-    = link_to 'Fort- und Weiterbildung', seminare_visitor_url
-  li.dropdown.yellow-menu
-    = link_to 'Ausbildung', 'http://bildungswerk-lsa.de/index.php?article_id=44'
+    - if current_user
+      = link_to 'Admin', admin_root_path, data: { no_turbolink: true }
+    - else
+      = link_to 'Admin', new_user_session_path

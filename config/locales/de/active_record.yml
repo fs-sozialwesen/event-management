@@ -144,6 +144,7 @@ de:
         slug: URL-ID
       seminar:
         bookings: Anmeldungen
+        bookable_until: Anmeldung möglich bis
         date_text: Termine (Text)
         invoices: Rechnungen
         editing_finished_at: Bearbeitung fertiggestellt

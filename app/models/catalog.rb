@@ -2,7 +2,7 @@ class Catalog < ApplicationRecord
   validates :title, presence: true
   validates :year, presence: true, uniqueness: true
 
-  has_many :categories, foreign_key: :year, primary_key: :year, inverse_of: :catalog
+  # has_many :categories, foreign_key: :year, primary_key: :year, inverse_of: :catalog
   has_many :seminars,   foreign_key: :year, primary_key: :year, inverse_of: :catalog
 
   default_scope -> { order :year }

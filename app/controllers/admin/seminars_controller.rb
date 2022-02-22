@@ -8,17 +8,17 @@ module Admin
       authorize Seminar
       respond_to do |format|
         format.html { redirect_to action: :category }
-        format.xlsx { @seminars = current_catalog.seminars }
+        format.xlsx { @seminars = current_catalog.seminars.where(year: current_year) }
       end
     end
 
     def category
       authorize Seminar
-      categories              = current_catalog.categories
+      categories              = Category.published
       @category               = categories.find_by(id: params[:id])
-      seminars                = current_catalog.seminars
+      seminars                = current_catalog.seminars.where(year: current_year)
       @uncategorized_seminars = seminars.where.not(id: seminars.joins(:categories).select(:id))
-      @seminars               = @category ? @category.all_seminars : @uncategorized_seminars
+      @seminars               = @category ? @category.all_seminars.where(year: current_year) : @uncategorized_seminars
       respond_to do |format|
         format.html { @seminars = @seminars.page(params[:page]) }
         format.xlsx { render 'with_all_categories' unless @category }
@@ -27,15 +27,10 @@ module Admin
 
     def date
       authorize Seminar
-      # @month    = params[:month].to_i
-      # @seminars = current_catalog.seminars.by_month(@month)
 
+      @month = (params[:month] || Date.current.month).to_i
+      @seminars = Seminar.by_year_and_month current_year, @month
 
-      @month         = (params[:month] || Date.current.month).to_i
-      first_of_month = Date.new current_catalog.year, @month
-      @days_of_month = first_of_month..first_of_month.end_of_month
-      @events        = Event.order(:date).joins(:seminar).includes(:seminar).where(date: @days_of_month)
-      @seminars      = Seminar.where(id: @events.select(:seminar_id))
       respond_to do |format|
         format.html { @seminars = @seminars.page(params[:page]) }
         format.xlsx
@@ -48,7 +43,7 @@ module Admin
       first_of_month = Date.new current_catalog.year, @month
       @days_of_month = first_of_month..first_of_month.end_of_month
       @events        = Event.order(:date).joins(:seminar).includes(:seminar).where(date: @days_of_month)
-      @seminars      = Seminar.where(id: @events.select(:seminar_id)).page(params[:page])
+      @seminars      = Seminar.by_year_and_month(current_year, @month).page(params[:page])
       respond_to do |format|
         format.html
         format.xlsx { render :date }
@@ -57,14 +52,14 @@ module Admin
 
     def canceled
       authorize Seminar
-      @seminars = current_catalog.seminars.canceled.page(params[:page])
+      @seminars = current_catalog.seminars.where(year: current_year).canceled.page(params[:page])
     end
 
     def filter
       authorize Seminar
       return unless request.xhr? || request.format == :xlsx
       @filter   = params.require(:seminar_filter).permit(:number1, :number2, :number3)
-      @seminars = current_catalog.seminars.by_number @filter
+      @seminars = current_catalog.seminars.where(year: current_year).by_number @filter
       render layout: false
     end
 
@@ -73,12 +68,12 @@ module Admin
       @scopes   = %i(all editing_not_finished layout_open editing_changed completed)
       @scope    = params[:scope].to_s.to_sym
       @scope    = @scopes.first unless @scope.in? @scopes
-      @seminars = current_catalog.seminars.page(params[:page]).send @scope
+      @seminars = current_catalog.seminars.where(year: current_year).page(params[:page]).send @scope
     end
 
     def recommended
       authorize Seminar
-      @seminars = current_catalog.seminars.recommended.page(params[:page])
+      @seminars = current_catalog.seminars.where(year: current_year).recommended.page(params[:page])
     end
 
     def show

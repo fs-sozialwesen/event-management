@@ -6,7 +6,7 @@
     ul.nav.nav-pills.nav-stacked.categories
       li class=('active' unless @category )
         = link_to "ohne (#{@uncategorized_seminars.count})", category_admin_seminars_url(nil)
-    = render 'admin/seminars/index/categories', categories: current_catalog.categories.roots,
+    = render 'admin/seminars/index/categories', categories: Category.published.roots,
       current_path: current_path
 
   .col-md-9

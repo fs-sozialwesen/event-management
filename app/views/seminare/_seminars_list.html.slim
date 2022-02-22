@@ -1,6 +1,0 @@
-- if seminars.bookable.any?
-  / h4 Aktuelle Seminare
-  = render 'table', seminars: seminars.bookable, css_class: 'bookable'
-- if seminars.overdue.any?
-  h4 Vergangene Seminare
-  = render 'table', seminars: seminars.overdue, css_class: 'overdue'

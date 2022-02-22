@@ -1,6 +1,0 @@
-.row.hidden-print
-  .col-xs-5 = content_for :back_link if content_for? :back_link
-  .col-xs-7.search
-    form.search.form action=seminar_search_url
-      .form-group
-        input.form-control type="text" name="q" placeholder="Suche" value=params[:q]

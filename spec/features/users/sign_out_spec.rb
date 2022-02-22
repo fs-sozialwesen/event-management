@@ -13,7 +13,7 @@ feature 'Sign out', :devise do
     sign_in_as_admin
     expect(page).to have_content I18n.t 'devise.sessions.signed_in'
     click_link 'Abmelden'
-    expect(page.current_path).to eq(seminare_visitor_path(year: Date.current.year))
+    expect(page.current_path).to eq(root_url)
   end
 
 end

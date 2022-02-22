@@ -12,4 +12,7 @@ class StaticPagesController < ApplicationController
   def reductions
   end
 
+  def zeichensetzen
+  end
+
 end

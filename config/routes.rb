@@ -1,12 +1,6 @@
 Rails.application.routes.draw do
 
-  # quick fix until new homepage is live
-  get '/kuj-magdeburg', to: redirect('/suche?q=magdeburg+kinder')
-  get '/kuj-stendal',   to: redirect('/suche?q=stendal+kinder')
-
-  get  'buchung/:seminar_id',   to: 'buchung#new',    as: :buchung_new
-  post 'buchung',               to: 'buchung#create', as: :buchung_create
-  get  'nachricht/:booking_id', to: 'buchung#show',   as: :buchung_show
+  get "buchung/:seminar_id", to: redirect { |params, _| "seminar-buchung/#{params[:seminar_id]}" }
 
   get  'seminar-buchung/:seminar_id',   to: 'bookings#new',    as: :booking_new
   post 'seminar-buchung',               to: 'bookings#create', as: :booking_create
@@ -14,10 +8,11 @@ Rails.application.routes.draw do
 
   root to: 'pages#home'
 
-  get 'seminare/start/:year',            to: 'seminare#home',   as: :seminare_home
-  get 'seminare(/:year(/:category_id))', to: 'seminare#index',  as: :seminare_visitor
-  get 'seminar/:id',                     to: 'seminare#show',   as: :seminar_visitor
-  get 'suche',                           to: 'seminare#search', as: :seminar_search
+  get 'seminare/start/:year',    to: redirect('https://www.pbw-lsa.de/fort_weiterbildung/seminare/')
+  get 'seminare(/:category_id)', to: redirect('https://www.pbw-lsa.de/fort_weiterbildung/seminare/')
+  get 'seminar/:id',             to: redirect { |params, _| "https://www.pbw-lsa.de/seminar/detail/#{params[:id]}/" }
+  get 'seminar/detail/:id',      to: redirect { |params, _| "https://www.pbw-lsa.de/seminar/detail/#{params[:id]}/" }
+  get 'suche',                   to: redirect('https://www.pbw-lsa.de/fort_weiterbildung/seminare/')
 
   devise_for :users, skip: [:registrations]
   as :user do
@@ -26,6 +21,7 @@ Rails.application.routes.draw do
   end
 
   namespace :api, constraints: { format: 'json' } do
+    root to: 'seminars#docs'
     resources(:categories, only: %i(index show)) { get :tree, on: :collection }
     resources :seminars,   only: %i(index show)
     resources :locations,  only: %i(index)
@@ -50,18 +46,13 @@ Rails.application.routes.draw do
         patch :toggle_category, :publish, :unpublish, :finish_editing, :finish_layout
       end
       collection do
-        get :date, :calendar, :canceled
+        get :date, :calendar, :canceled, :search, :filter, :recommended
         get 'editing_status(/:scope)', action: :editing_status, as: :editing_status
         get 'category(/:id)',          action: :category,       as: :category
-        get :search
-        get :filter
-        get :recommended
       end
     end
     resources :legal_statistics, only: %i(index show update)
-    resources :categories, except: :edit do
-      put :move, on: :member
-    end
+    resources(:categories, except: :edit) { put :move, on: :member }
     resources :bookings,   only: %i(show new create)
     resources :attendees,  only: %i(index show update) do
       get :cancel
@@ -79,6 +70,5 @@ Rails.application.routes.draw do
   get 'datenschutz'   => 'static_pages#data_protection',  as: :data_protection
   get 'daten'         => 'static_pages#data_info',        as: :data_info
   get 'rabatt_system' => 'static_pages#reductions',       as: :reductions
-
-  # get ':path1(/:path2(/:path3))' => 'pages#show', as: :pages
+  get 'zeichensetzen' => 'static_pages#zeichensetzen',    as: :zeichensetzen
 end

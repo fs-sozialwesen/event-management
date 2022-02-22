@@ -5,3 +5,25 @@ h1 Anmeldungsbestätigung
 
 p = t('bookings.created')
 
+- timeout = 10
+p#back-path data={url: @back_path, timeout: timeout }
+  | Sie werden in
+  span#timeout<> = timeout
+  | Sekunden
+  =<> link_to 'zurück', @back_path
+  | geleitet.
+
+coffee:
+  $ ->
+    url = $('#back-path').data('url')
+    counter = $('#back-path').data('timeout')
+
+    timer = null
+    redirectBack = =>
+      counter -= 1
+      $('#timeout').html counter
+      if counter <= 0
+        clearInterval timer
+        window.location = url
+
+    timer = setInterval redirectBack, 1000

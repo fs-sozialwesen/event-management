@@ -16,6 +16,7 @@
         th = %i{phone mobile fax}.map { |attr| Company.human_attribute_name(attr) }.join(', ')
         th = Company.human_attribute_name(:email)
         th Teilnehmer
+        th = Company.human_attribute_name(:created_at)
     tbody
       - @companies.each do |company|
         tr data = {url: admin_company_url(company)}
@@ -24,3 +25,4 @@
           td = lines_for [company.phone, company.mobile, company.fax]
           td = link_to(company.email, 'mailto:' + company.email) if company.email.present?
           td = company.attendees.booked.count
+          td = ldate company.created_at.to_date

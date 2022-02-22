@@ -18,7 +18,7 @@ class SeminarDecorator < ApplicationDecorator
   end
 
   def stripped_date_text
-    h.strip_tags(object.date_text.gsub('<br>', "\n"))
+    h.strip_tags(object.date_text.gsub('<br>', "\n")).strip
   end
 
   def date_text_or_events

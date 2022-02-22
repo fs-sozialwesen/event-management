@@ -19,17 +19,17 @@ module ApplicationHelper
     content_tag(:span, class: 'label label-' + label, title: title) { fa_icon icon }
   end
 
-  def ldate(date, options = nil)
+  def ldate(date, **options)
     return '' unless date.present?
-    return ldates date.begin, date.end, options if date.is_a?(Range)
-    I18n.l date, options
+    return ldates date.begin, date.end, **options if date.is_a?(Range)
+    I18n.l date, **options
   end
 
-  def ldates(start_date, end_date, options = nil)
+  def ldates(start_date, end_date, **options)
     # sep    = start_date == end_date.yesterday ? '/' : '-'
     sep    = '-'
     format = format_for start_date, end_date
-    [ldate(start_date, format: format), sep, ldate(end_date, options)].join
+    [ldate(start_date, format: format), sep, ldate(end_date, **options)].join
   end
 
   def format_for(start_date, end_date)

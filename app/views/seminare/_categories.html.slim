@@ -1,8 +1,0 @@
-ul.nav.nav-pills.nav-stacked.categories
-  - categories.each do |category|
-    li class=('active' if category == @category)
-      = link_to category.display_name,
-              seminare_visitor_url(category_id: category.to_param),
-              title: category.display_name
-      - if category.children.any?
-        = render 'seminare/categories', categories: category.children, current_path: current_path

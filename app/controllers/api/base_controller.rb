@@ -4,7 +4,7 @@ module Api
     protected
 
     helper_method def cache_time
-      1.hour
+      1.minute
     end
 
   end

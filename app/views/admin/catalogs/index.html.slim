@@ -11,7 +11,6 @@
         th = Catalog.human_attribute_name(:title)
         th = Catalog.human_attribute_name(:year)
         th = Catalog.human_attribute_name(:seminars)
-        th = Catalog.human_attribute_name(:categories)
         th = Catalog.human_attribute_name(:print_version)
         th
     tbody
@@ -21,6 +20,5 @@
           td = catalog.title
           td = catalog.year
           td = catalog.seminars.count
-          td = catalog.categories.count
           td = link_to('Herunterladen', catalog.print_version.url, target: '_blank') if catalog.print_version.present?
           td = link_to fa_icon('table', text: 'Exportieren'), [:admin, catalog, format: :xlsx], class: 'btn btn-default btn-xs'

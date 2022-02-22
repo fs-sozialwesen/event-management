@@ -44,12 +44,17 @@ class Seminar < ApplicationRecord
   default_scope { where archived: false }
 
   scope :archived,  -> { unscoped.where archived:  true }
-  scope :published, -> { where published: true }
+  scope :published, -> { where published: true, canceled: false }
   scope :canceled,  -> { where canceled:  true }
-  scope :bookable,  -> { where 'date >= :date', date: Date.current }
-  scope :overdue,   -> { where 'date < :date',  date: Date.current }
-  scope :by_month, lambda { |month|
-    month.zero? ? where(date: nil) : where('extract(month from date) = ?', month)
+  scope :bookable,  -> { where 'bookable_until >= :date', date: Date.current }
+  scope :overdue,   -> { where 'bookable_until < :date',  date: Date.current }
+  scope :by_year_and_month, lambda { |year, month|
+    if month.zero?
+      where(date: [nil, '']).where(year: year)
+    else
+      start_date = Date.new year, month
+      where(id: Event.where(date: start_date..start_date.end_of_month).select(:seminar_id))
+    end
   }
   scope :recommended,          -> { where recommended: true }
   scope :editing_finished,     -> { where.not editing_finished_at: nil }
@@ -66,9 +71,27 @@ class Seminar < ApplicationRecord
     where('number ilike ?', "#{filter[:number1]}%#{filter[:number2].tr('*', '%')}-%#{filter[:number3]}%")
   }
 
+  search_fields = %i(number title subtitle benefit content notes due_date price_text key_words)
+  ext_search_fields = {
+    seminars: search_fields,
+    locations: [:name],
+    teachers: %i(first_name last_name title)
+  }
+
+  # @param q String 'hallo tom'
+  # search_words = { q0: '%hallo%', q1: '%tom%' }
+  # (number ilike :q0 OR title ilike :q0 OR ... OR location.name ilike :q0) AND (number ilike :q1 OR title ...) AND ...
+  # (number ilike %hallo% OR title ilike %hallo% OR ... OR location.name ilike %hallo%) AND (number ilike %tom% OR title ...) AND ...
+  scope :ext_search, ->(q) {
+    search_words  = q.to_s.split(' ').map.with_index { |word, index| [:"q#{index}", "%#{word}%"] }.to_h
+    expression = search_words.keys.map do |key|
+      ext_search_fields.flat_map { |table, fields| fields.map { |field| "#{table}.#{field} ilike :#{key}" } }.join(' OR ')
+    end.map { |exp| "(#{exp})" }.join(' AND ')
+    joins(:location, :teachers).where(expression, search_words)
+  }
+
   has_paper_trail
 
-  search_fields = %i(number title subtitle benefit content notes due_date price_text key_words)
   associated_fields = {
     teachers:   %i(first_name last_name profession),
     categories: %i(name),
@@ -109,7 +132,7 @@ class Seminar < ApplicationRecord
   end
 
   def bookable?
-    published && (date || Date.current) >= Date.current
+    published && (bookable_until || Date.current) >= Date.current
   end
 
   def reducible?
@@ -147,6 +170,7 @@ class Seminar < ApplicationRecord
   def set_date
     return unless events.any?
     self.date = events.map(&:date).min
+    self.bookable_until ||= date
   end
 
 end

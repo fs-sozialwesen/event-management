@@ -5,7 +5,7 @@ module Admin
 
     def index
       authorize Category
-      @categories = current_catalog.categories.roots.includes(children: { children: :children })
+      @categories = Category.published.roots.includes(:children)
     end
 
     def show
@@ -13,7 +13,7 @@ module Admin
 
     def new
       authorize Category
-      @category = Category.new year: current_catalog.year, parent_id: params[:parent_id]
+      @category = Category.new parent_id: params[:parent_id]
       @category.calculate_position
     end
 
@@ -41,7 +41,7 @@ module Admin
         if @category.children.any?
           { alert: 'Kategorie hat noch Unterkategorien.' }
         else
-          @category.destroy ? { notice: 'Navigation link deleted.' } : { alert: 'not possible' }
+          @category.update(archived: true) ? { notice: 'Navigation link deleted.' } : { alert: 'not possible' }
         end
       redirect_to admin_categories_url, msg
     end
@@ -55,13 +55,13 @@ module Admin
 
     # Use callbacks to share common setup or constraints between actions.
     def set_category
-      @category = current_catalog.categories.find params[:id]
+      @category = Category.find params[:id]
       authorize @category
     end
 
     # Only allow a trusted parameter "white list" through.
     def category_params
-      params.require(:category).permit(:name, :number, :category_id, :parent_id, :year)
+      params.require(:category).permit(:name, :number, :category_id, :parent_id, :year, :archived)
     end
   end
 end

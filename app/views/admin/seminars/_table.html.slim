@@ -12,28 +12,27 @@
         - seminars.order(:date).includes(:catalog, :teachers, :events).decorate.each do |seminar|
           - attendees_count = seminar.attendees.count
           - events_count = seminar.events.count
-          - cache [seminar, attendees_count, events_count] do
-            tr data = {url: admin_seminar_url(seminar)}
-              td.number
-                = seminar.number
-                br
-                small.text-muted
-                  = seminar.dates.join('<br>').html_safe
-              td
-                = seminar.title
-                - if seminar.recommended?
-                  = " ⭐"
-                br
-                small.text-muted = seminar.subtitle
-              td = render 'admin/seminars/status', seminar: seminar
-              td.icons
-                => link_to fa_icon('users', text: attendees_count), admin_seminar_url(seminar, anchor: 'attendees')
-                => fa_icon 'calendar', text: events_count
-                /- if seminar.bookings.any?
-                  = progress_bar_for_bookings(seminar)
-                ul.list-inline
-                  - seminar.teachers.each do |teacher|
-                    li = link_to icon_for(teacher, text: teacher.name), admin_teacher_url(teacher)
+          tr data = {url: admin_seminar_url(seminar)}
+            td.number
+              = seminar.number
+              br
+              small.text-muted
+                = seminar.dates.join('<br>').html_safe
+            td
+              = seminar.title
+              - if seminar.recommended?
+                = " ⭐"
+              br
+              small.text-muted = seminar.subtitle
+            td = render 'admin/seminars/status', seminar: seminar
+            td.icons
+              => link_to fa_icon('users', text: attendees_count), admin_seminar_url(seminar, anchor: 'attendees')
+              => fa_icon 'calendar', text: events_count
+              /- if seminar.bookings.any?
+                = progress_bar_for_bookings(seminar)
+              ul.list-inline
+                - seminar.teachers.each do |teacher|
+                  li = link_to icon_for(teacher, text: teacher.name), admin_teacher_url(teacher)
 - else
   p Keine Seminare
 
