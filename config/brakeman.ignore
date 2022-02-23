@@ -1,0 +1,159 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "15a066c0394afe71907485834ce8ffa730fbd0ed6910ca157e6fa1b7493b259a",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/admin/attendees/cancel.html.slim",
+      "line": 66,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Attendee.find_by(:id => ((params[:id] or params[:attendee_id]))).seminar.decorate.price_text",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Admin::AttendeesController",
+          "method": "cancel",
+          "line": 32,
+          "file": "app/controllers/admin/attendees_controller.rb",
+          "rendered": {
+            "name": "admin/attendees/cancel",
+            "file": "app/views/admin/attendees/cancel.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "admin/attendees/cancel"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 105,
+      "fingerprint": "329aa2a444630a3855d250841430d32b383b1c352df293b5654a2dcfaf20371b",
+      "check_name": "PermitAttributes",
+      "message": "Potentially dangerous key allowed for mass assignment",
+      "file": "app/controllers/admin/users_controller.rb",
+      "line": 69,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.require(:user).permit(:name, :username, :email, :role, :password, :password_confirmation, :roles => ([]))",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Admin::UsersController",
+        "method": "user_params"
+      },
+      "user_input": ":role",
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "52c63f5beb82c3008d9e3811cacd6b9475fe0463ce2674439b424bcd8d357c3c",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/admin/attendees/cancel.html.slim",
+      "line": 60,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Attendee.find_by(:id => ((params[:id] or params[:attendee_id]))).seminar.decorate.teachers.map(&:name).join(\", \")",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Admin::AttendeesController",
+          "method": "cancel",
+          "line": 32,
+          "file": "app/controllers/admin/attendees_controller.rb",
+          "rendered": {
+            "name": "admin/attendees/cancel",
+            "file": "app/views/admin/attendees/cancel.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "admin/attendees/cancel"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "Dangerous Send",
+      "warning_code": 23,
+      "fingerprint": "ab85a81ffe92ab34afe450469f5d3462a578ad2df93e5430c9187bf16cdd3329",
+      "check_name": "Send",
+      "message": "User controlled method execution",
+      "file": "app/controllers/admin/seminars_controller.rb",
+      "line": 71,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_send/",
+      "code": "current_catalog.seminars.where(:year => current_year).page(params[:page]).send((params[:scope].to_s.to_sym or :all))",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Admin::SeminarsController",
+        "method": "editing_status"
+      },
+      "user_input": "params[:scope].to_s.to_sym",
+      "confidence": "High",
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "c3ef32b12d10a3a106e228164dbd6f550ec1a03bf57fdd8e638466f2e461fc3d",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped model attribute",
+      "file": "app/views/admin/attendees/cancel.html.slim",
+      "line": 57,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Attendee.find_by(:id => ((params[:id] or params[:attendee_id]))).seminar.decorate.formatted_events",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Admin::AttendeesController",
+          "method": "cancel",
+          "line": 32,
+          "file": "app/controllers/admin/attendees_controller.rb",
+          "rendered": {
+            "name": "admin/attendees/cancel",
+            "file": "app/views/admin/attendees/cancel.html.slim"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "admin/attendees/cancel"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "note": ""
+    },
+    {
+      "warning_type": "HTTP Verb Confusion",
+      "warning_code": 118,
+      "fingerprint": "edb317d42028dfff1246e015101ba95c7ca738ef51c55f33f7803d3f2b932de6",
+      "check_name": "VerbConfusion",
+      "message": "Potential HTTP verb confusion. `HEAD` is routed like `GET` but `request.get?` will return `false`",
+      "file": "app/controllers/application_controller.rb",
+      "line": 50,
+      "link": "https://brakemanscanner.org/docs/warning_types/http_verb_confusion/",
+      "code": "request.get? ? (:page) : (:action)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "ApplicationController",
+        "method": "user_not_authorized"
+      },
+      "user_input": "request.get?",
+      "confidence": "Weak",
+      "note": ""
+    }
+  ],
+  "updated": "2022-02-23 14:23:30 +0100",
+  "brakeman_version": "5.2.1"
+}
