@@ -65,11 +65,11 @@ gem "bundler-audit"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: %i[mri mingw x64_mingw]
+  # gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'pry-rails'
-  gem 'pry-rescue'
-  gem 'pry-doc'
+  # gem 'pry-rescue'
+  # gem 'pry-doc'
   gem 'rspec-rails'
   gem 'rubocop'
 end
@@ -83,13 +83,6 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # gem 'meta_request'
   # gem 'better_errors'
-  gem 'capistrano', '~> 3.5'
-  gem 'capistrano-bundler'
-  gem 'capistrano-rails', '~> 1.1'
-  gem 'capistrano-rails-console'
-  # gem 'capistrano-rvm', '~> 0.1.1'
-  gem 'capistrano-chruby'
-  gem 'capistrano3-puma'
   gem 'guard-bundler'
   gem 'guard-rails'
   gem 'guard-rspec'
