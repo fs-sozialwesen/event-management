@@ -83,9 +83,9 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # gem 'meta_request'
   # gem 'better_errors'
-  gem 'guard-bundler'
-  gem 'guard-rails'
-  gem 'guard-rspec'
+  # gem 'guard-bundler'
+  # gem 'guard-rails'
+  # gem 'guard-rspec'
   gem 'rails_layout'
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
