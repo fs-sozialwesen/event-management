@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+git_source(:github) { |repo| "https://github.com/#{repo}.git" }
+
 ruby '2.6.9'
 
 gem 'rails', '~> 5.2.6.2'
@@ -58,6 +60,8 @@ gem 'axlsx_styler'
 gem 'paperclip', '~> 5.0'
 gem 'acts-as-taggable-on'
 gem 'browser'
+gem "brakeman"
+gem "bundler-audit"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
