@@ -103,5 +103,4 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
-  gem 'codeclimate-test-reporter', '~> 1.0.0', require: nil
 end
