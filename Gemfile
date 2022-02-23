@@ -87,9 +87,9 @@ group :development do
   # gem 'guard-rails'
   # gem 'guard-rspec'
   gem 'rails_layout'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
+  # gem 'rb-fchange', :require=>false
+  # gem 'rb-fsevent', :require=>false
+  # gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
   gem 'mechanize'
   # gem 'binding_of_caller'
