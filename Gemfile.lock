@@ -1,5 +1,12 @@
 GIT
-  remote: git://github.com/randym/axlsx.git
+  remote: https://github.com/J-F-Liu/prawn-table
+  revision: 6e32ab811a162ca556644eaf942d757d8519f0be
+  specs:
+    prawn-table (0.2.3)
+      prawn (>= 1.3.0, < 3.0.0)
+
+GIT
+  remote: https://github.com/randym/axlsx.git
   revision: 8e7b4b3b7259103452c191f73ce0bf64f66033fe
   specs:
     axlsx (3.0.0.pre)
@@ -7,13 +14,6 @@ GIT
       mimemagic (~> 0.3)
       nokogiri (~> 1.8, >= 1.8.2)
       rubyzip (~> 1.2, >= 1.2.1)
-
-GIT
-  remote: https://github.com/J-F-Liu/prawn-table
-  revision: 6e32ab811a162ca556644eaf942d757d8519f0be
-  specs:
-    prawn-table (0.2.3)
-      prawn (>= 1.3.0, < 3.0.0)
 
 GEM
   remote: https://rubygems.org/
@@ -93,8 +93,12 @@ GEM
       sassc (>= 2.0.0)
     bootstrap-wysihtml5-rails (0.3.3.8)
       railties (>= 3.0)
+    brakeman (5.2.1)
     browser (2.6.1)
     builder (3.2.4)
+    bundler-audit (0.9.0.1)
+      bundler (>= 1.2.0, < 3)
+      thor (~> 1.0)
     byebug (10.0.0)
     capistrano (3.16.0)
       airbrussh (>= 1.0.0)
@@ -492,7 +496,9 @@ DEPENDENCIES
   bootstrap-datepicker-rails
   bootstrap-sass
   bootstrap-wysihtml5-rails
+  brakeman
   browser
+  bundler-audit
   byebug
   capistrano (~> 3.5)
   capistrano-bundler
