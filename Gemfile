@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.6.9'
 
-gem 'rails', '~> 5.1.6'
+gem 'rails', '~> 5.2.6.2'
 
 gem 'puma', '~> 4.3'
 gem 'sass-rails', '~> 5.0'
@@ -13,6 +13,9 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 gem 'draper'
 # gem 'rmagick'
+# Reduces boot times through caching; required in config/boot.rb
+gem 'bootsnap', require: false
+
 
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
