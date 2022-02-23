@@ -59,6 +59,7 @@ gem 'paperclip', '~> 5.0'
 gem 'acts-as-taggable-on'
 gem 'browser'
 gem "brakeman"
+gem "bundler-audit"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
