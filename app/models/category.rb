@@ -1,6 +1,6 @@
 class Category < ApplicationRecord
 
-  include PgSearch
+  include PgSearch::Model
 
   validates :name, presence: true
   validates :position, uniqueness: { scope: [:year, :parent_id] }
