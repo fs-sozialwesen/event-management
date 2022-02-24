@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.9'
+ruby '2.7.5'
 
 gem 'rails', '~> 5.2.6.2'
 
@@ -58,7 +58,6 @@ gem 'caxlsx'
 gem 'caxlsx_rails'
 gem 'axlsx_styler'
 gem 'paperclip', '~> 5.0'
-gem 'acts-as-taggable-on'
 gem 'browser'
 gem "brakeman"
 gem "bundler-audit"
