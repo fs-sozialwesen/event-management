@@ -83,13 +83,13 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # gem 'meta_request'
   # gem 'better_errors'
-  gem 'guard-bundler'
-  gem 'guard-rails'
-  gem 'guard-rspec'
+  # gem 'guard-bundler'
+  # gem 'guard-rails'
+  # gem 'guard-rspec'
   gem 'rails_layout'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
+  # gem 'rb-fchange', :require=>false
+  # gem 'rb-fsevent', :require=>false
+  # gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
   gem 'mechanize'
   # gem 'binding_of_caller'
@@ -103,5 +103,4 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
-  gem 'codeclimate-test-reporter', '~> 1.0.0', require: nil
 end
