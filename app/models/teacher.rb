@@ -1,6 +1,6 @@
 class Teacher < ApplicationRecord
 
-  include PgSearch
+  include PgSearch::Model
 
   has_and_belongs_to_many :seminars
 
