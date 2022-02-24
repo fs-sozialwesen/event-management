@@ -1,5 +1,5 @@
 class Attendee < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
 
   enum status: { booked: 0, canceled: 1, attended: 2 }
 
