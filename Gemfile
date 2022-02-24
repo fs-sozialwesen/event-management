@@ -2,11 +2,11 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.9'
+ruby '2.7.5'
 
 gem 'rails', '~> 5.2.6.2'
 
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 5.6'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
@@ -54,11 +54,10 @@ gem 'wicked_pdf'
 # gem 'rubyzip', '~> 1.1.0'
 # gem 'axlsx', '2.1.0.pre'
 # no new gem out yet using the new rubyzip version
-gem 'axlsx', github: 'randym/axlsx'
-gem 'axlsx_rails'
+gem 'caxlsx'
+gem 'caxlsx_rails'
 gem 'axlsx_styler'
 gem 'paperclip', '~> 5.0'
-gem 'acts-as-taggable-on'
 gem 'browser'
 gem "brakeman"
 gem "bundler-audit"
@@ -83,13 +82,13 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # gem 'meta_request'
   # gem 'better_errors'
-  gem 'guard-bundler'
-  gem 'guard-rails'
-  gem 'guard-rspec'
+  # gem 'guard-bundler'
+  # gem 'guard-rails'
+  # gem 'guard-rspec'
   gem 'rails_layout'
-  gem 'rb-fchange', :require=>false
-  gem 'rb-fsevent', :require=>false
-  gem 'rb-inotify', :require=>false
+  # gem 'rb-fchange', :require=>false
+  # gem 'rb-fsevent', :require=>false
+  # gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
   gem 'mechanize'
   # gem 'binding_of_caller'
@@ -103,5 +102,4 @@ group :test do
   gem 'launchy'
   gem 'selenium-webdriver'
   gem 'simplecov', require: false
-  gem 'codeclimate-test-reporter', '~> 1.0.0', require: nil
 end
