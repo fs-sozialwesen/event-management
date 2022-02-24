@@ -1,6 +1,6 @@
 class Location < ApplicationRecord
 
-  include PgSearch
+  include PgSearch::Model
 
   has_many :seminars
 
