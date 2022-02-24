@@ -55,4 +55,4 @@ jobs:
       - name: Security audit application code
         run: bundle exec brakeman -q -w2
       - name: Lint Ruby files with Rubocop
-        run: git diff-tree -r --no-commit-id --name-only head origin/master | xargs rubocop
+        run: rubocop --parallel ${{ steps.get_file_changes.outputs.files}}
