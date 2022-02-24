@@ -58,7 +58,6 @@ gem 'caxlsx'
 gem 'caxlsx_rails'
 gem 'axlsx_styler'
 gem 'paperclip', '~> 5.0'
-gem 'acts-as-taggable-on'
 gem 'browser'
 gem "brakeman"
 gem "bundler-audit"
