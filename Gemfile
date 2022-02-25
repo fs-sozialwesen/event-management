@@ -87,7 +87,7 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 3.36'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'database_cleaner'
