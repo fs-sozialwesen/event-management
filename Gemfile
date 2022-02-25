@@ -7,7 +7,7 @@ ruby '2.7.5'
 gem 'rails', '~> 5.2.6.2'
 
 gem 'puma', '~> 5.6'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 5.0'
 gem 'jquery-rails'
@@ -46,7 +46,7 @@ gem 'prawn'
 # See https://github.com/prawnpdf/prawn-table/pull/50
 gem 'prawn-table', git: 'https://github.com/J-F-Liu/prawn-table'
 
-gem 'wkhtmltopdf-binary', '0.12.6.5' # https://github.com/mileszs/wicked_pdf/issues/721#issuecomment-429560752
+gem 'wkhtmltopdf-binary', '0.12.3.1' # https://github.com/mileszs/wicked_pdf/issues/721#issuecomment-429560752
 gem 'wicked_pdf'
 
 # gem 'rubyzip', '~> 1.1.0'
