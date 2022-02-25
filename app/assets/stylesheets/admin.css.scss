@@ -16,12 +16,12 @@
  *= require select2-bootstrap
  *= require bootstrap-datepicker
  * require_tree .
- *= require admin/1st_load_framework.css.sass
- *= require admin/bs_alert.sass
- *= require admin/overflow.sass
- *= require admin/page-header.sass
- *= require admin/popover.sass
- *= require admin/table.sass
- *= require admin/tabs.sass
+ *= require admin/1st_load_framework
+ *= require admin/bs_alert
+ *= require admin/overflow
+ *= require admin/page-header
+ *= require admin/popover
+ *= require admin/table
+ *= require admin/tabs
  *= require_self
  */
