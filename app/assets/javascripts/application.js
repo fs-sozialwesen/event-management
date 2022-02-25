@@ -14,16 +14,4 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require jquery_ujs
-//  require bootstrap-wysihtml5
-//  require bootstrap-wysihtml5/locales/de-DE
-//  require select2
-//  require select2-full
-//  require bootstrap-datepicker
-//  require bootstrap-datepicker/core
-//  require bootstrap-datepicker/locales/bootstrap-datepicker.de.js
 
-
-//  require admin/form_init.coffee
-//  require admin/table.coffee
-//  require admin/nav-tabs.coffee
-//  require_tree .
