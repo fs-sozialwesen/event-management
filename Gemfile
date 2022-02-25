@@ -7,7 +7,7 @@ ruby '2.7.5'
 gem 'rails', '~> 5.2.6.2'
 
 gem 'puma', '~> 5.6'
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails', '~> 6.0'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
@@ -87,7 +87,7 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 3.36'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'database_cleaner'
