@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.9'
+ruby '2.7.5'
 
 gem 'rails', '~> 5.2.6.2'
 
@@ -18,17 +18,15 @@ gem 'draper'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
-
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'tzinfo-data', platforms: %i(mingw mswin x64_mingw jruby)
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'devise-i18n'
-# gem 'high_voltage'
 gem 'pg'
 gem 'pg_search'
 gem 'rails-settings-cached'
@@ -48,7 +46,7 @@ gem 'prawn'
 # See https://github.com/prawnpdf/prawn-table/pull/50
 gem 'prawn-table', git: 'https://github.com/J-F-Liu/prawn-table'
 
-gem 'wkhtmltopdf-binary', '0.12.3.1' # https://github.com/mileszs/wicked_pdf/issues/721#issuecomment-429560752
+gem 'wkhtmltopdf-binary', '0.12.6.5' # https://github.com/mileszs/wicked_pdf/issues/721#issuecomment-429560752
 gem 'wicked_pdf'
 
 # gem 'rubyzip', '~> 1.1.0'
@@ -58,20 +56,19 @@ gem 'caxlsx'
 gem 'caxlsx_rails'
 gem 'axlsx_styler'
 gem 'paperclip', '~> 5.0'
-gem 'acts-as-taggable-on'
 gem 'browser'
-gem "brakeman"
-gem "bundler-audit"
+gem 'brakeman'
+gem 'bundler-audit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'pry-rails'
-  # gem 'pry-rescue'
-  # gem 'pry-doc'
   gem 'rspec-rails'
-  gem 'rubocop'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-git', require: false
 end
 
 group :development do
@@ -83,20 +80,14 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # gem 'meta_request'
   # gem 'better_errors'
-  # gem 'guard-bundler'
-  # gem 'guard-rails'
-  # gem 'guard-rspec'
   gem 'rails_layout'
-  # gem 'rb-fchange', :require=>false
-  # gem 'rb-fsevent', :require=>false
-  # gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
   gem 'mechanize'
   # gem 'binding_of_caller'
 end
 
 group :test do
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 3.36'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'database_cleaner'
