@@ -18,17 +18,15 @@ gem 'draper'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
-
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
+gem 'tzinfo-data', platforms: %i(mingw mswin x64_mingw jruby)
 gem 'bootstrap-sass'
 gem 'devise'
 gem 'devise-i18n'
-# gem 'high_voltage'
 gem 'pg'
 gem 'pg_search'
 gem 'rails-settings-cached'
@@ -59,18 +57,18 @@ gem 'caxlsx_rails'
 gem 'axlsx_styler'
 gem 'paperclip', '~> 5.0'
 gem 'browser'
-gem "brakeman"
-gem "bundler-audit"
+gem 'brakeman'
+gem 'bundler-audit'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'byebug', platforms: %i[mri mingw x64_mingw]
   # Adds support for Capybara system testing and selenium driver
   gem 'pry-rails'
-  # gem 'pry-rescue'
-  # gem 'pry-doc'
   gem 'rspec-rails'
-  gem 'rubocop'
+  gem 'rubocop', require: false
+  gem 'rubocop-rails', require: false
+  gem 'rubocop-git', require: false
 end
 
 group :development do
@@ -82,13 +80,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   # gem 'meta_request'
   # gem 'better_errors'
-  # gem 'guard-bundler'
-  # gem 'guard-rails'
-  # gem 'guard-rspec'
   gem 'rails_layout'
-  # gem 'rb-fchange', :require=>false
-  # gem 'rb-fsevent', :require=>false
-  # gem 'rb-inotify', :require=>false
   gem 'spring-commands-rspec'
   gem 'mechanize'
   # gem 'binding_of_caller'
