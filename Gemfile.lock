@@ -5,16 +5,6 @@ GIT
     prawn-table (0.2.3)
       prawn (>= 1.3.0, < 3.0.0)
 
-GIT
-  remote: https://github.com/randym/axlsx.git
-  revision: 8e7b4b3b7259103452c191f73ce0bf64f66033fe
-  specs:
-    axlsx (3.0.0.pre)
-      htmlentities (~> 4.3, >= 4.3.4)
-      mimemagic (~> 0.3)
-      nokogiri (~> 1.8, >= 1.8.2)
-      rubyzip (~> 1.2, >= 1.2.1)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -63,26 +53,26 @@ GEM
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    acts-as-taggable-on (8.1.0)
-      activerecord (>= 5.0, < 6.2)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
     arel (9.0.0)
-    ast (2.4.0)
+    ast (2.4.2)
     autoprefixer-rails (9.5.0)
       execjs
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
       ice_nine (~> 0.11.0)
       thread_safe (~> 0.3, >= 0.3.1)
-    axlsx_rails (0.6.1)
-      actionpack (>= 3.1)
-      caxlsx (>= 3.0)
+    axlsx (3.0.0.pre)
+      htmlentities (~> 4.3, >= 4.3.4)
+      mimemagic (~> 0.3)
+      nokogiri (~> 1.8, >= 1.8.2)
+      rubyzip (~> 1.2, >= 1.2.1)
     axlsx_styler (0.2.0)
       activesupport (>= 3.1)
       axlsx (>= 2.0, < 4)
     bcrypt (3.1.16)
-    bootsnap (1.10.2)
+    bootsnap (1.10.3)
       msgpack (~> 1.2)
     bootstrap-datepicker-rails (1.9.0.1)
       railties (>= 3.0)
@@ -97,23 +87,25 @@ GEM
     bundler-audit (0.9.0.1)
       bundler (>= 1.2.0, < 3)
       thor (~> 1.0)
-    capybara (2.18.0)
+    capybara (3.36.0)
       addressable
+      matrix
       mini_mime (>= 0.1.3)
-      nokogiri (>= 1.3.3)
-      rack (>= 1.0.0)
-      rack-test (>= 0.5.4)
-      xpath (>= 2.0, < 4.0)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (>= 1.5, < 3.0)
+      xpath (~> 3.2)
     caxlsx (3.2.0)
       htmlentities (~> 4.3, >= 4.3.4)
       marcel (~> 1.0)
       nokogiri (~> 1.10, >= 1.10.4)
       rubyzip (>= 1.3.0, < 3)
-    childprocess (0.9.0)
-      ffi (~> 1.0, >= 1.0.11)
+    caxlsx_rails (0.6.2)
+      actionpack (>= 3.1)
+      caxlsx (>= 3.0)
+    childprocess (4.1.0)
     climate_control (0.2.0)
-    codeclimate-test-reporter (1.0.9)
-      simplecov (<= 0.13)
     coderay (1.1.2)
     coercible (1.0.0)
       descendants_tracker (~> 0.0.1)
@@ -161,30 +153,8 @@ GEM
     ffi (1.15.5)
     font-awesome-rails (4.7.0.8)
       railties (>= 3.2, < 8.0)
-    formatador (0.2.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
-    guard (2.14.2)
-      formatador (>= 0.2.4)
-      listen (>= 2.7, < 4.0)
-      lumberjack (>= 1.0.12, < 2.0)
-      nenv (~> 0.1)
-      notiffany (~> 0.0)
-      pry (>= 0.9.12)
-      shellany (~> 0.0)
-      thor (>= 0.18.1)
-    guard-bundler (2.1.0)
-      bundler (~> 1.0)
-      guard (~> 2.2)
-      guard-compat (~> 1.1)
-    guard-compat (1.2.1)
-    guard-rails (0.8.1)
-      guard (~> 2.11)
-      guard-compat (~> 1.0)
-    guard-rspec (4.7.3)
-      guard (~> 2.1)
-      guard-compat (~> 1.1)
-      rspec (>= 2.99.0, < 4.0)
     htmlentities (4.3.4)
     http-cookie (1.0.4)
       domain_name (~> 0.5)
@@ -220,10 +190,10 @@ GEM
     loofah (2.14.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
-    lumberjack (1.0.12)
     mail (2.7.1)
       mini_mime (>= 0.1.1)
     marcel (1.0.2)
+    matrix (0.4.2)
     mechanize (2.8.4)
       addressable (~> 2.8)
       domain_name (~> 0.5, >= 0.5.20190701)
@@ -245,9 +215,8 @@ GEM
     mini_mime (1.1.2)
     mini_portile2 (2.8.0)
     minitest (5.15.0)
-    msgpack (1.4.4)
+    msgpack (1.4.5)
     multi_json (1.15.0)
-    nenv (0.3.0)
     net-http-digest_auth (1.4.1)
     net-http-persistent (4.0.1)
       connection_pool (~> 2.2)
@@ -255,9 +224,6 @@ GEM
     nokogiri (1.13.3)
       mini_portile2 (~> 2.8.0)
       racc (~> 1.4)
-    notiffany (0.1.1)
-      nenv (~> 0.1)
-      shellany (~> 0.0)
     orm_adapter (0.5.0)
     paper_trail (12.2.0)
       activerecord (>= 5.2)
@@ -268,15 +234,14 @@ GEM
       mime-types
       mimemagic (~> 0.3.0)
       terrapin (~> 0.6.0)
-    parallel (1.12.1)
-    parser (2.5.0.3)
-      ast (~> 2.4.0)
+    parallel (1.21.0)
+    parser (3.1.1.0)
+      ast (~> 2.4.1)
     pdf-core (0.9.0)
-    pg (1.0.0)
+    pg (1.3.3)
     pg_search (2.3.6)
       activerecord (>= 5.2)
       activesupport (>= 5.2)
-    powerpack (0.1.1)
     prawn (2.4.0)
       pdf-core (~> 0.9.0)
       ttfunk (~> 1.7)
@@ -286,7 +251,7 @@ GEM
     pry-rails (0.3.6)
       pry (>= 0.10.4)
     public_suffix (4.0.6)
-    puma (4.3.11)
+    puma (5.6.2)
       nio4r (~> 2.0)
     pundit (1.1.0)
       activesupport (>= 3.0.0)
@@ -321,24 +286,20 @@ GEM
       method_source
       rake (>= 0.8.7)
       thor (>= 0.19.0, < 2.0)
-    rainbow (3.0.0)
+    rainbow (3.1.1)
     rake (13.0.6)
-    rb-fchange (0.0.6)
-      ffi
     rb-fsevent (0.10.3)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    regexp_parser (2.2.1)
     request_store (1.5.1)
       rack (>= 1.4)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rexml (3.2.5)
     rollbar (2.15.5)
       multi_json
-    rspec (3.7.0)
-      rspec-core (~> 3.7.0)
-      rspec-expectations (~> 3.7.0)
-      rspec-mocks (~> 3.7.0)
     rspec-core (3.7.1)
       rspec-support (~> 3.7.0)
     rspec-expectations (3.7.0)
@@ -356,14 +317,24 @@ GEM
       rspec-mocks (~> 3.7.0)
       rspec-support (~> 3.7.0)
     rspec-support (3.7.1)
-    rubocop (0.53.0)
+    rubocop (1.25.1)
       parallel (~> 1.10)
-      parser (>= 2.5)
-      powerpack (~> 0.1)
+      parser (>= 3.1.0.0)
       rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml
+      rubocop-ast (>= 1.15.1, < 2.0)
       ruby-progressbar (~> 1.7)
-      unicode-display_width (~> 1.0, >= 1.0.1)
-    ruby-progressbar (1.9.0)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.16.0)
+      parser (>= 3.1.1.0)
+    rubocop-git (0.1.3)
+      rubocop (>= 0.24.1)
+    rubocop-rails (2.13.0)
+      activesupport (>= 4.2.0)
+      rack (>= 1.1)
+      rubocop (>= 1.7.0, < 2.0)
+    ruby-progressbar (1.11.0)
     ruby_dep (1.5.0)
     rubyntlm (0.6.3)
     rubyzip (1.3.0)
@@ -382,13 +353,13 @@ GEM
       ffi (~> 1.9)
       rake
     select2-rails (3.5.11)
-    selenium-webdriver (3.11.0)
-      childprocess (~> 0.5)
-      rubyzip (~> 1.2)
-    shellany (0.0.1)
-    simple_form (5.0.3)
-      actionpack (>= 5.0)
-      activemodel (>= 5.0)
+    selenium-webdriver (4.1.0)
+      childprocess (>= 0.5, < 5.0)
+      rexml (~> 3.2, >= 3.2.5)
+      rubyzip (>= 1.2.2)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     simplecov (0.13.0)
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
@@ -432,7 +403,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8)
-    unicode-display_width (1.3.0)
+    unicode-display_width (2.1.0)
     virtus (1.0.5)
       axiom-types (~> 0.1)
       coercible (~> 1.0)
@@ -447,7 +418,7 @@ GEM
     websocket-extensions (0.1.5)
     wicked_pdf (2.1.0)
       activesupport
-    wkhtmltopdf-binary (0.12.3.1)
+    wkhtmltopdf-binary (0.12.6.5)
     xpath (3.2.0)
       nokogiri (~> 1.8)
 
@@ -455,9 +426,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  acts-as-taggable-on
-  axlsx!
-  axlsx_rails
   axlsx_styler
   bootsnap
   bootstrap-datepicker-rails
@@ -466,8 +434,9 @@ DEPENDENCIES
   brakeman
   browser
   bundler-audit
-  capybara (~> 2.13)
-  codeclimate-test-reporter (~> 1.0.0)
+  capybara (~> 3.36)
+  caxlsx
+  caxlsx_rails
   coffee-rails (~> 4.2)
   database_cleaner
   devise
@@ -476,9 +445,6 @@ DEPENDENCIES
   factory_girl_rails
   faker
   font-awesome-rails
-  guard-bundler
-  guard-rails
-  guard-rspec
   jbuilder (~> 2.5)
   jquery-rails
   kaminari
@@ -491,17 +457,16 @@ DEPENDENCIES
   prawn
   prawn-table!
   pry-rails
-  puma (~> 4.3)
+  puma (~> 5.6)
   pundit
   rails (~> 5.2.6.2)
   rails-settings-cached
   rails_layout
-  rb-fchange
-  rb-fsevent
-  rb-inotify
   rollbar
   rspec-rails
   rubocop
+  rubocop-git
+  rubocop-rails
   sass-rails (~> 5.0)
   select2-rails
   selenium-webdriver
@@ -516,10 +481,10 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   virtus
   wicked_pdf
-  wkhtmltopdf-binary (= 0.12.3.1)
+  wkhtmltopdf-binary (= 0.12.6.5)
 
 RUBY VERSION
-   ruby 2.6.9p207
+   ruby 2.7.5p203
 
 BUNDLED WITH
-   1.17.3
+   2.3.4

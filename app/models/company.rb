@@ -1,5 +1,5 @@
 class Company < ApplicationRecord
-  include PgSearch
+  include PgSearch::Model
 
   has_many :bookings, inverse_of: :company, dependent: :restrict_with_error
   has_many :attendees, inverse_of: :company, dependent: :restrict_with_error

@@ -6,7 +6,7 @@ class Seminar < ApplicationRecord
   SEM_REGEX     = /([A-CK])-(\d+)-(.*)/
   NUMBER_FORMAT = /\A[ABCK]-\d{3}-\d{2}(A\d)?[A-Z].*\Z/
 
-  include PgSearch
+  include PgSearch::Model
 
   belongs_to :catalog, foreign_key: :year, primary_key: :year, inverse_of: :seminars
   belongs_to :editor, class_name: 'User'
