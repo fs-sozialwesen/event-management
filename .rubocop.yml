@@ -1,6 +1,9 @@
+require: rubocop-rails
+
 AllCops:
+  NewCops: enable
   DisplayStyleGuide: true
-  TargetRubyVersion: 2.4
+  TargetRubyVersion: 2.7
   Include:
     - '**/Gemfile'
     - '**/Rakefile'
@@ -17,8 +20,6 @@ Rails/FilePath:
 Rails/SkipsModelValidations:
   Enabled: false
 
-Metrics/LineLength:
-  Max: 120
 Metrics/AbcSize:
   Max: 25
 Metrics/ClassLength:
@@ -33,11 +34,13 @@ Metrics/BlockLength:
 Metrics/CyclomaticComplexity:
   Enabled: false
 
+Layout/LineLength:
+  Max: 120
 Layout/DotPosition:
   EnforcedStyle: trailing
 Layout/MultilineOperationIndentation:
   EnforcedStyle: indented
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   EnforcedStyle: with_fixed_indentation
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
