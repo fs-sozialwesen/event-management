@@ -46,7 +46,7 @@ gem 'prawn'
 # See https://github.com/prawnpdf/prawn-table/pull/50
 gem 'prawn-table', git: 'https://github.com/J-F-Liu/prawn-table'
 
-gem 'wkhtmltopdf-binary', '0.12.3.1' # https://github.com/mileszs/wicked_pdf/issues/721#issuecomment-429560752
+gem 'wkhtmltopdf-binary', '0.12.6.5' # https://github.com/mileszs/wicked_pdf/issues/721#issuecomment-429560752
 gem 'wicked_pdf'
 
 # gem 'rubyzip', '~> 1.1.0'
@@ -87,7 +87,7 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 3.36'
   gem 'factory_girl_rails'
   gem 'faker'
   gem 'database_cleaner'
