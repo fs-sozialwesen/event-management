@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+cd tmp || exit
+tar xf event_management.tar  "*.sql.gz"
+gunzip event_management/databases/PostgreSQL.sql.gz
+mv event_management/databases/PostgreSQL.sql latest.sql
+rm -r event_management
+rm event_management.tar
+
+psql -d event-management_development -f latest.sql
