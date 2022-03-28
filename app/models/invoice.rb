@@ -2,8 +2,8 @@ class Invoice < ApplicationRecord
   enum status: { created: 0, sent: 1, payed: 2 }
 
   has_many :attendees, inverse_of: :invoice
-  belongs_to :seminar, inverse_of: :invoices
-  belongs_to :company, inverse_of: :invoices
+  belongs_to :seminar, inverse_of: :invoices, optional: true
+  belongs_to :company, inverse_of: :invoices, optional: true
 
   serialize :items, InvoiceItems
 

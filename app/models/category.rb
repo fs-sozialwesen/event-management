@@ -9,7 +9,7 @@ class Category < ApplicationRecord
   # belongs_to :catalog, foreign_key: :year, primary_key: :year, inverse_of: :categories
   has_and_belongs_to_many :seminars
 
-  belongs_to :parent, class_name: 'Category', inverse_of: :children
+  belongs_to :parent, class_name: 'Category', inverse_of: :children, optional: true
   has_many :children, -> { order :position }, class_name: 'Category', foreign_key: 'parent_id', inverse_of: :parent
   scope :roots, -> { where(parent_id: nil).order(:position) }
   scope :archived, -> { where archived: true }
@@ -93,7 +93,7 @@ class Category < ApplicationRecord
   end
 
   def invalidate_descendants_cache
-    self.class.find_each { |cat| Rails.cache.clear cat.descendants_cache_key }
+    self.class.find_each { |cat| Rails.cache.delete cat.descendants_cache_key }
   end
 
   def self.next_position_for(year, parent_id)

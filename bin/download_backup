@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+backups = `ssh em2 ls backups/event_management/`.split "\n"
+latest_backup = backups.sort.last
+`scp em2:backups/event_management/#{latest_backup}/event_management.tar tmp/`
