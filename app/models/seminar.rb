@@ -43,11 +43,11 @@ class Seminar < ApplicationRecord
 
   default_scope { where archived: false }
 
-  scope :archived,  -> { unscoped.where archived:  true }
+  scope :archived,  -> { unscoped.where archived: true }
   scope :published, -> { where published: true, canceled: false }
   scope :canceled,  -> { where canceled:  true }
-  scope :bookable,  -> { where 'bookable_until >= :date', date: Date.current }
-  scope :overdue,   -> { where 'bookable_until < :date',  date: Date.current }
+  scope :bookable,  -> { published.where 'COALESCE(bookable_until, date) >= CURRENT_DATE' }
+  scope :overdue,   -> { published.where 'COALESCE(bookable_until, date) < CURRENT_DATE' }
   scope :by_year_and_month, lambda { |year, month|
     if month.zero?
       where(date: [nil, '']).where(year: year)
@@ -132,7 +132,7 @@ class Seminar < ApplicationRecord
   end
 
   def bookable?
-    published && (bookable_until || Date.current) >= Date.current
+    published && (bookable_until || date) >= Date.current
   end
 
   def reducible?
@@ -170,7 +170,6 @@ class Seminar < ApplicationRecord
   def set_date
     return unless events.any?
     self.date = events.map(&:date).min
-    self.bookable_until ||= date
   end
 
 end

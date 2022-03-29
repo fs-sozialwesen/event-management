@@ -7,4 +7,16 @@ mv event_management/databases/PostgreSQL.sql latest.sql
 rm -r event_management
 rm event_management.tar
 
+
+psql -U postgres -d event-management_development -c "
+  SELECT pg_terminate_backend(pid)
+  FROM pg_stat_activity
+  WHERE pid <> pg_backend_pid() AND datname = 'event-management_development' ;"
+
+rails db:drop db:create
+
 psql -d event-management_development -f latest.sql
+
+
+psql -U postgres -d event-management_development -c "
+  UPDATE ar_internal_metadata SET value='development' WHERE key = 'environment';"
