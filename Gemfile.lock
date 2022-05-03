@@ -89,7 +89,7 @@ GEM
       sassc (>= 2.0.0)
     bootstrap-wysihtml5-rails (0.3.3.8)
       railties (>= 3.0)
-    brakeman (5.2.1)
+    brakeman (5.2.3)
     browser (5.3.1)
     builder (3.2.4)
     bundler-audit (0.9.0.1)
