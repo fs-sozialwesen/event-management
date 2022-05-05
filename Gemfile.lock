@@ -124,7 +124,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.12.2)
-    concurrent-ruby (1.1.9)
+    concurrent-ruby (1.1.10)
     connection_pool (2.2.5)
     crass (1.0.6)
     database_cleaner (2.0.1)
@@ -416,7 +416,7 @@ GEM
     websocket-driver (0.7.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
-    wicked_pdf (2.1.0)
+    wicked_pdf (2.6.2)
       activesupport
     wkhtmltopdf-binary (0.12.3.1)
     xpath (3.2.0)
