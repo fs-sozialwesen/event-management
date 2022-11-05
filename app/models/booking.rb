@@ -16,7 +16,7 @@ class Booking < ApplicationRecord
   validate :validate_attendees
   validates :data_protection, acceptance: true
   validates :terms_of_service, acceptance: true
-  validates :contact_phone, presence: true, if: :external
+  validates :contact_phone, :contact_email, presence: true, if: :external
   validates :invoice_title, :invoice_street, :invoice_zip, :invoice_city, presence: true, if: :external
   validates :tandem_address, :tandem_company, :tandem_name,
     presence: true,
