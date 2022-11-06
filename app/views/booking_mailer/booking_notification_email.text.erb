@@ -24,7 +24,7 @@ Arbeitgeber:
 <% end %>
 
 Rabatt
-<%= I18n.t('buchung.reductions')[@booking.reduction.to_sym] %>
+<%= I18n.t('buchung.reductions')[@booking.reduction.to_sym] if @booking.reduction.present? %>
 
 Bemerkungen:
 <%= @booking.comments %>
