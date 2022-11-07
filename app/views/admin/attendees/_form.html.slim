@@ -47,7 +47,10 @@
     legend Rabatt
     .form-group.radio_buttons
       .control_group
-        input type="hidden" name="booking[reduction]" value=""
+        span.radio
+          label
+            => f.radio_button :reduction, ""
+            | Kein
         span.radio
           label
             => f.radio_button :reduction, :early

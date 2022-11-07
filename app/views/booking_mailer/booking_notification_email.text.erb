@@ -16,12 +16,15 @@ Arbeitgeber:
 <%= @booking.invoice_zip %> <%= @booking.invoice_city %>
 
 <% if @booking.member || @booking.member_institution || @booking.graduate %>
-<%= t('bookings.form.member') if @booking.member %>
-<%= t('bookings.form.member_institution') if @booking.member_institution %>
+<%= t('buchung.new.member') if @booking.member %>
+<%= t('buchung.new.member_institution') if @booking.member_institution %>
 <% if @booking.graduate %>
-<%= t('bookings.form.graduate') %>: <%= @booking.school %>, <%= @booking.year %>
+<%= t('buchung.new.graduate') %>: <%= @booking.school %>, <%= @booking.year %>
 <% end %>
 <% end %>
+
+Rabatt
+<%= I18n.t('buchung.reductions')[@booking.reduction.to_sym] if @booking.reduction.present? %>
 
 Bemerkungen:
 <%= @booking.comments %>

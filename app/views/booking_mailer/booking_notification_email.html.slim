@@ -28,16 +28,19 @@ table
       p = @booking.invoice_title
       p = @booking.invoice_street
       p #{@booking.invoice_zip} #{@booking.invoice_city}
-
-  - if @booking.member || @booking.member_institution || @booking.graduate
-    tr
-      td: strong Paritätische
-      td
-        p = t('bookings.form.member') if @booking.member
-        p = t('bookings.form.member_institution') if @booking.member_institution
+  tr
+    td: strong Paritätische
+    td
+      - if @booking.member || @booking.member_institution || @booking.graduate
+        p = t('buchung.new.member') if @booking.member
+        p = t('buchung.new.member_institution') if @booking.member_institution
         - if @booking.graduate
-          p #{t('bookings.form.graduate')}: #{@booking.school} #{@booking.year}
-  - if @booking.comments.present?
-    tr
-      td: strong Bemerkungen
-      td = @booking.comments
+          p #{t('buchung.new.graduate')}: #{@booking.school} #{@booking.year}
+  tr
+    td: strong Rabatt
+    td
+      = I18n.t('buchung.reductions')[@booking.reduction.to_sym] if @booking.reduction.present?
+
+  tr
+    td: strong Bemerkungen
+    td = @booking.comments
