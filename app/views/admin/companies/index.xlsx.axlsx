@@ -4,9 +4,11 @@ wb = xlsx_package.workbook
 
 wb.add_worksheet(name: 'Adressliste Firmen') do |sheet|
   attrs = %i(name name2 street zip city city_part phone mobile fax email created_at updated_at)
-  last_col = ('A'.ord + attrs.size - 1).chr
-  sheet.add_row(attrs.map { |attr| Company.human_attribute_name attr } )
+  last_col = ('A'.ord + attrs.size).chr
+  sheet.add_row(attrs.map { |attr| Company.human_attribute_name attr } + ['Teilnehmer'])
   sheet.add_style "A1:#{last_col}1", b: true
 
-  @companies.each { |company| sheet.add_row(attrs.map { |attr| company.send attr }) }
+  @companies.each do |company|
+    sheet.add_row(attrs.map { |attr| company.send attr } + [company.attendees_count])
+  end
 end

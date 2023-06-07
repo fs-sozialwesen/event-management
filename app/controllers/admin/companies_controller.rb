@@ -1,10 +1,17 @@
 module Admin
   class CompaniesController < BaseController
-    before_action :set_company, only: %i[show update destroy]
+
+    before_action :set_company, only: %i(show update destroy)
 
     def index
       authorize Company
-      @companies = Company.order(:name)
+      @companies = Company.
+        left_joins(:attendees).
+        group('companies.id').
+        select('companies.*', 'count(attendees.id) as attendees_count').
+        distinct.
+        where(attendees: { status: 0 }). # only booked attendees
+        order(:name)
 
       respond_to do |format|
         format.html { @companies = @companies.page(params[:page]).all }
@@ -62,5 +69,6 @@ module Admin
     def company_params
       params.require(:company).permit(:name, :name2, :street, :zip, :city, :city_part, :phone, :mobile, :fax, :email)
     end
+
   end
 end
